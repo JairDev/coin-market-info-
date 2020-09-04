@@ -32,7 +32,7 @@ function App() {
                 </td>
                 <td>
                   <div>
-                    Price
+                    Price coin
                   </div>
                 </td>
               </tr>
