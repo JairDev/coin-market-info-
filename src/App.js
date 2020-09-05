@@ -2,7 +2,87 @@ import React, { useState, useEffect} from 'react';
 import './App.css';
 
 const urlApi = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false"
+const urlCoinId = "https://api.coingecko.com/api/v3/coins/bitcoin";
 
+function CoinsId({coins}) {
+  console.log(coins)
+  return (
+    <div className="App-section-coin-info">
+      <table className="App-section-coin-table">
+        <thead>
+          <tr>
+            <th>
+              <div>
+                Rank
+              </div>
+            </th>
+            <th>
+              <div>
+                Name
+              </div>
+            </th>
+            <th>
+              <div>
+                Market Cap
+              </div>
+            </th>
+            <th>
+              <div>
+                Price
+              </div>
+            </th>
+            <th>
+              <div>
+                Change (24h)
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div>
+                {coins.market_cap_rank}
+              </div>
+            </td>
+            <td>
+              <div>
+                <div><img src={coins.image.thumb} alt=""></img></div>
+                <div>
+                  {coins.name}
+                </div>
+              </div>
+            </td>
+            <td>
+              <div>
+                ${coins.market_data.market_cap.usd}
+              </div>
+            </td>
+            <td>
+              <div>
+                ${coins.market_data.current_price.usd}
+              </div>
+            </td>
+            <td>
+              <div>
+                {coins.market_data.price_change_percentage_24h}%
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+function ListCoinsID({array}) {
+  // console.log(array)
+  return (
+    array.map(coin => 
+      <CoinsId key={coin.id} coins={coin}/>
+    )
+  )
+}
 
 function Coins({coins}) {
   return (
@@ -18,21 +98,44 @@ function Coins({coins}) {
 }
 
 function ListCoins({array}) {
-  console.log(array)
+  // console.log(array)
   return (
     array.map(coin => 
-      <Coins coins={coin}/>
+      <Coins key={coin.id} coins={coin}/>
     )
   )
 }
 
+
+
+async function getCoin(url) {
+  try {
+    const response = await fetch(url)
+    return response.json()
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 function App() {
   const [coinList, setCoinList ] = useState([])
+  const [coinId, setCoinID] = useState([])
+
   useEffect(() => {
-    fetch(urlApi)
-    .then(res => res.json())
-    .then(data => setCoinList(data))
+    (async function getData() {
+      const data = await getCoin(urlApi)
+      setCoinList(data)
+    })().catch(error => console.log(error));
+    
+    (async function getDataCoinId() {
+      const data = await getCoin(urlCoinId)
+      const arrCoinID = [data]
+      setCoinID(arrCoinID)
+      // console.log(arrCoinID)
+    })().catch(error => console.log(error));
+
   }, [])
+
   return (
     <div className="App">
       <header className="App-header">
@@ -54,7 +157,8 @@ function App() {
             <button className="button-add-coin">Add coin</button>
           </form>
         </div>
-        <div className="App-section-coin-info">
+        <ListCoinsID array={coinId} />
+        {/* <div className="App-section-coin-info">
           <table className="App-section-coin-table">
             <thead>
               <tr>
@@ -80,7 +184,7 @@ function App() {
               </tr>
             </tbody>
           </table>
-        </div>
+        </div> */}
       </section>
       
       <section className="App-section-news">
