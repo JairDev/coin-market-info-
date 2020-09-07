@@ -132,15 +132,38 @@ async function getCoin(url) {
   }
 }
 
+// function FormValueCoin() {
+//   const [value, setValue] = useState("")
+
+//   return(
+//     <form>
+//       <input type="text" value={value}></input>
+//       <button className="button-add-coin">Add coin</button>
+//     </form>
+//   )
+// }
+
 function App() {
+  const [value, setValue] = useState("")
   const [coinList, setCoinList ] = useState([])
   const [keyword, setKeyword] = useState("bitcoin")
+
   useEffect(() => {
     (async function getData() {
       const data = await getCoin(urlApi)
       setCoinList(data)
     })().catch(error => console.log(error));
   }, [])
+
+  const handleSubmit = (e) => {
+    setKeyword(value)
+    setValue("")
+    e.preventDefault()
+  }
+
+  const handleChange = (e) => {
+    setValue(e.target.value)
+  }
   
   return (
     <div className="App">
@@ -159,11 +182,13 @@ function App() {
       <section className="App-section-main">
       <section className="App-section-coin">
         <div>
-          <form>
-            <button className="button-add-coin" >Add coin</button>
+          {<form onSubmit={handleSubmit}>
+            <input type="text" value={value} onChange={handleChange}></input>
+            <button className="button-add-coin">Add coin</button>
           </form>
+          }
         </div>
-        <button onClick={() => setKeyword("ethereum")}>Click</button>
+
         <ListCoinsID keyword={keyword} />
       </section>
       
