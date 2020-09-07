@@ -2,10 +2,9 @@ import React, { useState, useEffect} from 'react';
 import './App.css';
 
 const urlApi = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false"
-const urlCoinId = "https://api.coingecko.com/api/v3/coins/bitcoin";
 
 function CoinsId({coins}) {
-  console.log(coins)
+  // console.log(coins)
   return (
     <div className="App-section-coin-info">
       <table className="App-section-coin-table">
@@ -75,10 +74,26 @@ function CoinsId({coins}) {
   )
 }
 
-function ListCoinsID({array}) {
-  // console.log(array)
+function ListCoinsID({keyword}) {
+  // console.log(keyword)
+  const [coinId, setCoinID] = useState([])
+  // // console.log(coinId)
+  // console.count("ListCoinsID")
+  useEffect(()=> {
+    async function getDataCoinId() {
+      const urlCoinId = `https://api.coingecko.com/api/v3/coins/${keyword}`;
+      const data = await getCoin(urlCoinId)
+      // const arrCoinID = [data]
+      setCoinID(prev =>  [...prev, data])
+    }
+    // const coinId = (key) => getCoin(`https://api.coingecko.com/api/v3/coins/${key}`)
+    // coinId(keyword).then(res => setCoinID([res]))
+    // console.log(coinId(keyword))
+    getDataCoinId()
+  }, [keyword])
+
   return (
-    array.map(coin => 
+    coinId.map(coin => 
       <CoinsId key={coin.id} coins={coin}/>
     )
   )
@@ -119,23 +134,14 @@ async function getCoin(url) {
 
 function App() {
   const [coinList, setCoinList ] = useState([])
-  const [coinId, setCoinID] = useState([])
-
+  const [keyword, setKeyword] = useState("bitcoin")
   useEffect(() => {
     (async function getData() {
       const data = await getCoin(urlApi)
       setCoinList(data)
     })().catch(error => console.log(error));
-    
-    (async function getDataCoinId() {
-      const data = await getCoin(urlCoinId)
-      const arrCoinID = [data]
-      setCoinID(arrCoinID)
-      // console.log(arrCoinID)
-    })().catch(error => console.log(error));
-
   }, [])
-
+  
   return (
     <div className="App">
       <header className="App-header">
@@ -154,37 +160,11 @@ function App() {
       <section className="App-section-coin">
         <div>
           <form>
-            <button className="button-add-coin">Add coin</button>
+            <button className="button-add-coin" >Add coin</button>
           </form>
         </div>
-        <ListCoinsID array={coinId} />
-        {/* <div className="App-section-coin-info">
-          <table className="App-section-coin-table">
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>Name</th>
-                <th>Market Cap</th>
-                <th>Price</th>
-                <th>Change (24h)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div>
-                    1
-                  </div>
-                </td>
-                <td>
-                  <div>
-                    BTC
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div> */}
+        <button onClick={() => setKeyword("ethereum")}>Click</button>
+        <ListCoinsID keyword={keyword} />
       </section>
       
       <section className="App-section-news">
