@@ -100,12 +100,20 @@ function ListCoinsID({keyword}) {
 }
 
 function Coins({coins}) {
+  const fixedPercentage = coins.price_change_percentage_24h.toFixed(2)
+  // console.log(fixedPercentage)
+  const classPercentage = fixedPercentage < 0 ? "low-percentage" : "high-percentage"
+  // console.log(classPercentage)
+  // console.log(coins)
   return (
     <div className="parent-content-coins">
       <div className="content-coins">
+        <div className="img-coin-band"> 
+          <img alt="" src={coins.image} />
+        </div>
         <div className="coin-name">{coins.id}</div>
         <span className="coin-price">${coins.current_price}</span>
-        <span>{coins.price_change_percentage_24h}</span>
+        <span className={classPercentage}>{fixedPercentage}%</span>
       </div>
     </div>
 
@@ -132,17 +140,6 @@ async function getCoin(url) {
   }
 }
 
-// function FormValueCoin() {
-//   const [value, setValue] = useState("")
-
-//   return(
-//     <form>
-//       <input type="text" value={value}></input>
-//       <button className="button-add-coin">Add coin</button>
-//     </form>
-//   )
-// }
-
 function App() {
   const [value, setValue] = useState("")
   const [coinList, setCoinList ] = useState([])
@@ -151,7 +148,9 @@ function App() {
   useEffect(() => {
     (async function getData() {
       const data = await getCoin(urlApi)
-      setCoinList(data)
+      const repeatData = [...data, ...data]
+      console.log(repeatData)
+      setCoinList(repeatData)
     })().catch(error => console.log(error));
   }, [])
 

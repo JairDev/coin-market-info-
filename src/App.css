@@ -14,36 +14,73 @@
 }
 
 .App-section-headband {
-  background-color: #3a9efd;
+  /* background-color: #3a9efd; */
+  background-color: #fff;
+  /* box-shadow: 0px 5px 50px 15px #3a9efd54; */
   font-size: 1.5rem;
   margin-top: 2rem;
   padding: .3rem 0;
-  overflow: hidden;
+  /* overflow: hidden; */
   white-space: nowrap;
+  animation: move 1s linear 0s infinite normal none running;
+  position: relative;
 }
+/* 
+@keyframes move {
+  0% {
+    left: 0
+  }
+  100% {
+    left: -50%
+  }
+} */
+
+
 .App-section-headband-content-coins {
-  color: white;
+  color: black;
   display: flex;
   position: relative;
 }
 
 .parent-content-coins {
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .content-coins { 
-  border: 1px solid yellow;
+  /* border: 1px solid yellow; */
   display: flex;
+  align-items: center;
 }
 .coin-name {
-  padding: 0 1rem;
+  /* padding: 0 1rem; */
 }
 
 .content-coins :nth-child(1), 
 .content-coins :nth-child(2),
-.content-coins :nth-child(3) {
+.content-coins :nth-child(3),
+.content-coins :nth-child(4) {
   /* border: 1px solid red; */
-  margin-right: .8rem;
+  /* margin-right: .8rem; */
+  margin-right: .5rem;
+  margin-left: .5rem;
+}
+
+.img-coin-band {
+  /* border: 2px solid red; */
+  width: 30px;
+}
+
+.img-coin-band img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.low-percentage {
+  color: #e11d25;
+}
+
+.high-percentage {
+  color: green;
 }
 
 
