@@ -16,34 +16,36 @@
 .App-section-headband {
   /* background-color: #3a9efd; */
   background-color: #fff;
-  /* box-shadow: 0px 5px 50px 15px #3a9efd54; */
   font-size: 1.5rem;
   margin-top: 2rem;
   padding: .3rem 0;
-  /* overflow: hidden; */
   white-space: nowrap;
-  animation: move 1s linear 0s infinite normal none running;
   position: relative;
+  overflow: hidden;
 }
-/* 
-@keyframes move {
+
+
+
+.App-section-headband-content-coins {
+  color: black;
+  display: table-cell;
+  position: relative;
+  animation: move 60s linear 0s infinite normal none running;
+}
+
+
+/* @keyframes move {
   0% {
     left: 0
   }
   100% {
     left: -50%
   }
-} */
-
-
-.App-section-headband-content-coins {
-  color: black;
-  display: flex;
-  position: relative;
-}
+}  */
 
 .parent-content-coins {
-  /* border: 1px solid red; */
+
+  display: inline-block;
 }
 
 .content-coins { 
