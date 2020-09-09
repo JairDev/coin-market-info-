@@ -3,13 +3,6 @@ import './App.css';
 
 const urlApi = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false"
 const apiKeyNews = "28d89ba563644bf397ab0a8e7b46fa4d"
-const urlNews = 'http://newsapi.org/v2/everything?' +
-'q=Apple&' +
-'from=2020-09-08&' +
-'sortBy=popularity&' +
-`apiKey=${apiKeyNews}`;
-
-
 
 function CoinsId({array}) {
   return (
@@ -100,20 +93,23 @@ function ListCoinsID({keyword}) {
     async function getDataCoinId() {
       const urlCoinId = `https://api.coingecko.com/api/v3/coins/${keyword}`;
       const data = await getCoin(urlCoinId)
-      setCoinID((prev) => { 
-        const findIdx = prev.findIndex(item => item.id === keyword);
-        if(findIdx === -1) {
-          return  [...prev, data]
-        }else {
-          console.log("repeat")
-          return  [...prev]
-        }
-      })
+      if(data.error) {
+        console.log("data", data.error)
+      }else if(!keyword) {
+        console.log("not key")
+      }else {
+        setCoinID((prev) => { 
+          const findIdx = prev.findIndex(item => item.id === keyword);
+          if(findIdx === -1) {
+            return  [...prev, data]
+          }else {
+            console.log("repeat")
+            return  [...prev]
+          }
+        })
+      }
     }
-    // const coinId = (key) => getCoin(`https://api.coingecko.com/api/v3/coins/${key}`)
-    // coinId(keyword).then(res => setCoinID([res]))
-    // console.log(coinId(keyword))
-    getDataCoinId()
+    getDataCoinId().catch(error => console.log(error))
   }, [keyword])
 
   return  <CoinsId array={coinId} keyword={keyword}/>
@@ -140,7 +136,6 @@ function Coins({coins}) {
 }
 
 function ListCoins({array}) {
-  // console.log(array)
   return (
     array.map(coin => 
       <Coins key={coin.id} coins={coin}/>
@@ -149,7 +144,7 @@ function ListCoins({array}) {
 }
 
 function ArticlesNews({news}) {
-  console.log(news)
+  // console.log(news)
   return (
   <div className="articles">
     <div className="articles-content-img">
@@ -166,9 +161,26 @@ function ArticlesNews({news}) {
   )
 }
 
-function ListNews({array}) {
+function ListNews({keyword}) {
+  // console.log(keyword)
+  const [news, setNews] = useState([])
+
+  useEffect(() => {
+    async function getNews() {
+      const urlNews = 'http://newsapi.org/v2/everything?' +
+                      `q=${keyword}&` +
+                      'from=2020-09-08&' +
+                      'sortBy=popularity&' +
+                      `apiKey=${apiKeyNews}`;
+      const data = await getCoin(urlNews)
+      setNews(data.articles)
+      console.log(data)
+    }
+    getNews()
+  }, [keyword])
+  // console.log(news)
   return ( 
-    array.map(news => <ArticlesNews key={news.title} news={news}/>)
+    news.map(news => <ArticlesNews news={news}/>)
   )
 }
 
@@ -183,11 +195,33 @@ async function getCoin(url) {
   }
 }
 
+function Form(props) {
+  const {
+    onSubmit,
+    onChange,
+    value,
+    textSpan,
+    textButton,
+  } = props
+  return (
+    <form onSubmit={onSubmit}>
+      <div className="App-section-coin-content-input">
+        <label>
+          <span>{textSpan}</span>
+          <div className="App-section-coin-content-input-button">
+            <input type="text" value={value} onChange={onChange} placeholder="E.g bitcoin"></input>
+            <button className="button-add-coin">{textButton}</button>
+          </div>
+        </label>
+      </div>
+    </form>
+  )
+}
 function App() {
   const [value, setValue] = useState("")
   const [coinList, setCoinList ] = useState([])
   const [keyword, setKeyword] = useState("bitcoin")
-  const [key, setKey] = useState([])
+  const [keywordNews, setKeywordNews] = useState("bitcoin")
   const [news, setNews] = useState([])
 
   useEffect(() => {
@@ -196,26 +230,15 @@ function App() {
       setCoinList(data)
     })().catch(error => console.log(error));
 
-    async function getNews() {
-      const data = await getCoin(urlNews)
-      setNews(data.articles)
-      // console.log(data.articles)
-    }
-    getNews()
+    // async function getNews() {
+    //   const data = await getCoin(urlNews)
+    //   setNews(data.articles)
+    // }
+    // getNews().catch(error => console.log(error));
   }, [])
   
   const handleSubmit = (e) => {
-    setKey(prev => prev.concat([value]))
-    // key.map(same => {
-    //   if(same === value) {
-    //     return null
-    //   }
-    //   return setKeyword(value)
-    // })
-    // console.log(key)
-    setKeyword(prev => {
-      return value
-    })
+    setKeyword(value)
     setValue("")
     e.preventDefault()
   }
@@ -223,6 +246,16 @@ function App() {
   const handleChange = (e) => {
     setValue(e.target.value)
   }
+
+  // const handleSubmitNews = (e) => {
+  //   setKeyword(value)
+  //   setValue("")
+  //   e.preventDefault()
+  // }
+
+  // const handleChangeNews = (e) => {
+  //   setValue(e.target.value)
+  // }
   
   return (
     <div className="App">
@@ -242,18 +275,14 @@ function App() {
       <section className="App-section-main">
       <section className="App-section-coin">
         <div className="App-section-coin-content-form">
-          {<form onSubmit={handleSubmit}>
-            <div className="App-section-coin-content-input">
-              <label>
-                <span>Add currency to chart</span>
-                <div className="App-section-coin-content-input-button">
-                  <input type="text" value={value} onChange={handleChange} placeholder="E.g bitcoin"></input>
-                  <button className="button-add-coin">Add</button>
-                </div>
-              </label>
-            </div>
-
-          </form>
+          {
+            <Form 
+              onSubmit={handleSubmit} 
+              onChange={handleChange} 
+              value={value}
+              textSpan={"Add currency to chart"}
+              textButton={"Add"}
+            />
           }
         </div>
 
@@ -264,36 +293,19 @@ function App() {
         <div className="content-title-news">
           <span>News about Btc</span>
         </div>
+        <Form 
+          onSubmit={handleSubmit} 
+          onChange={handleChange} 
+          value={value}
+          textSpan={"Search news by currency"}
+          textButton={"Search"}
+        />
         <div className="App-section-content-articles">
           {
-            // news.map(newsAbout => 
-            //   console.log(newsAbout)
-            //   // <div className="articles">
-            //   //   <div className="articles-content-img">
-            //   //     <img src={newsAbout.urlToImage} alt=""></img>
-            //   //   </div>
-            //   //   <div className="articles-content-description">
-            //   //     <p>{newsAbout.description}</p>
-            //   //   </div>
-            //   // </div>
-            
-            // )
-            <ListNews array={news}/>
+            <ListNews keyword={keyword}/>
           }
         </div>
-        {/* <div className="App-section-content-articles">
-          <div className="articles">
-            <div>
-              <img src="" alt=""></img>
-            </div>
-            <div>
-              <p></p>
-            </div>
-          </div>
-        </div> */}
-        
       </section>
-        
       </section>
     </div>
   );
