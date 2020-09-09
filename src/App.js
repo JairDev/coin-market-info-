@@ -4,15 +4,14 @@ import './App.css';
 const urlApi = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false"
 const apiKeyNews = "28d89ba563644bf397ab0a8e7b46fa4d"
 const urlNews = 'http://newsapi.org/v2/everything?' +
-'q=Bitcoin&' +
+'q=Apple&' +
 'from=2020-09-08&' +
 'sortBy=popularity&' +
-'apiKey=28d89ba563644bf397ab0a8e7b46fa4d';
+`apiKey=${apiKeyNews}`;
 
 
 
 function CoinsId({array}) {
-  // console.log(array)
   return (
     <div className="App-section-coin-info">
       <table className="App-section-coin-table">
@@ -58,10 +57,6 @@ function CoinsId({array}) {
 }
 
 function TrTable({coins}) {
-  // const slice = String(coins.market_data.current_price.usd).slice(2)
-  // const [a,b]= String(coins.market_data.current_price.usd)
-  // const format = `${a}${b},${slice}`
-  // console.log(format)
   const fixedPercentage = coins.market_data.price_change_percentage_24h.toFixed(2)
   const classPercentage = fixedPercentage < 0 ? "low-percentage" : "high-percentage"
   return (
@@ -99,17 +94,20 @@ function TrTable({coins}) {
 }
 
 function ListCoinsID({keyword}) {
-  // console.log(keyword)
   const [coinId, setCoinID] = useState([])
-  // // console.log(coinId)
-  // console.count("ListCoinsID")
+
   useEffect(()=> {
     async function getDataCoinId() {
       const urlCoinId = `https://api.coingecko.com/api/v3/coins/${keyword}`;
       const data = await getCoin(urlCoinId)
-      // const arrCoinID = [data]
       setCoinID((prev) => { 
-        return  [...prev, data]
+        const findIdx = prev.findIndex(item => item.id === keyword);
+        if(findIdx === -1) {
+          return  [...prev, data]
+        }else {
+          console.log("repeat")
+          return  [...prev]
+        }
       })
     }
     // const coinId = (key) => getCoin(`https://api.coingecko.com/api/v3/coins/${key}`)
@@ -117,8 +115,8 @@ function ListCoinsID({keyword}) {
     // console.log(coinId(keyword))
     getDataCoinId()
   }, [keyword])
-  // console.log(coinId)
-  return  <CoinsId array={coinId}/>
+
+  return  <CoinsId array={coinId} keyword={keyword}/>
 }
 
 function Coins({coins}) {
@@ -147,6 +145,30 @@ function ListCoins({array}) {
     array.map(coin => 
       <Coins key={coin.id} coins={coin}/>
     )
+  )
+}
+
+function ArticlesNews({news}) {
+  console.log(news)
+  return (
+  <div className="articles">
+    <div className="articles-content-img">
+      <img src={news.urlToImage} alt=""></img>
+    </div>
+    <div className="articles-content-description">
+      <p>{news.title}</p>
+      <div className="articles-content-author">
+        <span>by</span>
+        <span className="articles-content-author-name">{news.author}</span>
+      </div>
+    </div>
+  </div>
+  )
+}
+
+function ListNews({array}) {
+  return ( 
+    array.map(news => <ArticlesNews key={news.title} news={news}/>)
   )
 }
 
@@ -244,19 +266,19 @@ function App() {
         </div>
         <div className="App-section-content-articles">
           {
-            news.map(newsAbout => 
-              
-              <div className="articles">
-                <div className="articles-content-img">
-                  <img src={newsAbout.urlToImage} alt=""></img>
-                </div>
-                <div className="articles-content-description">
-                  <p>{newsAbout.description}</p>
-                </div>
-              </div>
+            // news.map(newsAbout => 
+            //   console.log(newsAbout)
+            //   // <div className="articles">
+            //   //   <div className="articles-content-img">
+            //   //     <img src={newsAbout.urlToImage} alt=""></img>
+            //   //   </div>
+            //   //   <div className="articles-content-description">
+            //   //     <p>{newsAbout.description}</p>
+            //   //   </div>
+            //   // </div>
             
-            // console.log(newsAbout)
-            )
+            // )
+            <ListNews array={news}/>
           }
         </div>
         {/* <div className="App-section-content-articles">
