@@ -2,9 +2,17 @@ import React, { useState, useEffect} from 'react';
 import './App.css';
 
 const urlApi = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false"
-// const urlBtcApi = "https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=btc"
-function CoinsId({coins}) {
-  // console.log(coins)
+const apiKeyNews = "28d89ba563644bf397ab0a8e7b46fa4d"
+const urlNews = 'http://newsapi.org/v2/everything?' +
+'q=Bitcoin&' +
+'from=2020-09-08&' +
+'sortBy=popularity&' +
+'apiKey=28d89ba563644bf397ab0a8e7b46fa4d';
+
+
+
+function CoinsId({array}) {
+  // console.log(array)
   return (
     <div className="App-section-coin-info">
       <table className="App-section-coin-table">
@@ -12,62 +20,37 @@ function CoinsId({coins}) {
           <tr>
             <th>
               <div>
-                Rank
+                <span>Rank</span>
               </div>
             </th>
             <th>
               <div>
-                Name
+              <span>Name</span>
               </div>
             </th>
             <th>
               <div>
-                Market Cap
+              <span>Market Cap</span>
               </div>
             </th>
             <th>
               <div>
-                Price
+              <span>Price</span>
               </div>
             </th>
             <th>
               <div>
-                Change (24h)
+              <span>Change (24h)</span>
               </div>
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr className={`App-section-coin-table-${coins.name}`}>
-            <td>
-              <div>
-                {coins.market_cap_rank}
-              </div>
-            </td>
-            <td>
-              <div>
-                <div><img src={coins.image.thumb} alt=""></img></div>
-                <div>
-                  {coins.name}
-                </div>
-              </div>
-            </td>
-            <td>
-              <div>
-                ${coins.market_data.market_cap.usd}
-              </div>
-            </td>
-            <td>
-              <div>
-                ${coins.market_data.current_price.usd}
-              </div>
-            </td>
-            <td>
-              <div>
-                {coins.market_data.price_change_percentage_24h}%
-              </div>
-            </td>
-          </tr>
+          {
+            array.map(coin => 
+              <TrTable key={coin.id} coins={coin}/>
+            )
+          }
         </tbody>
       </table>
     </div>
@@ -75,6 +58,12 @@ function CoinsId({coins}) {
 }
 
 function TrTable({coins}) {
+  // const slice = String(coins.market_data.current_price.usd).slice(2)
+  // const [a,b]= String(coins.market_data.current_price.usd)
+  // const format = `${a}${b},${slice}`
+  // console.log(format)
+  const fixedPercentage = coins.market_data.price_change_percentage_24h.toFixed(2)
+  const classPercentage = fixedPercentage < 0 ? "low-percentage" : "high-percentage"
   return (
     <tr className={`App-section-coin-table-${coins.name}`}>
             <td>
@@ -83,8 +72,8 @@ function TrTable({coins}) {
               </div>
             </td>
             <td>
-              <div>
-                <div><img src={coins.image.thumb} alt=""></img></div>
+              <div className="App-section-coin-table-coindata">
+                <div className="App-section-coin-table-coindata-img"><img src={coins.image.thumb} alt=""></img></div>
                 <div>
                   {coins.name}
                 </div>
@@ -101,13 +90,14 @@ function TrTable({coins}) {
               </div>
             </td>
             <td>
-              <div>
-                {coins.market_data.price_change_percentage_24h}%
+              <div className={classPercentage}>
+                {fixedPercentage}%
               </div>
             </td>
           </tr>
   )
 }
+
 function ListCoinsID({keyword}) {
   // console.log(keyword)
   const [coinId, setCoinID] = useState([])
@@ -118,65 +108,23 @@ function ListCoinsID({keyword}) {
       const urlCoinId = `https://api.coingecko.com/api/v3/coins/${keyword}`;
       const data = await getCoin(urlCoinId)
       // const arrCoinID = [data]
-      setCoinID(prev =>  [...prev, data])
+      setCoinID((prev) => { 
+        return  [...prev, data]
+      })
     }
     // const coinId = (key) => getCoin(`https://api.coingecko.com/api/v3/coins/${key}`)
     // coinId(keyword).then(res => setCoinID([res]))
     // console.log(coinId(keyword))
     getDataCoinId()
   }, [keyword])
-
-  return (
-    <div className="App-section-coin-info">
-      <table className="App-section-coin-table">
-        <thead>
-          <tr>
-            <th>
-              <div>
-                Rank
-              </div>
-            </th>
-            <th>
-              <div>
-                Name
-              </div>
-            </th>
-            <th>
-              <div>
-                Market Cap
-              </div>
-            </th>
-            <th>
-              <div>
-                Price
-              </div>
-            </th>
-            <th>
-              <div>
-                Change (24h)
-              </div>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            coinId.map(coin => 
-              // <CoinsId key={coin.id} coins={coin}/>
-              <TrTable key={coin.id} coins={coin}/>
-            )
-          }
-        </tbody>
-      </table>
-    </div>
-  )
+  // console.log(coinId)
+  return  <CoinsId array={coinId}/>
 }
 
 function Coins({coins}) {
   const fixedPercentage = coins.price_change_percentage_24h.toFixed(2)
-  // console.log(fixedPercentage)
+
   const classPercentage = fixedPercentage < 0 ? "low-percentage" : "high-percentage"
-  // console.log(classPercentage)
-  // console.log(coins)
   return (
     <div className="parent-content-coins">
       <div className="content-coins">
@@ -217,16 +165,35 @@ function App() {
   const [value, setValue] = useState("")
   const [coinList, setCoinList ] = useState([])
   const [keyword, setKeyword] = useState("bitcoin")
+  const [key, setKey] = useState([])
+  const [news, setNews] = useState([])
 
   useEffect(() => {
     (async function getData() {
       const data = await getCoin(urlApi)
       setCoinList(data)
     })().catch(error => console.log(error));
-  }, [])
 
+    async function getNews() {
+      const data = await getCoin(urlNews)
+      setNews(data.articles)
+      // console.log(data.articles)
+    }
+    getNews()
+  }, [])
+  
   const handleSubmit = (e) => {
-    setKeyword(value)
+    setKey(prev => prev.concat([value]))
+    // key.map(same => {
+    //   if(same === value) {
+    //     return null
+    //   }
+    //   return setKeyword(value)
+    // })
+    // console.log(key)
+    setKeyword(prev => {
+      return value
+    })
     setValue("")
     e.preventDefault()
   }
@@ -252,10 +219,18 @@ function App() {
 
       <section className="App-section-main">
       <section className="App-section-coin">
-        <div>
+        <div className="App-section-coin-content-form">
           {<form onSubmit={handleSubmit}>
-            <input type="text" value={value} onChange={handleChange}></input>
-            <button className="button-add-coin">Add coin</button>
+            <div className="App-section-coin-content-input">
+              <label>
+                <span>Add currency to chart</span>
+                <div className="App-section-coin-content-input-button">
+                  <input type="text" value={value} onChange={handleChange} placeholder="E.g bitcoin"></input>
+                  <button className="button-add-coin">Add</button>
+                </div>
+              </label>
+            </div>
+
           </form>
           }
         </div>
@@ -265,12 +240,36 @@ function App() {
       
       <section className="App-section-news">
         <div className="content-title-news">
-          <span>News</span>
+          <span>News about Btc</span>
         </div>
         <div className="App-section-content-articles">
-          <div className="articles">Articles</div>
-          <div className="articles">Articles</div>
+          {
+            news.map(newsAbout => 
+              
+              <div className="articles">
+                <div className="articles-content-img">
+                  <img src={newsAbout.urlToImage} alt=""></img>
+                </div>
+                <div className="articles-content-description">
+                  <p>{newsAbout.description}</p>
+                </div>
+              </div>
+            
+            // console.log(newsAbout)
+            )
+          }
         </div>
+        {/* <div className="App-section-content-articles">
+          <div className="articles">
+            <div>
+              <img src="" alt=""></img>
+            </div>
+            <div>
+              <p></p>
+            </div>
+          </div>
+        </div> */}
+        
       </section>
         
       </section>

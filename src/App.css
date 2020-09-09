@@ -5,6 +5,7 @@
 .App-header {
   /* border: 2px solid red; */
   background-color: #3e4491;
+  padding: 1rem 0
 }
 .App-header-nav {
   display: flex;
@@ -15,9 +16,10 @@
 
 .App-section-headband {
   /* background-color: #3a9efd; */
-  background-color: #fff;
+  background-color: #f7f7f7;
+  box-shadow: 0 0px 30px 5px rgba(58, 158, 253, .5);
   font-size: 1.5rem;
-  margin-top: 2rem;
+  margin-top: 3rem;
   padding: .3rem 0;
   white-space: nowrap;
   position: relative;
@@ -33,8 +35,8 @@
   animation: move 60s linear 0s infinite normal none running;
 }
 
-
-/* @keyframes move {
+/* 
+@keyframes move {
   0% {
     left: 0
   }
@@ -82,7 +84,7 @@
 }
 
 .high-percentage {
-  color: green;
+  color: rgb(41, 212, 41);
 }
 
 
@@ -91,25 +93,60 @@
   border: none;
   border-radius: 30px;
   background-color: #f7a400;
+  box-shadow: 0 0px 25px 1px rgba(547, 164, 0, .3);
   font-size: 1.3rem;
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
   padding: .4rem 1rem;
 }
 
 .App-section-main {
   /* border: 2px solid greenyellow; */
   margin-top: 8rem;
-  padding: 0 2rem;
+  padding: 0 4rem;
 }
 
-.App-section-coin{
+/* .App-section-coin{
   border: 1px solid red;
 
-}
+} */
 
 .App-section-coin-info {
   background-color: #3e4491;
+  margin-top: 3rem;
 }
+.App-section-coin-content-form  {
+  /* margin-bottom: 1rem; */
+}
+.App-section-coin-content-form form {
+  display: flex;
+}
+.App-section-coin-content-input label {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+.App-section-coin-content-input input {
+  border: none;
+  border-radius: 30px;
+  height: 25px;
+  padding: 1rem 1rem;
+  font-size: 1.3rem;
+}
+
+.App-section-coin-content-input label span{
+  font-size: 1.3rem;
+  margin-bottom: .5rem;
+}
+
+.App-section-coin-content-input-button {
+  display: flex;
+  align-items: center;
+}
+
+.App-section-coin-content-input-button button {
+  margin-left: 1rem;
+}
+
 
 .App-section-coin-table {
   display: table;
@@ -117,6 +154,15 @@
   width: 100%;
   border-collapse: collapse;
   text-align: center;
+}
+
+.App-section-coin-table thead  {
+  color: #f7a400;
+}
+
+.App-section-coin-table thead span {
+  display: block;
+  padding: 1rem 0
 }
 
 .App-section-coin-table thead th:nth-child(1) {
@@ -128,29 +174,50 @@
 }
 
 .App-section-coin-table tbody td {
-  padding: 1rem 0;
   border-bottom: 1px solid rgb(131, 131, 131);
+  color: white;
+  padding: 1rem 0;
+}
+
+.App-section-coin-table-coindata {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.App-section-coin-table-coindata-img {
+  margin-right: .3rem;
 }
 
 .App-section-news {
-  margin-top: 4rem;
+  /* border: 2px solid red; */
   color: white;
+  margin-top: 4rem;
 }
 .content-title-news {
-  font-size: 3rem;
+  font-size: 6rem;
   text-align: center;
 }
 
 .App-section-content-articles {
   /* border: 1px solid red; */
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   margin-top: 2rem;
+}
+
+.articles-content-img img {
+  width: 100%;
 }
 
 .articles {
   border: 1px solid yellow;
-  width: 200px;
-  height: 200px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* width: 200px;
+  height: 200px; */
 }
 
 /* section {
