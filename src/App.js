@@ -5,6 +5,7 @@ const urlApi = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&o
 const apiKeyNews = "28d89ba563644bf397ab0a8e7b46fa4d"
 
 function CoinsId({array}) {
+  const ListCoinsTable = IterateArray(TrTable)
   return (
     <div className="App-section-coin-info">
       <table className="App-section-coin-table">
@@ -38,51 +39,52 @@ function CoinsId({array}) {
           </tr>
         </thead>
         <tbody>
-          {
+          {/* {
             array.map(coin => 
               <TrTable key={coin.id} coins={coin}/>
             )
-          }
+          } */}
+          <ListCoinsTable array={array} id={"id"}/>
         </tbody>
       </table>
     </div>
   )
 }
 
-function TrTable({coins}) {
-  const fixedPercentage = coins.market_data.price_change_percentage_24h.toFixed(2)
+function TrTable({item}) {
+  const fixedPercentage = item.market_data.price_change_percentage_24h.toFixed(2)
   const classPercentage = fixedPercentage < 0 ? "low-percentage" : "high-percentage"
   return (
-    <tr className={`App-section-coin-table-${coins.name}`}>
-            <td>
-              <div>
-                {coins.market_cap_rank}
-              </div>
-            </td>
-            <td>
-              <div className="App-section-coin-table-coindata">
-                <div className="App-section-coin-table-coindata-img"><img src={coins.image.thumb} alt=""></img></div>
-                <div>
-                  {coins.name}
-                </div>
-              </div>
-            </td>
-            <td>
-              <div>
-                ${coins.market_data.market_cap.usd}
-              </div>
-            </td>
-            <td>
-              <div>
-                ${coins.market_data.current_price.usd}
-              </div>
-            </td>
-            <td>
-              <div className={classPercentage}>
-                {fixedPercentage}%
-              </div>
-            </td>
-          </tr>
+    <tr className={`App-section-coin-table-${item.name}`}>
+      <td>
+        <div>
+          {item.market_cap_rank}
+        </div>
+      </td>
+      <td>
+        <div className="App-section-coin-table-coindata">
+          <div className="App-section-coin-table-coindata-img"><img src={item.image.thumb} alt=""></img></div>
+          <div>
+            {item.name}
+          </div>
+        </div>
+      </td>
+      <td>
+        <div>
+          ${item.market_data.market_cap.usd}
+        </div>
+      </td>
+      <td>
+        <div>
+          ${item.market_data.current_price.usd}
+        </div>
+      </td>
+      <td>
+        <div className={classPercentage}>
+          {fixedPercentage}%
+        </div>
+      </td>
+    </tr>
   )
 }
 
@@ -92,11 +94,9 @@ function ListCoinsID({keyword}) {
   useEffect(()=> {
     async function getDataCoinId() {
       const urlCoinId = `https://api.coingecko.com/api/v3/coins/${keyword}`;
-      const data = await getCoin(urlCoinId)
+      const data = await getDataFetch(urlCoinId)
       if(data.error) {
         console.log("data", data.error)
-      }else if(!keyword) {
-        console.log("not key")
       }else {
         setCoinID((prev) => { 
           const findIdx = prev.findIndex(item => item.id === keyword);
@@ -115,18 +115,18 @@ function ListCoinsID({keyword}) {
   return  <CoinsId array={coinId} keyword={keyword}/>
 }
 
-function Coins({coins}) {
-  const fixedPercentage = coins.price_change_percentage_24h.toFixed(2)
+function Coins({item}) {
+  const fixedPercentage = item.price_change_percentage_24h.toFixed(2)
 
   const classPercentage = fixedPercentage < 0 ? "low-percentage" : "high-percentage"
   return (
     <div className="parent-content-coins">
       <div className="content-coins">
         <div className="img-coin-band"> 
-          <img alt="" src={coins.image} />
+          <img alt="" src={item.image} />
         </div>
-        <div className="coin-name">{coins.id}</div>
-        <span className="coin-price">${coins.current_price}</span>
+        <div className="coin-name">{item.id}</div>
+        <span className="coin-price">${item.current_price}</span>
         <span className={classPercentage}>{fixedPercentage}%</span>
         <div className="content-pair-btc">/Pair</div>
       </div>
@@ -135,35 +135,46 @@ function Coins({coins}) {
   )
 }
 
-function ListCoins({array}) {
-  return (
-    array.map(coin => 
-      <Coins key={coin.id} coins={coin}/>
+// function ListCoins({array}) {
+//   return (
+//     array.map(coin => 
+//       <Coins key={coin.id} coins={coin}/>
+//     )
+//   )
+// }
+
+function IterateArray(Component) {
+  return function ChangeComponent({array, id}) {
+    return (
+      array.map(item => <Component key={item[id]} item={item}/>)
     )
-  )
+  }
 }
 
-function ArticlesNews({news}) {
-  // console.log(news)
+
+function ArticlesNews({item}) {
   return (
-  <div className="articles">
-    <div className="articles-content-img">
-      <img src={news.urlToImage} alt=""></img>
-    </div>
-    <div className="articles-content-description">
-      <p>{news.title}</p>
-      <div className="articles-content-author">
-        <span>by</span>
-        <span className="articles-content-author-name">{news.author}</span>
+    <div className="content-articles">
+      <div className="articles">
+        <div className="articles-content-img">
+          <img src={item.urlToImage} alt=""></img>
+        </div>
+        <div className="articles-content-description">
+          <p>{item.title}</p>
+          <div className="articles-content-author">
+            <span>by</span>
+            <span className="articles-content-author-name">{item.author}</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
   )
 }
 
 function ListNews({keyword}) {
-  // console.log(keyword)
   const [news, setNews] = useState([])
+
+  const ArrayListNews = IterateArray(ArticlesNews)
 
   useEffect(() => {
     async function getNews() {
@@ -172,21 +183,18 @@ function ListNews({keyword}) {
                       'from=2020-09-08&' +
                       'sortBy=popularity&' +
                       `apiKey=${apiKeyNews}`;
-      const data = await getCoin(urlNews)
+      const data = await getDataFetch(urlNews)
       setNews(data.articles)
-      console.log(data)
     }
     getNews()
   }, [keyword])
-  // console.log(news)
   return ( 
-    news.map(news => <ArticlesNews news={news}/>)
+    // news.map(news => <ArticlesNews news={news}/>)
+    <ArrayListNews array={news} id={"content"}/>
   )
 }
 
-
-
-async function getCoin(url) {
+async function getDataFetch(url) {
   try {
     const response = await fetch(url)
     return response.json()
@@ -218,45 +226,44 @@ function Form(props) {
   )
 }
 function App() {
-  const [value, setValue] = useState("")
+  const [valueCoin, setValueCoin] = useState("")
+  const [valueNews, setValueNews] = useState("")
   const [coinList, setCoinList ] = useState([])
   const [keyword, setKeyword] = useState("bitcoin")
-  const [keywordNews, setKeywordNews] = useState("bitcoin")
-  const [news, setNews] = useState([])
+  const [keywordNews, setKeywordNews] = useState("apple")
+
+  const ListCoins = IterateArray(Coins)
 
   useEffect(() => {
     (async function getData() {
-      const data = await getCoin(urlApi)
+      const data = await getDataFetch(urlApi)
       setCoinList(data)
     })().catch(error => console.log(error));
-
-    // async function getNews() {
-    //   const data = await getCoin(urlNews)
-    //   setNews(data.articles)
-    // }
-    // getNews().catch(error => console.log(error));
   }, [])
+
   
-  const handleSubmit = (e) => {
-    setKeyword(value)
-    setValue("")
+  const handleSubmit = (id, e) => {
+    if(id === "coin") {
+      if(!valueCoin) {
+        e.preventDefault()
+        return;
+      }
+      setKeyword(valueCoin)
+      setValueCoin("")
+    }else {
+      if(!valueNews) {
+        e.preventDefault()
+        return;
+      }
+      setKeywordNews(valueNews)
+      setValueNews("")
+    }
     e.preventDefault()
   }
 
-  const handleChange = (e) => {
-    setValue(e.target.value)
+  const handleChange = (id, e) => {
+    id === "coin" ? setValueCoin(e.target.value) : setValueNews(e.target.value)
   }
-
-  // const handleSubmitNews = (e) => {
-  //   setKeyword(value)
-  //   setValue("")
-  //   e.preventDefault()
-  // }
-
-  // const handleChangeNews = (e) => {
-  //   setValue(e.target.value)
-  // }
-  
   return (
     <div className="App">
       <header className="App-header">
@@ -267,25 +274,26 @@ function App() {
       </header>
       <section className="App-section-headband">
       <div className="App-section-headband-content-coins">
-        <ListCoins array={coinList}/>
-        <ListCoins array={coinList}/>
+        <ListCoins array={coinList} id={"id"}/>
+        {/* <ListCoins array={coinList} />
+        <ListCoins array={coinList}/> */}
         </div>
       </section>
 
       <section className="App-section-main">
+      
       <section className="App-section-coin">
         <div className="App-section-coin-content-form">
           {
             <Form 
-              onSubmit={handleSubmit} 
-              onChange={handleChange} 
-              value={value}
+              onSubmit={(e) => handleSubmit("coin", e)} 
+              onChange={(e) => handleChange("coin", e)} 
+              value={valueCoin}
               textSpan={"Add currency to chart"}
               textButton={"Add"}
             />
           }
         </div>
-
         <ListCoinsID keyword={keyword} />
       </section>
       
@@ -294,15 +302,15 @@ function App() {
           <span>News about Btc</span>
         </div>
         <Form 
-          onSubmit={handleSubmit} 
-          onChange={handleChange} 
-          value={value}
+          onSubmit={(e) => handleSubmit("news", e)} 
+          onChange={(e) => handleChange("news", e)} 
+          value={valueNews}
           textSpan={"Search news by currency"}
           textButton={"Search"}
         />
         <div className="App-section-content-articles">
           {
-            <ListNews keyword={keyword}/>
+            <ListNews keyword={keywordNews}/>
           }
         </div>
       </section>
