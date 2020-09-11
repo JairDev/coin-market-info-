@@ -1,52 +1,51 @@
 import React, { useState, useEffect} from 'react';
+import { Link, Route } from "wouter";
 import './App.css';
 
 const urlApi = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false"
 const apiKeyNews = "28d89ba563644bf397ab0a8e7b46fa4d"
 
-function CoinsId({array}) {
-  const ListCoinsTable = IterateArray(TrTable)
+function ArticlesNews({item}) {
   return (
-    <div className="App-section-coin-info">
-      <table className="App-section-coin-table">
-        <thead>
-          <tr>
-            <th>
-              <div>
-                <span>Rank</span>
-              </div>
-            </th>
-            <th>
-              <div>
-              <span>Name</span>
-              </div>
-            </th>
-            <th>
-              <div>
-              <span>Market Cap</span>
-              </div>
-            </th>
-            <th>
-              <div>
-              <span>Price</span>
-              </div>
-            </th>
-            <th>
-              <div>
-              <span>Change (24h)</span>
-              </div>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* {
-            array.map(coin => 
-              <TrTable key={coin.id} coins={coin}/>
-            )
-          } */}
-          <ListCoinsTable array={array} id={"id"}/>
-        </tbody>
-      </table>
+    <div className="content-articles">
+      <div className="articles">
+        <div className="articles-content-img">
+          <img src={item.urlToImage} alt=""></img>
+        </div>
+        <div className="articles-content-description">
+          <p>{item.title}</p>
+          <div className="articles-content-author">
+            <span>by</span>
+            <span className="articles-content-author-name">{item.author}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function ListNews({keyword}) {
+  const [news, setNews] = useState([])
+
+  useEffect(() => {
+    async function getNews() {
+      const urlNews = 'http://newsapi.org/v2/everything?' +
+                      `q=${keyword}&` +
+                      'from=2020-09-08&' +
+                      'sortBy=popularity&' +
+                      `apiKey=${apiKeyNews}`;
+      const data = await getDataFetch(urlNews)
+      setNews(data.articles)
+    }
+    getNews()
+  }, [keyword])
+  return ( 
+    <div className="App-section-content-articles">
+      <IterateArray 
+        array={news} 
+        property={"content"} 
+        Component={ArticlesNews} 
+      />
     </div>
   )
 }
@@ -88,6 +87,48 @@ function TrTable({item}) {
   )
 }
 
+function TableCoin({array}) {
+  return (
+    <div className="App-section-coin-info">
+      <table className="App-section-coin-table">
+        <thead>
+          <tr>
+            <th>
+              <div>
+                <span>Rank</span>
+              </div>
+            </th>
+            <th>
+              <div>
+              <span>Name</span>
+              </div>
+            </th>
+            <th>
+              <div>
+              <span>Market Cap</span>
+              </div>
+            </th>
+            <th>
+              <div>
+              <span>Price</span>
+              </div>
+            </th>
+            <th>
+              <div>
+              <span>Change (24h)</span>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <IterateArray array={array} property={"id"} Component={TrTable} />
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+
 function ListCoinsID({keyword}) {
   const [coinId, setCoinID] = useState([])
 
@@ -112,10 +153,38 @@ function ListCoinsID({keyword}) {
     getDataCoinId().catch(error => console.log(error))
   }, [keyword])
 
-  return  <CoinsId array={coinId} keyword={keyword}/>
+  return  (
+    <>
+      <TableCoin array={coinId} keyword={keyword}/>
+    </>
+  )
 }
 
-function Coins({item}) {
+function Form(props) {
+  const {
+    onSubmit,
+    onChange,
+    value,
+    textSpan,
+    textButton,
+    placeHolder
+  } = props
+  return (
+    <form onSubmit={onSubmit}>
+      <div className="App-section-coin-content-input">
+        <label>
+          <span>{textSpan}</span>
+          <div className="App-section-coin-content-input-button">
+            <input type="text" value={value} onChange={onChange} placeholder={`E.g ${placeHolder}`}></input>
+            <button className="button-add-coin">{textButton}</button>
+          </div>
+        </label>
+      </div>
+    </form>
+  )
+}
+
+function CoinStrip({item}) {
   const fixedPercentage = item.price_change_percentage_24h.toFixed(2)
 
   const classPercentage = fixedPercentage < 0 ? "low-percentage" : "high-percentage"
@@ -128,111 +197,28 @@ function Coins({item}) {
         <div className="coin-name">{item.id}</div>
         <span className="coin-price">${item.current_price}</span>
         <span className={classPercentage}>{fixedPercentage}%</span>
-        <div className="content-pair-btc">/Pair</div>
-      </div>
-    </div>
-
-  )
-}
-
-// function ListCoins({array}) {
-//   return (
-//     array.map(coin => 
-//       <Coins key={coin.id} coins={coin}/>
-//     )
-//   )
-// }
-
-function IterateArray(Component) {
-  return function ChangeComponent({array, id}) {
-    return (
-      array.map(item => <Component key={item[id]} item={item}/>)
-    )
-  }
-}
-
-
-function ArticlesNews({item}) {
-  return (
-    <div className="content-articles">
-      <div className="articles">
-        <div className="articles-content-img">
-          <img src={item.urlToImage} alt=""></img>
-        </div>
-        <div className="articles-content-description">
-          <p>{item.title}</p>
-          <div className="articles-content-author">
-            <span>by</span>
-            <span className="articles-content-author-name">{item.author}</span>
-          </div>
-        </div>
+        {/* <div className="content-pair-btc">/Pair</div> */}
       </div>
     </div>
   )
 }
 
-function ListNews({keyword}) {
-  const [news, setNews] = useState([])
-
-  const ArrayListNews = IterateArray(ArticlesNews)
-
-  useEffect(() => {
-    async function getNews() {
-      const urlNews = 'http://newsapi.org/v2/everything?' +
-                      `q=${keyword}&` +
-                      'from=2020-09-08&' +
-                      'sortBy=popularity&' +
-                      `apiKey=${apiKeyNews}`;
-      const data = await getDataFetch(urlNews)
-      setNews(data.articles)
-    }
-    getNews()
-  }, [keyword])
-  return ( 
-    // news.map(news => <ArticlesNews news={news}/>)
-    <ArrayListNews array={news} id={"content"}/>
-  )
-}
-
-async function getDataFetch(url) {
-  try {
-    const response = await fetch(url)
-    return response.json()
-  } catch (error) {
-    throw new Error(error)
-  }
-}
-
-function Form(props) {
-  const {
-    onSubmit,
-    onChange,
-    value,
-    textSpan,
-    textButton,
-  } = props
+function IterateArray({array, property, Component}) {
   return (
-    <form onSubmit={onSubmit}>
-      <div className="App-section-coin-content-input">
-        <label>
-          <span>{textSpan}</span>
-          <div className="App-section-coin-content-input-button">
-            <input type="text" value={value} onChange={onChange} placeholder="E.g bitcoin"></input>
-            <button className="button-add-coin">{textButton}</button>
-          </div>
-        </label>
-      </div>
-    </form>
+    array.map(item => <Component key={item[property]} item={item}/>)
   )
 }
+
+function Converter() {
+  return <div>Converter</div>
+}
+
 function App() {
   const [valueCoin, setValueCoin] = useState("")
   const [valueNews, setValueNews] = useState("")
   const [coinList, setCoinList ] = useState([])
   const [keyword, setKeyword] = useState("bitcoin")
   const [keywordNews, setKeywordNews] = useState("apple")
-
-  const ListCoins = IterateArray(Coins)
 
   useEffect(() => {
     (async function getData() {
@@ -268,58 +254,83 @@ function App() {
     <div className="App">
       <header className="App-header">
         <nav className="App-header-nav">
-          <div>Logo</div>
-          <div><a href="#0">Converter</a></div>
+          <div>
+            <Link to="/">Logo</Link>
+          </div>
+          <div>
+            <Link to="/converter">Converter</Link>
+          </div>
         </nav>
       </header>
       <section className="App-section-headband">
       <div className="App-section-headband-content-coins">
-        <ListCoins array={coinList} id={"id"}/>
-        {/* <ListCoins array={coinList} />
-        <ListCoins array={coinList}/> */}
+        <IterateArray 
+          array={coinList} 
+          property={"id"} 
+          Component={CoinStrip} 
+        />
+        <IterateArray 
+          array={coinList} 
+          property={"id"} 
+          Component={CoinStrip} 
+        />
         </div>
       </section>
 
-      <section className="App-section-main">
-      
-      <section className="App-section-coin">
-        <div className="App-section-coin-content-form">
-          {
+      <Route path="/converter" component={Converter}/>
+      <Route base="/">
+        <section className="App-section-main">
+        <section className="App-section-coin">
+          <div className="content-title-coin">
+            <span className="content-no-flip-text">Coin Market</span>
+            <div className="content-flip-text">
+              <span className="text-flip">BTC</span>
+              <span className="text-flip">ETH</span>
+              <span className="text-flip">XRP</span>
+            </div>
+          </div>
+          <div className="App-section-content-form">
+              <Form 
+                onSubmit={(e) => handleSubmit("coin", e)} 
+                onChange={(e) => handleChange("coin", e)} 
+                value={valueCoin}
+                textSpan={"Add currency to chart"}
+                textButton={"Add"}
+                placeHolder={"bitcoin, ethereum"}
+              />
+          </div>
+          <ListCoinsID keyword={keyword} />
+        </section>
+        
+        <section className="App-section-news">
+          <div className="content-title-news">
+            <span>News about Btc</span>
+          </div>
+          <div className="App-section-content-form">
             <Form 
-              onSubmit={(e) => handleSubmit("coin", e)} 
-              onChange={(e) => handleChange("coin", e)} 
-              value={valueCoin}
-              textSpan={"Add currency to chart"}
-              textButton={"Add"}
+              onSubmit={(e) => handleSubmit("news", e)} 
+              onChange={(e) => handleChange("news", e)} 
+              value={valueNews}
+              textSpan={"Search news by keyword"}
+              textButton={"Search"}
+              placeHolder={"bitcoin, apple"}
             />
-          }
-        </div>
-        <ListCoinsID keyword={keyword} />
-      </section>
-      
-      <section className="App-section-news">
-        <div className="content-title-news">
-          <span>News about Btc</span>
-        </div>
-        <Form 
-          onSubmit={(e) => handleSubmit("news", e)} 
-          onChange={(e) => handleChange("news", e)} 
-          value={valueNews}
-          textSpan={"Search news by currency"}
-          textButton={"Search"}
-        />
-        <div className="App-section-content-articles">
-          {
+          </div>
             <ListNews keyword={keywordNews}/>
-          }
-        </div>
+        </section>
       </section>
-      </section>
+      </Route>
     </div>
   );
 }
 
-
-
+async function getDataFetch(url) {
+  try {
+    const response = await fetch(url)
+    return response.json()
+  } catch (error) {
+    throw new Error(error)
+  }
+}
 
 export default App;
