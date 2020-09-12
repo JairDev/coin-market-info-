@@ -126,57 +126,36 @@
   text-align: center;
   margin-bottom: 6rem;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .content-flip-text {
   border: 2px solid gold;
-  animation: flip2 3s linear 0s 1 normal none running;
+  animation: flip 10s linear 0s infinite normal none running;
+  /* height: 110px; */
+  /* position: absolute;
+  right: 0; */
 }
 
-.text-flip:nth-child(1) {
-  border: 2px solid rgb(255, 136, 0);
-  opacity: 1;
-  /* animation: flip2 2s linear 5s infinite normal none running; */
-}
-
-.text-flip:nth-child(2) {
-  border: 4px solid rgb(22, 255, 14);
-  opacity: 1;
-  /* animation: flip3 1s linear 0s infinite alternate none running; */
-}
-
-.text-flip:nth-child(3) {
-  border: 6px solid rgb(255, 4, 234);
-  opacity: 1;
-  /* animation: flip4 1s linear 3s infinite alternate- none running; */
-} 
-
-@keyframes flip2 {
-  0% {
-    transform: translateY(0px);
-  }
-
-  10% {
-    transform: translateY(-110px);
-  }
-
-  40% {
-    transform: translateY(-220px);
-  }
-
-  /* 100% {
-    transform: translateY(-200px);
-  } */
-}
 
 .text-flip {
   /* border: 1px solid red; */
   display: block;
   transform: translateY(0px);
-  /* position: absolute; */
+  /* animation: flip 5s linear 0s infinite normal none running; */
+  position: absolute;
   right: 0;
+
 }
+
+/* @keyframes flip {
+  0%, 12.66%, 100% {transform:translate3d(0,0,0);}
+  16.66%, 29.32% {transform:translate3d(0,-100%,0);}
+  33.32%,45.98% {transform:translate3d(0,-200%,0);}
+  49.98%,62.64% {transform:translate3d(0,-300%,0);}
+  66.64%,79.3% {transform:translate3d(0,-200%,0);}
+  83.3%,95.96% {transform:translate3d(0,-100%,0);}
+} */
 
 
 .App-section-coin-content-form form {

@@ -129,26 +129,23 @@ function TableCoin({array}) {
 }
 
 
-function ListCoinsID({keyword}) {
+function CoinsTable({keyword}) {
   const [coinId, setCoinID] = useState([])
 
   useEffect(()=> {
     async function getDataCoinId() {
       const urlCoinId = `https://api.coingecko.com/api/v3/coins/${keyword}`;
       const data = await getDataFetch(urlCoinId)
-      if(data.error) {
-        console.log("data", data.error)
-      }else {
-        setCoinID((prev) => { 
-          const findIdx = prev.findIndex(item => item.id === keyword);
-          if(findIdx === -1) {
-            return  [...prev, data]
-          }else {
-            console.log("repeat")
-            return  [...prev]
-          }
-        })
-      }
+      setCoinID((prev) => { 
+        const findIdx = prev.findIndex(item => item.id === keyword);
+        if(findIdx === -1) {
+          return  [...prev, data]
+        }else {
+          console.log("repeat")
+          return  [...prev]
+        }
+      })
+   
     }
     getDataCoinId().catch(error => console.log(error))
   }, [keyword])
@@ -284,9 +281,10 @@ function App() {
           <div className="content-title-coin">
             <span className="content-no-flip-text">Coin Market</span>
             <div className="content-flip-text">
-              <span className="text-flip">BTC</span>
+              {/* <span className="text-flip">BTC</span>
               <span className="text-flip">ETH</span>
               <span className="text-flip">XRP</span>
+              <span className="text-flip">BNB</span> */}
             </div>
           </div>
           <div className="App-section-content-form">
@@ -299,7 +297,7 @@ function App() {
                 placeHolder={"bitcoin, ethereum"}
               />
           </div>
-          <ListCoinsID keyword={keyword} />
+          <CoinsTable keyword={keyword} />
         </section>
         
         <section className="App-section-news">
@@ -327,6 +325,9 @@ function App() {
 async function getDataFetch(url) {
   try {
     const response = await fetch(url)
+    if(!response.ok) {
+      throw new Error(`Error: ${response.status}`)
+    }
     return response.json()
   } catch (error) {
     throw new Error(error)
