@@ -142,7 +142,6 @@
   /* border: 1px solid red; */
   display: block;
   transform: translateY(0px);
-  /* animation: flip 5s linear 0s infinite normal none running; */
   position: absolute;
   right: 0;
 
@@ -301,6 +300,34 @@
   margin-left: .5rem;
   letter-spacing: .5px;
 }
-/* section {
+
+.App-section-converter {
+  border: 2px solid greenyellow;
+  color: white
+}
+
+.App-section-converter-content {
+  border: 2px solid red;
+  display: flex;
+  justify-content: space-around;
+}
+
+.App-section-converter-content-form {
+  border: 2px solid yellow;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 40%;
+  height: 20vh;
+}
+.App-section-converter-content-form select {
+  height: 40px;
+  width: 100%;
+}
+
+.converter-price {
   border: 2px solid white;
-} */
+  display: block;
+  width: 100%;
+  font-size: 1.5rem;
+}
