@@ -18,12 +18,6 @@ function DataInformation({title, label, FormComponent, DataComponent}) {
     <>
       <div className="content-title-coin">
         <span className="content-no-flip-text">{title}</span>
-        <div className="content-flip-text">
-          {/* <span className="text-flip">BTC</span>
-          <span className="text-flip">ETH</span>
-          <span className="text-flip">XRP</span>
-          <span className="text-flip">BNB</span> */}
-        </div>
       </div>
       <div className="App-section-content-form">
           <FormComponent
@@ -32,7 +26,7 @@ function DataInformation({title, label, FormComponent, DataComponent}) {
             value={value}
             textSpan={label}
             textButton={"Add"}
-            placeHolder={"bitcoin, ethereum"}
+            placeHolder={"bitcoin, ethereum"} 
           />
       </div>
       <DataComponent keyword={keyword} />

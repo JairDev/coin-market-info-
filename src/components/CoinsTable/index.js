@@ -4,7 +4,7 @@ import TrTable from "../TrTable"
 
 function CoinsTable({array}) {
   return (
-    <div className="App-section-coin-info">
+    <div className={`App-section-coin-info`}>
       <table className="App-section-coin-table">
         <thead>
           <tr>

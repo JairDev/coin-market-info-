@@ -85,7 +85,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header">
         <nav className="App-header-nav">
           <div>
             <Link to="/">Logo</Link>
@@ -94,7 +94,7 @@ function App() {
             <Link to="/converter">Converter</Link>
           </div>
         </nav>
-      </header>
+      </header> */}
       <section className="App-section-headband">
       <div className="App-section-headband-content-coins">
         <IterateArray 
@@ -109,12 +109,12 @@ function App() {
         />
         </div>
       </section>
+
       <section className="App-section-main">
         {/* <Route 
           path="/converter" 
           component={Converter}
         /> */}
-
         <Route 
           base="/"
           component={Home}

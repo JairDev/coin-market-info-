@@ -88,14 +88,21 @@
 
 
 .button-add-coin {
-  border: none;
+  border: 2px solid #f7a400;
   border-radius: 30px;
-  background-color: #f7a400;
+  /* background-color: #f7a400; */
+  background: none;
   box-shadow: 0 0px 25px 1px rgba(547, 164, 0, .3);
   color: #3e4491;
-  font-size: 1.4rem;
-  font-weight: bold;
-  padding: .4rem 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  /* font-size: 1.4rem;
+  font-weight: bold; */
+  /* padding: .4rem 1rem; */
 }
 
 .App-section-main {
@@ -107,10 +114,12 @@
   padding: 15px;
 }
 
-/* .App-section-coin{
-  border: 1px solid red;
+.App-section-coin{
+  border: 10px solid rgba(247, 164, 0, 1);
+  border-radius: 25px;
+  padding: 4rem 4vw;
 
-} */
+}
 
 .App-section-coin-info {
   background-color: #3e4491;
@@ -120,7 +129,7 @@
 .content-title-coin {
   color: white;
   display: flex;
-  /* justify-content: space-evenly; */
+  justify-content: space-evenly;
   flex-wrap: wrap;
   font-size: 6rem;
   text-align: center;
@@ -177,12 +186,20 @@
 
 .App-section-coin-content-input label span{
   font-size: 1.3rem;
-  margin-bottom: .5rem;
+  margin-bottom: 1rem;
 }
 
 .App-section-coin-content-input-button {
   display: flex;
   align-items: center;
+}
+.icon-plus {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: black;
+  fill: white;
 }
 
 .App-section-coin-content-input-button button {
@@ -286,6 +303,7 @@
   /* display: none; */
   /* border: 1px solid yellowgreen; */
   padding: 1rem;
+  overflow-wrap: break-word;
 }
 .articles-content-description p {
   font-size: 1.2rem;
@@ -330,4 +348,78 @@
   display: block;
   width: 100%;
   font-size: 1.5rem;
+}
+
+.content-svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+.content-svg svg {
+  position: relative;
+  display: block;
+  width: calc(149% + 1.3px);
+  height: 146px;
+}
+
+.shape-fill {
+  fill: #FFFFFF;
+}
+
+.content-no-flip-text {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  font-size: 8vw;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+@media only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+  table, thead, tbody, th, td, tr { 
+		display: block; 
+  }
+
+  
+  thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+  }
+  
+  /* tr { border: 1px solid #ccc; } */
+
+  .App-section-coin-table tbody td{ 
+		border: none;
+		border-bottom: 1px solid rgb(131, 131, 131);
+		position: relative;
+    /* padding-left: 50%;  */
+
+    padding: 1rem 0 1rem 50%;
+  }
+  .App-section-coin-table tbody td:first-child { 
+    border-top: 1px solid rgb(131, 131, 131);
+  }
+
+  .App-section-coin-table tbody tr{ 
+    margin-bottom: 1rem;
+  }
+  
+  td:before { 
+		position: absolute;
+		/* top: 6px; */
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+  }
+  
+  td:nth-of-type(1):before { content: "Rank"; color:#f7a400; font-weight: bold;}
+	td:nth-of-type(2):before { content: "Name"; color:#f7a400; font-weight: bold;}
+	td:nth-of-type(3):before { content: "Market Cap"; color:#f7a400; font-weight: bold;}
+	td:nth-of-type(4):before { content: "Price"; color:#f7a400; font-weight: bold;}
+	td:nth-of-type(5):before { content: "Change (24h)"; color:#f7a400; font-weight: bold;}
 }

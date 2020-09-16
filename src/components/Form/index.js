@@ -16,7 +16,9 @@ function Form(props) {
           <span>{textSpan}</span>
           <div className="App-section-coin-content-input-button">
             <input type="text" value={value} onChange={onChange} placeholder={`E.g ${placeHolder}`}></input>
-            <button className="button-add-coin">{textButton}</button>
+            <button className="button-add-coin">
+              <svg class="icon icon-plus"><use xlinkHref="#icon-plus"></use></svg>
+            </button>
           </div>
         </label>
       </div>
