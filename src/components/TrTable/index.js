@@ -1,4 +1,5 @@
 import React from "react"
+import "./TrTable.css"
 
 function TrTable({item}) {
   const fixedPercentage = item.market_data.price_change_percentage_24h.toFixed(2)
@@ -13,9 +14,9 @@ function TrTable({item}) {
       <td>
         <div className="App-section-coin-table-coindata">
           <div className="App-section-coin-table-coindata-img"><img src={item.image.thumb} alt=""></img></div>
-          <div>
+          <span>
             {item.name}
-          </div>
+          </span>
         </div>
       </td>
       <td>

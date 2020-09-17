@@ -1,4 +1,5 @@
 import React from "react"
+import "./ArticlesNews.css"
 
 function ArticlesNews({item}) {
   return (

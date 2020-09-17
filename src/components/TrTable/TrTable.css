@@ -1,0 +1,20 @@
+.App-section-coin-table tbody td {
+  border-bottom: 1px solid rgb(131, 131, 131);
+  color: white;
+  padding: 1rem 0;
+}
+
+.App-section-coin-table tbody tr {
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.App-section-coin-table-coindata {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.App-section-coin-table-coindata-img {
+  margin-right: .3rem;
+}

@@ -1,0 +1,29 @@
+.App-section-coin-info {
+  background-color: #3e4491;
+  margin-top: 3rem;
+}
+
+.App-section-coin-table {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.App-section-coin-table thead  {
+  color: #f7a400;
+}
+
+.App-section-coin-table thead span {
+  display: block;
+  padding: 1rem 0
+}
+
+.App-section-coin-table thead th:nth-child(1) {
+  width: 10%;
+}
+
+.App-section-coin-table thead th {
+  border-bottom: 1px solid rgb(131, 131, 131);
+}

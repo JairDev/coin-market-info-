@@ -1,6 +1,7 @@
 import React from "react"
 import IterateArray from "../../utils/IterateArray"
 import TrTable from "../TrTable"
+import "./CoinsTable.css"
 
 function CoinsTable({array}) {
   return (

@@ -1,0 +1,86 @@
+
+.App-section-coin-content-input label {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.App-section-coin-content-input input {
+  border: none;
+  border-radius: 30px;
+  height: 25px;
+  padding: 1rem 1rem;
+  font-size: 1.3rem;
+  width: 40%;
+  max-width: 200px;
+}
+
+.App-section-coin-content-input label span{
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.App-section-coin-content-input-button {
+  display: flex;
+  align-items: center;
+}
+
+.icon-plus {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: black;
+  fill: white;
+}
+
+.App-section-coin-content-input-button button {
+  margin-left: 1rem;
+}
+
+.button-add-coin {
+  border: 2px solid #f7a400;
+  border-radius: 30px;
+  background: none;
+  box-shadow: 0 0px 25px 1px rgba(547, 164, 0, .3);
+  color: #3e4491;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  position: relative;
+}
+.button-add-coin:before {
+  content: "";
+  /* border: 2px solid #f7a400; */
+  border-radius: 30px;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  transform: scale(1.0);
+  
+}
+.button-add-coin:hover::before {
+  content: "";
+  border: 2px solid #f7a400;
+  border-radius: 30px;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  animation: scaleBorder .7s linear 0s 1 normal none running;
+  opacity: 1;
+  transform: scale(1.0);
+}
+
+@keyframes scaleBorder {
+  0% {
+    opacity: 1;
+    transform: scale(1.0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}

@@ -1,4 +1,5 @@
 import React from "react"
+import "./Form.css"
 
 function Form(props) {
   const {
@@ -6,7 +7,6 @@ function Form(props) {
     onChange,
     value,
     textSpan,
-    textButton,
     placeHolder,
   } = props
   return (
@@ -15,9 +15,9 @@ function Form(props) {
         <label>
           <span>{textSpan}</span>
           <div className="App-section-coin-content-input-button">
-            <input type="text" value={value} onChange={onChange} placeholder={`E.g ${placeHolder}`}></input>
+            <input className="form-input" type="text" value={value} onChange={onChange} placeholder={`E.g ${placeHolder}`}></input>
             <button className="button-add-coin">
-              <svg class="icon icon-plus"><use xlinkHref="#icon-plus"></use></svg>
+              <svg className="icon icon-plus"><use xlinkHref="#icon-plus"></use></svg>
             </button>
           </div>
         </label>

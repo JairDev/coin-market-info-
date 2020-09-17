@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react"
 import getDataFetch from "../../services"
 import IterateArray from "../../utils/IterateArray"
 import ArticlesNews from "../ArticleNews"
+import "./NewsData.css"
 
 const apiKeyNews = "28d89ba563644bf397ab0a8e7b46fa4d"
 
