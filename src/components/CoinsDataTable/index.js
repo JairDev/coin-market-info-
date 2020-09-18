@@ -19,7 +19,6 @@ function CoinsDataTable({keyword = "bitcoin"}) {
     async function getDataCoinId() {
       const urlCoinId = `https://api.coingecko.com/api/v3/coins/${keyword}`;
       const data = await getDataFetch(urlCoinId)
-      console.log(data)
       setCoinID((prev) => { 
         const findIdx = prev.findIndex(item => item.id === keyword);
         if(findIdx === -1) {
@@ -32,12 +31,21 @@ function CoinsDataTable({keyword = "bitcoin"}) {
     getDataCoinId().catch(error => console.log(error))
   }, [keyword, setCoinID])
 
+  const onClick = (id) => {
+    console.log(coinId)
+    const copyArray = [...coinId]
+    const index = copyArray.findIndex(item => item.name === id)
+    copyArray.splice(index, 1)
+    console.log(copyArray)
+    setCoinID(copyArray) 
+  }
 
   return  (
-      <CoinsTable 
-        array={coinId} 
-        keyword={keyword}
-      />
+    <CoinsTable 
+      array={coinId} 
+      keyword={keyword}
+      onClick={onClick}
+    />
   )
 }
 

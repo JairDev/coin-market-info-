@@ -6,7 +6,7 @@ function ArticlesNews({item}) {
     <div className="content-articles">
       <div className="articles">
         <div className="articles-content-img">
-          <img src={item.urlToImage} alt=""></img>
+          <img src={item.urlToImage} alt={item.title}></img>
         </div>
         <div className="articles-content-description">
           <p>{item.title}</p>

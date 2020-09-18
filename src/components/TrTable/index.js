@@ -1,7 +1,8 @@
 import React from "react"
 import "./TrTable.css"
 
-function TrTable({item}) {
+function TrTable({item, onClick}) {
+  const id = item.name
   const fixedPercentage = item.market_data.price_change_percentage_24h.toFixed(2)
   const classPercentage = fixedPercentage < 0 ? "low-percentage" : "high-percentage"
   return (
@@ -33,7 +34,11 @@ function TrTable({item}) {
         <div className={classPercentage}>
           {fixedPercentage}%
         </div>
+        <div className="remove" onClick={() => onClick(item.name)} data-id={item.name}>
+          <span>X</span>
+        </div>
       </td>
+    
     </tr>
   )
 }

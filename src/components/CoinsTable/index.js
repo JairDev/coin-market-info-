@@ -3,7 +3,7 @@ import IterateArray from "../../utils/IterateArray"
 import TrTable from "../TrTable"
 import "./CoinsTable.css"
 
-function CoinsTable({array}) {
+function CoinsTable({array, onClick}) {
   return (
     <div className={`App-section-coin-info`}>
       <table className="App-section-coin-table">
@@ -37,7 +37,14 @@ function CoinsTable({array}) {
           </tr>
         </thead>
         <tbody>
-          <IterateArray array={array} property={"id"} Component={TrTable} />
+         { 
+          <IterateArray 
+            array={array} 
+            property={"id"} 
+            Component={TrTable}
+            onClick={onClick}
+          />
+         }
         </tbody>
       </table>
     </div>

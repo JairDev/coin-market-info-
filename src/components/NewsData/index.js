@@ -2,14 +2,17 @@ import React, {useEffect, useState} from "react"
 import getDataFetch from "../../services"
 import IterateArray from "../../utils/IterateArray"
 import ArticlesNews from "../ArticleNews"
+import Loader  from "../Loader"
 import "./NewsData.css"
 
 const apiKeyNews = "28d89ba563644bf397ab0a8e7b46fa4d"
 
-
 function NewsData({keyword}) {
   const [news, setNews] = useState([])
+  const [loader, setLoader] = useState(false)
+
   if(!keyword) keyword = "ethereum"
+
   useEffect(() => {
     async function getNews() {
       const urlNews = 'http://newsapi.org/v2/everything?' +
@@ -17,18 +20,23 @@ function NewsData({keyword}) {
                       'from=2020-09-08&' +
                       'sortBy=popularity&' +
                       `apiKey=${apiKeyNews}`;
+      setLoader(true)
       const data = await getDataFetch(urlNews)
       setNews(data.articles)
+      setLoader(false)
     }
-    getNews()
+    getNews().catch(error => console.log(error))
   }, [keyword])
   return ( 
     <div className="App-section-content-articles">
-      <IterateArray 
+      {
+        loader ? <Loader/> :
+        <IterateArray 
         array={news} 
         property={"content"} 
         Component={ArticlesNews} 
       />
+      }
     </div>
   )
 }

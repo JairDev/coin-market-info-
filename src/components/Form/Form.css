@@ -52,26 +52,16 @@
   height: 35px;
   position: relative;
 }
+
 .button-add-coin:before {
-  content: "";
-  /* border: 2px solid #f7a400; */
-  border-radius: 30px;
-  width: 35px;
-  height: 35px;
-  position: absolute;
-  transform: scale(1.0);
-  
-}
-.button-add-coin:hover::before {
   content: "";
   border: 2px solid #f7a400;
   border-radius: 30px;
   width: 35px;
   height: 35px;
   position: absolute;
-  animation: scaleBorder .7s linear 0s 1 normal none running;
-  opacity: 1;
   transform: scale(1.0);
+  
 }
 
 @keyframes scaleBorder {
@@ -81,6 +71,17 @@
   }
   100% {
     opacity: 0;
-    transform: scale(1.6);
+    transform: scale(1.7);
   }
+}
+
+.form-input:focus ~ .button-add-coin:before {
+  border: 2px solid #f7a400;
+  border-radius: 30px;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  animation: scaleBorder .8s linear 0s 1 normal none running;
+  opacity: 1;
+  transform: scale(1.0);
 }
