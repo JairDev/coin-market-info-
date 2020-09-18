@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from "react"
+import React, {useEffect, useState, useRef} from "react"
 import getDataFetch from "../../services"
 import IterateArray from "../../utils/IterateArray"
 import ArticlesNews from "../ArticleNews"
 import Loader  from "../Loader"
+import useNearScreen from "../../hooks/useNearScreen"
 import "./NewsData.css"
 
 const apiKeyNews = "28d89ba563644bf397ab0a8e7b46fa4d"
@@ -10,7 +11,7 @@ const apiKeyNews = "28d89ba563644bf397ab0a8e7b46fa4d"
 function NewsData({keyword}) {
   const [news, setNews] = useState([])
   const [loader, setLoader] = useState(false)
-
+  
   if(!keyword) keyword = "ethereum"
 
   useEffect(() => {
@@ -41,4 +42,14 @@ function NewsData({keyword}) {
   )
 }
 
-export default NewsData
+function LazyNewsData() {
+  const {show, elementRef}= useNearScreen({distance: "50px"})
+
+  return (
+    <div ref={elementRef}>
+      {show ? <NewsData/> : null}
+    </div>
+  )
+}
+
+export default LazyNewsData

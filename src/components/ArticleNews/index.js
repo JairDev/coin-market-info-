@@ -1,9 +1,13 @@
 import React from "react"
 import "./ArticlesNews.css"
+import useNearScreen from "../../hooks/useNearScreen"
 
 function ArticlesNews({item}) {
+  const {show, elementRef}= useNearScreen({distance: "0px"})
+  // console.log(show)
+
   return (
-    <div className="content-articles">
+    <div ref={elementRef} className="content-articles">
       <div className="articles">
         <div className="articles-content-img">
           <img src={item.urlToImage} alt={item.title}></img>

@@ -3,6 +3,7 @@ import Form from "../../components/Form"
 import CoinsDataTable from "../../components/CoinsDataTable"
 import NewsData from "../../components/NewsData"
 import DataInformation from "../../components/DataInformation"
+import LazyNewsdata from "../../components/NewsData"
 import "./Home.css"
 
 function Home() {
@@ -27,7 +28,7 @@ function Home() {
           title={"News about BTC"}
           label={"Search news by keyword"}
           FormComponent={Form}
-          DataComponent={NewsData}
+          DataComponent={LazyNewsdata}
         />
       </section>
     </>

@@ -6,7 +6,9 @@ import CoinsTable from "../CoinsTable"
 function useStateSaveCoin() {
   const [coinId, setCoinID] = useState(JSON.parse(localStorage.getItem("coin")) || [])
   
-  localStorage.setItem("coin", JSON.stringify(coinId))
+  useEffect(() => {
+    localStorage.setItem("coin", JSON.stringify(coinId))
+  }, [coinId])
 
   return [coinId, setCoinID]
 }
@@ -32,11 +34,9 @@ function CoinsDataTable({keyword = "bitcoin"}) {
   }, [keyword, setCoinID])
 
   const onClick = (id) => {
-    console.log(coinId)
     const copyArray = [...coinId]
     const index = copyArray.findIndex(item => item.name === id)
     copyArray.splice(index, 1)
-    console.log(copyArray)
     setCoinID(copyArray) 
   }
 

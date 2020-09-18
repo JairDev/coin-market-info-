@@ -1,5 +1,11 @@
 .content-articles {
   padding: 15px 15px;
+  opacity: .5;
+  transition: .8s all linear;
+}
+
+.content-articles.display {
+  opacity: 1;
 }
 
 .articles {

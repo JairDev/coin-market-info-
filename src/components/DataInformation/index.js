@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import "./DataInformation.css"
-import Loader from "../Loader"
 
 function DataInformation({title, label, FormComponent, DataComponent}) {
   const [keyword, setKeyword] = useState()
