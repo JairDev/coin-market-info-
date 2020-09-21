@@ -14,9 +14,7 @@ function DataInformation({title, label, FormComponent, DataComponent}) {
     setValue("")
     e.preventDefault()
   }
-  // console.log(classForm)
   const handleChange = (e) => {
-    // console.log("n")
     setValue(e.target.value)
   }
   return (

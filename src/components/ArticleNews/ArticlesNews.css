@@ -1,11 +1,16 @@
 .content-articles {
   padding: 15px 15px;
-  opacity: .5;
-  transition: .8s all linear;
+  opacity: 0;
+  transition: .2s all linear;
+  position: relative;
+  top: 20%;
 }
 
 .content-articles.display {
+  /* border: 2px solid red; */
   opacity: 1;
+  position: relative;
+  top: 0;
 }
 
 .articles {
@@ -19,7 +24,7 @@
 
 .articles-content-img {
   height: 250px;
-  margin-bottom: 4rem;
+  margin-bottom: 1rem;
 
 }
 
@@ -31,6 +36,10 @@
 }
 
 .articles-content-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
   padding: 1rem;
   overflow-wrap: break-word;
 }

@@ -1,6 +1,7 @@
-import React, {useEffect, useState, useRef} from "react"
+import {useEffect, useState, useRef} from "react"
 
 function useNearScreen({distance = "50px"} = {}) {
+  // console.log(distance)
   const [show, setShow] = useState(false)
   const elementRef = useRef()
 
@@ -11,7 +12,7 @@ function useNearScreen({distance = "50px"} = {}) {
       if(el.isIntersecting) {
         if(el.target.className === "content-articles") {
           el.target.classList.add("display")
-          console.log(el.target)
+          // console.log(el.target)
         }
         setShow(true)
         observer.disconnect ()

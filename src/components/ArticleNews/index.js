@@ -3,7 +3,7 @@ import "./ArticlesNews.css"
 import useNearScreen from "../../hooks/useNearScreen"
 
 function ArticlesNews({item}) {
-  const {show, elementRef}= useNearScreen({distance: "0px"})
+  const {show, elementRef}= useNearScreen({distance: "-10px"})
   // console.log(show)
 
   return (

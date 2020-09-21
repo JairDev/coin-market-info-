@@ -6,7 +6,7 @@ import DataInformation from "../../components/DataInformation"
 import LazyNewsdata from "../../components/NewsData"
 import "./Home.css"
 
-function Home() {
+function Home({onClick}) {
   return (
     <>
       <section className="App-section-coin">
