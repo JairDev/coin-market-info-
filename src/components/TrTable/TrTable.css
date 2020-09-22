@@ -17,8 +17,15 @@
 }
 
 .App-section-coin-table-coindata-img {
+  width: 25px;
   margin-right: .3rem;
 }
+
+.App-section-coin-table-coindata-img img {
+  width: 100%;
+  object-fit: cover;
+}
+
 
 .remove {
   border: 1px solid red;

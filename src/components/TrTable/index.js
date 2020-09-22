@@ -2,8 +2,7 @@ import React from "react"
 import "./TrTable.css"
 
 function TrTable({item, onClick}) {
-  const id = item.name
-  const fixedPercentage = item.market_data.price_change_percentage_24h.toFixed(2)
+  const fixedPercentage = item.price_change_percentage_24h.toFixed(2)
   const classPercentage = fixedPercentage < 0 ? "low-percentage" : "high-percentage"
   return (
     <tr className={`App-section-coin-table-${item.name}`}>
@@ -14,7 +13,7 @@ function TrTable({item, onClick}) {
       </td>
       <td>
         <div className="App-section-coin-table-coindata">
-          <div className="App-section-coin-table-coindata-img"><img src={item.image.thumb} alt=""></img></div>
+          <div className="App-section-coin-table-coindata-img"><img src={item.image} alt=""></img></div>
           <span>
             {item.name}
           </span>
@@ -22,12 +21,12 @@ function TrTable({item, onClick}) {
       </td>
       <td>
         <div>
-          ${item.market_data.market_cap.usd}
+          ${item.market_cap}
         </div>
       </td>
       <td>
         <div>
-          ${item.market_data.current_price.usd}
+          ${item.current_price}
         </div>
       </td>
       <td>

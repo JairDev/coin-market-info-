@@ -1,20 +1,15 @@
-import React, {Suspense} from "react"
+import React from "react"
 import useNearScreen from "../../hooks/useNearScreen"
-
-const NewsData = React.lazy(() =>
-  import("./NewsData.js")
-)
+import NewsData from "./NewsData"
 
 function LazyNewsData({keyword}) {
   const {show, elementRef}= useNearScreen({distance: "0px"})
 
   return (
-    <Suspense fallback={null}>
-      <div ref={elementRef}>
-        {show ? <NewsData keyword={keyword}/> : null}
-      </div>
-    </Suspense>
-  )
+    <div ref={elementRef}>
+      {show ? <NewsData keyword={keyword}/> : null}
+    </div>
+  ) 
 }
 
 export default LazyNewsData

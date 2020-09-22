@@ -7,32 +7,33 @@ import "./NewsData.css"
 
 const apiKeyNews = "28d89ba563644bf397ab0a8e7b46fa4d"
 
+const Initial_Page = 0
+
 function NewsData({keyword}) {
+  const [newKeyWord, setNewKeyWord] = useState ([])
   const [news, setNews] = useState([])
+  const [newsSlice, setNewsSlice] = useState([])
   const [loader, setLoader] = useState(false)
-  let [current, setCurrent] = useState(0)
+  const [current, setCurrent] = useState(0)
   const index = 3
   if(!keyword) keyword = "ethereum"
 
+  const handleClick = (e) => {
+    setCurrent(prev => prev += 1)
+  }
   const sliceArray = (array) => {
     const start = current * index
     const end = index + start
     const slice = array.slice(start, end)
-    // console.log(start, end)
-    console.log(current)
-    return slice
+    return slice 
   }
-
-  const handleClick = (e) => {
-    // console.log(news)
-    setCurrent(prev => prev += 1)
-    console.log(current)
-    const slice = sliceArray(news)
-    // console.log(slice)
-    // console.log(slice)
-  }
+  useEffect(() => {
+    const slice = sliceArray(newsSlice)
+    setNews(prev => prev.concat(slice))
+  }, [current,newsSlice])
 
   useEffect(() => {
+    setCurrent(0)
     async function getNews() {
       const urlNews = 'http://newsapi.org/v2/everything?' +
                       `q=${keyword}&` +
@@ -41,14 +42,15 @@ function NewsData({keyword}) {
                       `apiKey=${apiKeyNews}`;
       setLoader(true)
       const data = await getDataFetch(urlNews)
-      sliceArray(data.articles)
+      const dataSlice = sliceArray(data.articles)
       // console.log(data.articles)
-      setNews(data.articles)
+      setNews(dataSlice)
+      setNewsSlice(data.articles)
       setLoader(false)
     }
     getNews().catch(error => console.log(error))
-  }, [keyword])
-
+  }, [keyword])    
+ 
   return ( 
     <>
       <div className="App-section-content-articles">
@@ -57,7 +59,8 @@ function NewsData({keyword}) {
           <IterateArray 
           array={news} 
           property={"content"} 
-          Component={ArticlesNews} 
+          Component={ArticlesNews}
+          page={current} 
         />
         }
       </div>

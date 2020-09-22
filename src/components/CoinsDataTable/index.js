@@ -19,12 +19,17 @@ function CoinsDataTable({keyword = "bitcoin"}) {
 
   useEffect(()=> {
     async function getDataCoinId() {
+      const urlTable = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`
+      
       const urlCoinId = `https://api.coingecko.com/api/v3/coins/${keyword}`;
-      const data = await getDataFetch(urlCoinId)
+      const data = await getDataFetch(urlTable)
+      console.log(data)
+      const find = data.find(coin => coin.id === keyword)
+      console.log(find)
       setCoinID((prev) => { 
         const findIdx = prev.findIndex(item => item.id === keyword);
         if(findIdx === -1) {
-          return  [...prev, data]
+          return  [...prev, find]
         }else {
           return  [...prev]
         }
