@@ -4,28 +4,39 @@ import CoinsTable from "../CoinsTable"
 
 
 function useStateSaveCoin() {
-  const [coinId, setCoinID] = useState(JSON.parse(localStorage.getItem("coin")) || [])
+  const [localKeyword, setLocalKeyword] = useState(JSON.parse(localStorage.getItem("coin")) || [])
   
   useEffect(() => {
-    localStorage.setItem("coin", JSON.stringify(coinId))
-  }, [coinId])
+    localStorage.setItem("coin", JSON.stringify(localKeyword))
+  }, [localKeyword])
 
-  return [coinId, setCoinID]
+  return [localKeyword, setLocalKeyword]
 }
 
-function CoinsDataTable({keyword = "bitcoin"}) {
-  const [coinId, setCoinID] = useStateSaveCoin()
-  // const [coinId, setCoinID] = useState([])
+function CoinsDataTable({keyword = "bitcoin"}) {  
+  const [localKeyword, setLocalKeyword] = useStateSaveCoin()
+  const [coinId, setCoinID] = useState([]) 
+  const [arrayCoins, setArrayCoins] = useState([])
+  const urlTable = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`
+
+  // console.log(localKeyword)
 
   useEffect(()=> {
-    async function getDataCoinId() {
-      const urlTable = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`
-      
-      const urlCoinId = `https://api.coingecko.com/api/v3/coins/${keyword}`;
+    setLocalKeyword(prev => {
+      const findWord = prev.findIndex(word => word === keyword)
+      if(findWord === -1) {
+        return [...prev, keyword]
+      }else {
+        return [...prev]
+      }
+    })
+    async function getDataCoinId() {      
+      // const urlCoinId = `https://api.coingecko.com/api/v3/coins/${keyword}`;
       const data = await getDataFetch(urlTable)
-      console.log(data)
+      // console.log(data)
+      setArrayCoins(data)
       const find = data.find(coin => coin.id === keyword)
-      console.log(find)
+      // console.log(find)
       setCoinID((prev) => { 
         const findIdx = prev.findIndex(item => item.id === keyword);
         if(findIdx === -1) {
@@ -36,8 +47,33 @@ function CoinsDataTable({keyword = "bitcoin"}) {
       })
     }
     getDataCoinId().catch(error => console.log(error))
-  }, [keyword, setCoinID])
+    
+  }, [keyword, setCoinID, setLocalKeyword])
+  
+  useEffect(() => {
+    async function getDataCoinId() {      
+      const data = await getDataFetch(urlTable)
+      // console.log(data)
+      const findWord = localKeyword.map(word => {
+        const filter = data.filter(item => item.id === word)
+        console.log(...filter)
+        setCoinID(prev => {
+          const findIndex = prev.findIndex(item => item.id === word)
+          if(findIndex === -1) {
+            return [...prev, ...filter]
+          }else {
+            return [...prev]
+          }
+        })
+      })
 
+      // const filter = data.filter(item => item.id === "bitcoin")
+      
+      // setArrayCoins(data)
+      
+    }
+    getDataCoinId().catch(error => console.log(error))
+  },[localKeyword])
   const onClick = (id) => {
     const copyArray = [...coinId]
     const index = copyArray.findIndex(item => item.name === id)
