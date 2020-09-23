@@ -74,10 +74,14 @@ function CoinsDataTable({keyword = "bitcoin"}) {
     }
     getDataCoinId().catch(error => console.log(error))
   },[localKeyword])
+
   const onClick = (id) => {
     const copyArray = [...coinId]
+    const copyArrayKeyword = [...localKeyword]
     const index = copyArray.findIndex(item => item.name === id)
     copyArray.splice(index, 1)
+    copyArrayKeyword.splice(index, 1)
+    setLocalKeyword(copyArrayKeyword)
     setCoinID(copyArray) 
   }
 
