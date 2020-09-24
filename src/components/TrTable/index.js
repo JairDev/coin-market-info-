@@ -34,7 +34,11 @@ function TrTable({item, onClick}) {
           {fixedPercentage}%
         </div>
         <div className="remove" onClick={() => onClick(item.name)} data-id={item.name}>
-          <span>X</span>
+          <span>
+            <svg className="icon icon-cancel-circle">
+              <use xlinkHref="#icon-cancel-circle"></use>
+            </svg>
+          </span>
         </div>
       </td>
     

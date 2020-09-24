@@ -1,16 +1,15 @@
 .content-articles {
   padding: 15px 15px;
   opacity: 0;
-  transition: .2s all linear;
+  transition: all linear .4s;
   position: relative;
-  top: 20%;
+  transform: scale(0.0);
 }
 
 .content-articles.display {
-  /* border: 2px solid red; */
   opacity: 1;
   position: relative;
-  top: 0;
+  transform: scale(1.0);
 }
 
 .articles {
@@ -49,7 +48,7 @@
   letter-spacing: 1px;
 }
 .articles-content-author {
-  margin-top: 1rem;
+  margin-top: 3rem;
 }
 .articles-content-author-name {
   font-weight: bold;

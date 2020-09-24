@@ -1,12 +1,11 @@
 import React from "react"
 import Form from "../../components/Form"
 import CoinsDataTable from "../../components/CoinsDataTable"
-import NewsData from "../../components/NewsData"
 import DataInformation from "../../components/DataInformation"
 import LazyNewsdata from "../../components/NewsData"
 import "./Home.css"
 
-function Home({onClick}) {
+function Home() {
   return (
     <>
       <section className="App-section-coin">
@@ -20,6 +19,7 @@ function Home({onClick}) {
           label={"Add currency to chart"}
           FormComponent={Form}
           DataComponent={CoinsDataTable}
+          classButton={"button-add-coin"}
         />
       </section>
 
@@ -29,6 +29,7 @@ function Home({onClick}) {
           label={"Search news by keyword"}
           FormComponent={Form}
           DataComponent={LazyNewsdata}
+          classButton={"button-add-news"}
         />
       </section>
     </>

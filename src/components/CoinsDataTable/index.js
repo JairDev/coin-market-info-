@@ -1,25 +1,13 @@
 import React, { useEffect, useState } from "react"
 import  getDataFetch from "../../services/index"
 import CoinsTable from "../CoinsTable"
-
-
-function useStateSaveCoin() {
-  const [localKeyword, setLocalKeyword] = useState(JSON.parse(localStorage.getItem("coin")) || [])
-  
-  useEffect(() => {
-    localStorage.setItem("coin", JSON.stringify(localKeyword))
-  }, [localKeyword])
-
-  return [localKeyword, setLocalKeyword]
-}
+import useStateSaveWord from "../../hooks/useStateSaveWord"
 
 function CoinsDataTable({keyword = "bitcoin"}) {  
-  const [localKeyword, setLocalKeyword] = useStateSaveCoin()
+  const [localKeyword, setLocalKeyword] = useStateSaveWord()
   const [coinId, setCoinID] = useState([]) 
   const [arrayCoins, setArrayCoins] = useState([])
   const urlTable = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`
-
-  // console.log(localKeyword)
 
   useEffect(()=> {
     setLocalKeyword(prev => {
@@ -31,12 +19,9 @@ function CoinsDataTable({keyword = "bitcoin"}) {
       }
     })
     async function getDataCoinId() {      
-      // const urlCoinId = `https://api.coingecko.com/api/v3/coins/${keyword}`;
       const data = await getDataFetch(urlTable)
-      // console.log(data)
       setArrayCoins(data)
       const find = data.find(coin => coin.id === keyword)
-      // console.log(find)
       setCoinID((prev) => { 
         const findIdx = prev.findIndex(item => item.id === keyword);
         if(findIdx === -1) {
@@ -48,15 +33,11 @@ function CoinsDataTable({keyword = "bitcoin"}) {
     }
     getDataCoinId().catch(error => console.log(error))
     
-  }, [keyword, setCoinID, setLocalKeyword])
+  }, [keyword, setCoinID, setLocalKeyword, urlTable])
   
   useEffect(() => {
-    async function getDataCoinId() {      
-      const data = await getDataFetch(urlTable)
-      // console.log(data)
       const findWord = localKeyword.map(word => {
-        const filter = data.filter(item => item.id === word)
-        console.log(...filter)
+        const filter = arrayCoins.filter(item => item.id === word)
         setCoinID(prev => {
           const findIndex = prev.findIndex(item => item.id === word)
           if(findIndex === -1) {
@@ -65,15 +46,9 @@ function CoinsDataTable({keyword = "bitcoin"}) {
             return [...prev]
           }
         })
-      })
-
-      // const filter = data.filter(item => item.id === "bitcoin")
-      
-      // setArrayCoins(data)
-      
-    }
-    getDataCoinId().catch(error => console.log(error))
-  },[localKeyword])
+        return filter
+      }) 
+  },[localKeyword, urlTable, arrayCoins])
 
   const onClick = (id) => {
     const copyArray = [...coinId]

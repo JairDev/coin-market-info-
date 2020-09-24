@@ -1,0 +1,90 @@
+.App-section-coin-content-input-button {
+  display: flex;
+  align-items: center;
+}
+
+
+
+.App-section-coin-content-input-button button {
+  margin-left: 1rem;
+}
+
+.button-add-coin {
+  border: 1px solid #f7a400;
+  border-radius: 30px;
+  background: none;
+  box-shadow: 0 0px 25px 1px rgba(547, 164, 0, .3);
+  color: #3e4491;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  position: relative;
+}
+
+.button-add-coin:before {
+  content: "";
+  border: 1px solid #f7a400;
+  border-radius: 30px;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  transform: scale(1.0);
+  
+}
+
+.icon-plus {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: black;
+  fill: white;
+}
+
+.button-add-news {
+  border: 1px solid #f7a400;
+  border-radius: 30px;
+  background: none;
+  box-shadow: 0 0px 25px 1px rgba(547, 164, 0, .3);
+  color: #3e4491;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  position: relative;
+}
+
+.button-add-news:before {
+  content: "";
+  border: 1px solid #f7a400;
+  border-radius: 30px;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  transform: scale(1.0);
+  
+}
+
+.more {
+  border: 1px solid #f7a400;
+  /* border-radius: 30px; */
+  background: none;
+  box-shadow: 0 0px 25px 1px rgba(547, 164, 0, .3);
+  color: #3e4491;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 35px;
+  position: relative;
+  left: 50%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+

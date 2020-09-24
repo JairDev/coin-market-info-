@@ -28,12 +28,20 @@
 
 
 .remove {
-  border: 1px solid red;
   cursor: pointer;
   position: absolute;
   top: 50%;
   right: 20px;
   transform: translateY(-50%);
+}
+
+.icon-cancel-circle {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: white;
+  fill: white;
 }
 
 @media only screen and (max-width: 760px),

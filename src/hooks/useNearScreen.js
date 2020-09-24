@@ -8,15 +8,15 @@ function useNearScreen({distance = "50px"} = {}) {
   useEffect(() => {
     const isObserver = (entries, observer) => {
       const el = entries[0]
-      
       if(el.isIntersecting) {
         if(el.target.className === "content-articles") {
           el.target.classList.add("display")
-          // console.log(el.target)
         }
+       
         setShow(true)
         observer.disconnect ()
       }
+
     } 
     const observer = new IntersectionObserver(isObserver, {
       rootMargin: distance

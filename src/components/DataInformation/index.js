@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import "./DataInformation.css"
 
-function DataInformation({title, label, FormComponent, DataComponent}) {
+function DataInformation({title, label, classButton, FormComponent, DataComponent}) {
   const [keyword, setKeyword] = useState()
   const [value, setValue] = useState("")
 
@@ -30,7 +30,8 @@ function DataInformation({title, label, FormComponent, DataComponent}) {
             value={value}
             textSpan={label}
             textButton={"Add"}
-            placeHolder={"bitcoin, ethereum"} 
+            placeHolder={"bitcoin, ethereum"}
+            classButton={classButton} 
           />
       </div>
       <DataComponent keyword={keyword} />
