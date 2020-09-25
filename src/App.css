@@ -37,9 +37,13 @@
 } 
 
 .App-section-main {
+  border: 8px solid rgba(247, 164, 0, 1);
+  box-shadow: 0 0px 25px 1px rgba(547, 164, 0, .3);
+  border-radius: 25px;
   width: 90%;
   margin: 6rem auto 0;
-  padding: 15px;
+  margin-bottom: 2rem;
+  padding: 5vw;
 }
 
 .content-flip-text {
@@ -47,15 +51,6 @@
   animation: flip 10s linear 0s infinite normal none running;
 }
 
-
-.text-flip {
-  /* border: 1px solid red; */
-  display: block;
-  transform: translateY(0px);
-  position: absolute;
-  right: 0;
-
-}
 
 /* @keyframes flip {
   0%, 12.66%, 100% {transform:translate3d(0,0,0);}
@@ -118,10 +113,15 @@
 	td:nth-of-type(5):before { 
     content: "Change (24h)"; color:#f7a400; font-weight: bold;
   }
-  .App-section-main {
+  /* .App-section-main {
     width: 90%;
     margin: 6rem auto 0;
-    padding: 0px;
+    padding: 10px;
+    
+  } */
+
+  .content-no-flip-text {
+    padding-left: 0vw;
   }
   
 }

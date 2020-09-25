@@ -26,10 +26,6 @@ function DataInformation({title, label, classButton, FormComponent, DataComponen
   
   return (
     <>
-      <div className="content-title-coin">
-        <span className="content-no-flip-text">{title}</span>
-      </div>
-
       <div className="App-section-content-form">
           <FormComponent
             onSubmit={(e) => handleSubmit(e)} 
