@@ -10,17 +10,12 @@ import "./NewsData.css";
 
 const apiKeyNews = "28d89ba563644bf397ab0a8e7b46fa4d";
 
-function NewsData({ keyword }) {
+function NewsData({ keyword, current }) {
   const {show, elementRef}= useNearScreen({distance: "0px"})
   const [news, setNews] = useState([]);
   const [newsSlice, setNewsSlice] = useState([]);
   const [loader, setLoader] = useState(false);
-  const [current, setCurrent] = useState(0);
   const index = 3;
-
-  const handleClick = () => {
-    setCurrent((prev) => (prev += 1));
-  };
 
   const sliceArray = useCallback(
     (array) => {
@@ -40,15 +35,13 @@ function NewsData({ keyword }) {
   }, [current, newsSlice, sliceArray]);
 
   useEffect(() => {
-    // console.log("-")
     if (current !== 0) return;
-    setCurrent(0);
     async function getNews() {
       const urlNews = `http://newsapi.org/v2/everything?q=${keyword}&from=2020-09-08&sortBy=popularity&apiKey=${apiKeyNews}`;
       setLoader(true);
       const data = await getDataFetch(urlNews);
+      console.log(data)
       const dataSlice = sliceArray(data.articles);
-      console.log(dataSlice)
       setNews(dataSlice);
       setNewsSlice(data.articles);
       setLoader(false);
@@ -70,13 +63,14 @@ function NewsData({ keyword }) {
           />
         )}
       </div>
-      <ButtonAdd onClick={handleClick} classButton={"more"}/>
+
     </>
   );
 }
 
 NewsData.propTypes = {
   keyword: PropTypes.string,
+  current: PropTypes.number,
 };
 
 export default NewsData;

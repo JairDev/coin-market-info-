@@ -1,15 +1,19 @@
 import React, { useState } from "react"
+import ButtonAdd from "../ButtonAdd"
+
 import "./DataInformation.css"
 
 function DataInformation({title, label, classButton, FormComponent, DataComponent}) {
   const [keyword, setKeyword] = useState()
   const [value, setValue] = useState("")
+  const [current, setCurrent] = useState(0);
 
   const handleSubmit = (e) => {
     if(!value) {
       e.preventDefault()
       return
     }
+    setCurrent(0)
     setKeyword(value)
     setValue("")
     e.preventDefault()
@@ -17,6 +21,11 @@ function DataInformation({title, label, classButton, FormComponent, DataComponen
   const handleChange = (e) => {
     setValue(e.target.value)
   }
+
+  const handleClick = () => {
+    setCurrent((prev) => (prev += 1));
+  };
+  
   return (
     <>
       <div className="content-title-coin">
@@ -34,7 +43,11 @@ function DataInformation({title, label, classButton, FormComponent, DataComponen
             classButton={classButton} 
           />
       </div>
-      <DataComponent keyword={keyword} />
+      <DataComponent 
+        keyword={keyword} 
+        current={current}
+      />
+      <ButtonAdd onClick={handleClick} classButton={"more"}/>
     </>
   )
 }
