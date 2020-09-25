@@ -1,6 +1,4 @@
 import React, { useState } from "react"
-import ButtonAdd from "../ButtonAdd"
-
 import "./DataInformation.css"
 
 function DataInformation({title, label, classButton, FormComponent, DataComponent}) {
@@ -46,8 +44,8 @@ function DataInformation({title, label, classButton, FormComponent, DataComponen
       <DataComponent 
         keyword={keyword} 
         current={current}
+        handleClick={handleClick}
       />
-      <ButtonAdd onClick={handleClick} classButton={"more"}/>
     </>
   )
 }

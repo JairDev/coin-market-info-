@@ -22,6 +22,10 @@
   animation: move 60s linear 0s infinite normal none running;
 }
 
+.App-section-headband-content-coins:hover {
+  animation-play-state: paused;
+}
+
  @keyframes move {
   0% {
     left: 0;
@@ -114,4 +118,10 @@
 	td:nth-of-type(5):before { 
     content: "Change (24h)"; color:#f7a400; font-weight: bold;
   }
+  .App-section-main {
+    width: 90%;
+    margin: 6rem auto 0;
+    padding: 0px;
+  }
+  
 }

@@ -5,7 +5,6 @@ import IterateArray from "../../utils/IterateArray";
 import ArticlesNews from "../ArticleNews";
 import Loader from "../Loader";
 import useNearScreen from "../../hooks/useNearScreen"
-import ButtonAdd from "../ButtonAdd"
 import "./NewsData.css";
 
 const apiKeyNews = "28d89ba563644bf397ab0a8e7b46fa4d";
@@ -22,7 +21,6 @@ function NewsData({ keyword, current }) {
       const start = current * index;
       const end = index + start;
       const slice = array.slice(start, end);
-      console.log(start, end);
       return slice;
     },
     [current]
@@ -40,7 +38,6 @@ function NewsData({ keyword, current }) {
       const urlNews = `http://newsapi.org/v2/everything?q=${keyword}&from=2020-09-08&sortBy=popularity&apiKey=${apiKeyNews}`;
       setLoader(true);
       const data = await getDataFetch(urlNews);
-      console.log(data)
       const dataSlice = sliceArray(data.articles);
       setNews(dataSlice);
       setNewsSlice(data.articles);

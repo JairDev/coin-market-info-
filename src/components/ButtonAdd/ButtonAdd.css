@@ -72,7 +72,6 @@
 
 .more {
   border: 1px solid #f7a400;
-  /* border-radius: 30px; */
   background: none;
   box-shadow: 0 0px 25px 1px rgba(547, 164, 0, .3);
   color: #3e4491;
@@ -80,10 +79,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  align-self: center;
   width: 80px;
   height: 35px;
   position: relative;
-  left: 50%;
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
