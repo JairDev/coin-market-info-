@@ -46,11 +46,6 @@
   padding: 5vw;
 }
 
-.content-flip-text {
-  border: 2px solid gold;
-  animation: flip 10s linear 0s infinite normal none running;
-}
-
 
 /* @keyframes flip {
   0%, 12.66%, 100% {transform:translate3d(0,0,0);}

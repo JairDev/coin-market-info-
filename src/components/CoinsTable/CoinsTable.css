@@ -1,5 +1,5 @@
 .App-section-coin-info {
-  background-color: #3e4491;
+  /* background-color: #3e4491; */
   border-radius: 4px;
   margin-top: 3rem;
   overflow: hidden;
@@ -14,6 +14,7 @@
 }
 
 .App-section-coin-table thead  {
+  background-color: #3e4491;
   color: #f7a400;
 }
 

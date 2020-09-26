@@ -1,12 +1,14 @@
 import React, { useState } from "react"
 import "./DataInformation.css"
 
-function DataInformation({title, label, classButton, FormComponent, DataComponent}) {
+function DataInformation({label, classButton, FormComponent, DataComponent}) {
   const [keyword, setKeyword] = useState()
   const [value, setValue] = useState("")
   const [current, setCurrent] = useState(0);
+  const [rotateCell, setRotateCell] = useState("")
 
   const handleSubmit = (e) => {
+    setRotateCell("rotate-cell")
     if(!value) {
       e.preventDefault()
       return
@@ -16,6 +18,7 @@ function DataInformation({title, label, classButton, FormComponent, DataComponen
     setValue("")
     e.preventDefault()
   }
+
   const handleChange = (e) => {
     setValue(e.target.value)
   }
@@ -32,7 +35,6 @@ function DataInformation({title, label, classButton, FormComponent, DataComponen
             onChange={(e) => handleChange(e)} 
             value={value}
             textSpan={label}
-            textButton={"Add"}
             placeHolder={"bitcoin, ethereum"}
             classButton={classButton} 
           />
@@ -41,6 +43,7 @@ function DataInformation({title, label, classButton, FormComponent, DataComponen
         keyword={keyword} 
         current={current}
         handleClick={handleClick}
+        className={rotateCell}
       />
     </>
   )

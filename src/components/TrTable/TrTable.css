@@ -5,14 +5,36 @@
   position: relative;
 }
 
+.App-section-coin-table-coin {
+  transform: rotate3d(1, 0, 0, 90deg);
+  transform-origin: top;
+  transition: all linear 2s;
+}
+
+.App-section-coin-table-coin.ro {
+  transform: rotate3d(1, 0, 0, 0deg);
+  animation: rotate-cell .5s linear 0s 1 normal none running
+}
+
+@keyframes rotate-cell {
+  0% {
+    transform: rotate3d(1, 0, 0, 90deg);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: rotate3d(1, 0, 0, 0deg);
+  }
+}
+
 .App-section-coin-table tbody tr {
+  background-color: #3e4491;
   font-size: 1.1rem;
   letter-spacing: 1px;
 }
 
 .App-section-coin-table-coindata {
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   padding: 0 1rem;
 }
