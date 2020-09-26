@@ -44,10 +44,10 @@ function Home() {
             <span className="text-flip">XRP</span>
             <span className="text-flip">BTC</span>
             <span className="text-flip">BNB</span>
-            <span className="text-flip">ETH</span>
-            <span className="text-flip">XRP</span>
-            <span className="text-flip">BTC</span>
-            <span className="text-flip">BNB</span>
+            <span className="text-flip">BCH</span>
+            <span className="text-flip">LTC</span>
+            <span className="text-flip">ADA</span>
+            <span className="text-flip">EOS</span>
           </div>
         </div>
         <DataInformation

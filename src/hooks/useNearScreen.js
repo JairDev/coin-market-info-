@@ -1,6 +1,6 @@
 import {useEffect, useState, useRef} from "react"
 
-function useNearScreen({distance = "50px"} = {}) {
+function useNearScreen({distance = "0px"} = {}) {
   // console.log(distance)
   const [show, setShow] = useState(false)
   const elementRef = useRef()
