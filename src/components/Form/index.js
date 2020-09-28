@@ -9,14 +9,15 @@ function Form(props) {
     value,
     textSpan,
     placeHolder,
-    classButton
+    classButton,
+    classError
   } = props
   return (
     <form className={`form-data`} onSubmit={onSubmit}>
       <div className="App-section-coin-content-input">
         <label>
           <span>{textSpan}</span>
-          <div className="App-section-coin-content-input-button">
+          <div className={`App-section-coin-content-input-button ${classError}`} tooltip="Data not found..." classActive={`${classError}`}>
             <input className="form-input" type="text" value={value} onChange={onChange} placeholder={`E.g ${placeHolder}`}></input>
             <ButtonAdd classButton={classButton}/>
           </div>

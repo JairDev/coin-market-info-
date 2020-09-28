@@ -52,7 +52,7 @@ function Home() {
           </div>
           <DataInformation
             label={"Add currency to chart"}
-            FormComponent={Form}
+            // FormComponent={Form}
             DataComponent={CoinsDataTable}
             classButton={"button-add-coin"}
           />
@@ -62,7 +62,7 @@ function Home() {
           <InfoTitle spanTitle={"News about"}/>
           <DataInformation
             label={"Search news by keyword"}
-            FormComponent={Form}
+            // FormComponent={Form}
             DataComponent={LazyNewsdata}
             classButton={"button-add-news"}
           />

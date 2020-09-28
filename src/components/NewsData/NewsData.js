@@ -5,15 +5,25 @@ import IterateArray from "../../utils/IterateArray";
 import ArticlesNews from "../ArticleNews";
 import Loader from "../Loader";
 import useNearScreen from "../../hooks/useNearScreen"
+import Form from "../../components/Form"
 import "./NewsData.css";
 
 const apiKeyNews = "28d89ba563644bf397ab0a8e7b46fa4d";
 
-function NewsData({ keyword, current }) {
+function NewsData(props) {
+  const { 
+    keyword, 
+    current,
+    label, 
+    value, 
+    classButton, 
+    handleSubmit, 
+    handleChange } = props
   const {show, elementRef}= useNearScreen({distance: "0px"})
   const [news, setNews] = useState([]);
   const [newsSlice, setNewsSlice] = useState([]);
   const [loader, setLoader] = useState(false);
+  const [classError, setClassError] = useState("");
   const index = 3;
 
   const sliceArray = useCallback(
@@ -38,6 +48,13 @@ function NewsData({ keyword, current }) {
       const urlNews = `http://newsapi.org/v2/everything?q=${keyword}&from=2020-09-08&sortBy=popularity&apiKey=${apiKeyNews}`;
       setLoader(true);
       const data = await getDataFetch(urlNews);
+      if(data.totalResults === 0) {
+        setClassError("error")
+        setTimeout(() => {
+          setClassError("")
+        }, 800);
+        return
+      }
       const dataSlice = sliceArray(data.articles);
       setNews(dataSlice);
       setNewsSlice(data.articles);
@@ -48,6 +65,17 @@ function NewsData({ keyword, current }) {
 
   return (
     <>
+    <div className="App-section-content-form">
+        <Form
+          onSubmit={handleSubmit} 
+          onChange={handleChange} 
+          value={value}
+          label={label}
+          placeHolder={"bitcoin, ethereum"}
+          classButton={"button-add-news"}
+          classError={classError} 
+        />
+      </div>
       <div ref={elementRef} className="App-section-content-articles">
         {loader ? (
           <Loader />

@@ -2,11 +2,20 @@ import React, { useEffect, useState } from "react";
 import getDataFetch from "../../services/index";
 import CoinsTable from "../CoinsTable";
 import useStateSaveWord from "../../hooks/useStateSaveWord";
+import Form from "../../components/Form"
 
-function CoinsDataTable({ keyword = "bitcoin" }) {
+function CoinsDataTable(props) {
+  const { 
+    keyword = "bitcoin", 
+    label, 
+    value, 
+    classButton, 
+    handleSubmit, 
+    handleChange } = props
   const [localKeyword, setLocalKeyword] = useStateSaveWord();
   const [coinId, setCoinID] = useState([]);
   const [arrayCoins, setArrayCoins] = useState([]);
+  const [classError, setClassError] = useState("");
   const urlTable = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`;
 
   useEffect(() => {
@@ -23,7 +32,14 @@ function CoinsDataTable({ keyword = "bitcoin" }) {
       const data = await getDataFetch(urlTable);
       setArrayCoins(data);
       const find = data.find((coin) => coin.id === keyword);
-      if (!find) return;
+      if (!find) {
+        console.log("not found")
+        setClassError("error")
+        setTimeout(() => {
+          setClassError("")
+        }, 800);
+        return;
+      };
       setCoinID((prev) => {
         const findIdx = prev.findIndex((item) => item.id === keyword);
         if (findIdx === -1) {
@@ -37,6 +53,7 @@ function CoinsDataTable({ keyword = "bitcoin" }) {
   }, [keyword, setCoinID, setLocalKeyword, urlTable]);
 
   useEffect(() => {
+    console.log("not ")
     const findWord = localKeyword.map((word) => {
       const filter = arrayCoins.filter((item) => item.id === word);
       setCoinID((prev) => {
@@ -55,18 +72,31 @@ function CoinsDataTable({ keyword = "bitcoin" }) {
     const copyArray = [...coinId];
     const copyArrayKeyword = [...localKeyword];
     const index = copyArray.findIndex((item) => item.name === id);
+    const indexWord = copyArrayKeyword.findIndex((item) => item === id.toLowerCase());
     copyArray.splice(index, 1);
-    copyArrayKeyword.splice(index, 1);
+    copyArrayKeyword.splice(indexWord, 1);
     setLocalKeyword(copyArrayKeyword);
     setCoinID(copyArray);
   };
 
   return (
-    <CoinsTable
-      array={coinId}
-      onClick={onClick}
-      keyword={keyword}
-    />
+    <>
+      <div className="App-section-content-form">
+        <Form
+          onSubmit={handleSubmit} 
+          onChange={handleChange} 
+          value={value}
+          label={label}
+          placeHolder={"bitcoin, ethereum"}
+          classButton={classButton}
+          classError={classError} 
+        />
+      </div>
+      <CoinsTable
+        array={coinId}
+        onClick={onClick}
+      />
+    </>
   );
 }
 

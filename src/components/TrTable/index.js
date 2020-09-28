@@ -1,19 +1,12 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import "./TrTable.css"
 
-function TrTable({item, onClick, keyword}) {
+function TrTable({item, onClick}) {
   const fixedPercentage = item.price_change_percentage_24h.toFixed(2)
   const classPercentage = fixedPercentage < 0 ? "low-percentage" : "high-percentage"
-  // console.log(keyword)
-  const [className, setClasName] = useState("")
-
-  useEffect(() => {
-    console.log("add effetct")
-    setClasName("ro")
-  }, [keyword])
 
   return (
-    <tr className={`App-section-coin-table-coin ${className}`}>
+    <tr className={`App-section-coin-table-coin ro`}>
       <td>
         <div>
           {item.market_cap_rank}

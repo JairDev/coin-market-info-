@@ -5,13 +5,22 @@ import PropTypes from 'prop-types';
 import ButtonAdd from "../ButtonAdd"
 import "./NewsData.css";
 
-function LazyNewsData({keyword = "apple", current, handleClick}) {
+function LazyNewsData({keyword = "apple", current, handleClick, handleSubmit, handleChange}) {
   const {show, elementRef}= useNearScreen({distance: "0px"})
 
   return (
     <div className="content-all-news" ref={elementRef}>
-      {show ? <NewsData current={current} keyword={keyword}/> : null}
-      <ButtonAdd onClick={handleClick} classButton={"more"}/>
+      {show ? 
+      <NewsData 
+        current={current} 
+        keyword={keyword}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+      /> : null}
+      <ButtonAdd 
+        onClick={handleClick} 
+        classButton={"more"}
+      />
     </div>
   )
 }

@@ -8,8 +8,8 @@
 .App-section-coin-content-input input {
   border: none;
   border-radius: 30px;
-  height: 25px;
-  padding: 1rem 1rem;
+  /* height: 25px; */
+  padding: .5rem 1rem;
   font-size: 1.3rem;
   width: 40%;
   max-width: 200px;
@@ -17,7 +17,7 @@
 
 .App-section-coin-content-input label span{
   font-size: 1.3rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.3rem;
 }
 
 @keyframes scaleBorder {
@@ -30,6 +30,55 @@
     transform: scale(1.7);
   }
 }
+
+
+.App-section-coin-content-input-button {
+  position: relative;
+}
+
+[tooltip]::before {
+  content: attr(tooltip);
+  background-color: rgba(225, 29, 37, .9);
+  border-radius: 30px;
+  padding: .5rem 1rem;
+  position: absolute;
+  bottom: calc(0% + 0px);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  color: #ffffff;
+  opacity: 0;
+  transition: all linear .3s;
+}
+
+[tooltip]::after {
+    content: '';
+    border: 5px solid transparent;
+    border-top: 5px solid rgba(225, 29, 37, .9);
+    opacity: 0;
+    position: absolute;
+    bottom: 0%;
+    left: 3%;
+    transition: all linear .3s;
+    z-index: 10;
+}
+
+[classActive="error"]::before {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  color: #ffffff;
+  opacity: 1;
+}
+[classActive="error"]::after{
+  bottom: 100%;
+  opacity: 1;
+}
+
+
+
 
 .form-input:focus ~ .button-add-coin:before {
   border: 1px solid #f7a400;
