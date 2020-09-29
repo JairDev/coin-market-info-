@@ -7,7 +7,7 @@ import "./NewsData.css";
 
 function LazyNewsData({keyword = "apple", current, handleClick, handleSubmit, handleChange}) {
   const {show, elementRef}= useNearScreen({distance: "0px"})
-
+  // console.log(show)
   return (
     <div className="content-all-news" ref={elementRef}>
       {show ? 
@@ -16,6 +16,7 @@ function LazyNewsData({keyword = "apple", current, handleClick, handleSubmit, ha
         keyword={keyword}
         handleSubmit={handleSubmit}
         handleChange={handleChange}
+        onClick={handleClick} 
       /> : null}
       <ButtonAdd 
         onClick={handleClick} 

@@ -4,8 +4,8 @@ import getDataFetch from "../../services";
 import IterateArray from "../../utils/IterateArray";
 import ArticlesNews from "../ArticleNews";
 import Loader from "../Loader";
-import useNearScreen from "../../hooks/useNearScreen"
 import Form from "../../components/Form"
+import useNearScreen from "../../hooks/useNearScreen"
 import "./NewsData.css";
 
 const apiKeyNews = "28d89ba563644bf397ab0a8e7b46fa4d";
@@ -16,10 +16,11 @@ function NewsData(props) {
     current,
     label, 
     value, 
-    classButton, 
     handleSubmit, 
-    handleChange } = props
-  const {show, elementRef}= useNearScreen({distance: "0px"})
+    handleChange,
+    } = props
+
+  const {show, elementRef}= useNearScreen({distance: "0px", once: false})
   const [news, setNews] = useState([]);
   const [newsSlice, setNewsSlice] = useState([]);
   const [loader, setLoader] = useState(false);
@@ -48,10 +49,11 @@ function NewsData(props) {
       const urlNews = `http://newsapi.org/v2/everything?q=${keyword}&from=2020-09-08&sortBy=popularity&apiKey=${apiKeyNews}`;
       setLoader(true);
       const data = await getDataFetch(urlNews);
+      console.log(data)
       if(data.totalResults === 0) {
         setClassError("error")
         setTimeout(() => {
-          setClassError("")
+          setClassError("") 
         }, 800);
         return
       }
@@ -76,19 +78,17 @@ function NewsData(props) {
           classError={classError} 
         />
       </div>
-      <div ref={elementRef} className="App-section-content-articles">
-        {loader ? (
-          <Loader />
-        ) : (
+      <div className="App-section-content-articles">
+        {loader ? <Loader /> : 
           <IterateArray
             array={news}
             property={"content"}
             Component={ArticlesNews}
             page={current}
           />
-        )}
+        }
       </div>
-
+      <div ref={elementRef} className="check-point"></div>
     </>
   );
 }
