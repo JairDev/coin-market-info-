@@ -11,16 +11,16 @@ import "./NewsData.css";
 const apiKeyNews = "28d89ba563644bf397ab0a8e7b46fa4d";
 
 function NewsData(props) {
-  const { 
+  const {
     keyword, 
     current,
-    label, 
+    label,
     value, 
     handleSubmit, 
     handleChange,
-    } = props
+  } = props
 
-  const {show, elementRef}= useNearScreen({distance: "0px", once: false})
+  const {elementRef}= useNearScreen({distance: "0px", once: false})
   const [news, setNews] = useState([]);
   const [newsSlice, setNewsSlice] = useState([]);
   const [loader, setLoader] = useState(false);
@@ -49,7 +49,6 @@ function NewsData(props) {
       const urlNews = `http://newsapi.org/v2/everything?q=${keyword}&from=2020-09-08&sortBy=popularity&apiKey=${apiKeyNews}`;
       setLoader(true);
       const data = await getDataFetch(urlNews);
-      console.log(data)
       if(data.totalResults === 0) {
         setClassError("error")
         setTimeout(() => {
@@ -62,7 +61,7 @@ function NewsData(props) {
       setNewsSlice(data.articles);
       setLoader(false);
     }
-    getNews().catch((error) => console.log(error));
+    getNews().catch((error) => {throw new Error(error)});
   }, [current, keyword, sliceArray]);
 
   return (
@@ -74,7 +73,7 @@ function NewsData(props) {
           value={value}
           label={label}
           placeHolder={"bitcoin, ethereum"}
-          classButton={"button-add-news"}
+          // classButton={"button-add-news"}
           classError={classError} 
         />
       </div>

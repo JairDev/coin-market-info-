@@ -7,17 +7,18 @@ function Form(props) {
     onSubmit,
     onChange,
     value,
-    textSpan,
+    label,
     placeHolder,
     classButton,
     classError
   } = props
+
   return (
-    <form className={`form-data`} onSubmit={onSubmit}>
+    <form className={`form-data`} onSubmit={onSubmit} aria-label="add new currency">
       <div className="App-section-coin-content-input">
         <label>
-          <span>{textSpan}</span>
-          <div className={`App-section-coin-content-input-button ${classError}`} tooltip="Data not found..." classActive={`${classError}`}>
+          <span>{label}</span>
+          <div className={`App-section-coin-content-input-button ${classError}`} tooltip="Data not found...">
             <input className="form-input" type="text" value={value} onChange={onChange} placeholder={`E.g ${placeHolder}`}></input>
             <ButtonAdd classButton={classButton}/>
           </div>

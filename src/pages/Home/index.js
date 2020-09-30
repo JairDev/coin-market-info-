@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react"
 import getDataFetch from "../../services"
-import Form from "../../components/Form"
 import CoinsDataTable from "../../components/CoinsDataTable"
 import DataInformation from "../../components/DataInformation"
 import LazyNewsdata from "../../components/NewsData"
@@ -52,7 +51,6 @@ function Home() {
           </div>
           <DataInformation
             label={"Add currency to chart"}
-            // FormComponent={Form}
             DataComponent={CoinsDataTable}
             classButton={"button-add-coin"}
           />
@@ -62,7 +60,6 @@ function Home() {
           <InfoTitle spanTitle={"News about"}/>
           <DataInformation
             label={"Search news by keyword"}
-            // FormComponent={Form}
             DataComponent={LazyNewsdata}
             classButton={"button-add-news"}
           />

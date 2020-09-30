@@ -3,7 +3,7 @@ import "./ArticlesNews.css"
 import useNearScreen from "../../hooks/useNearScreen"
 
 function ArticlesNews({item}) {
-  const {show, elementRef}= useNearScreen({distance: "0px"})
+  const {elementRef}= useNearScreen({distance: "0px"})
   return (
     <div ref={elementRef} className="content-articles">
       <a href={item.url} rel="noreferrer noopener" target="_blank">
