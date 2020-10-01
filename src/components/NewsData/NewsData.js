@@ -5,7 +5,6 @@ import IterateArray from "../../utils/IterateArray";
 import ArticlesNews from "../ArticleNews";
 import Loader from "../Loader";
 import Form from "../../components/Form"
-import useNearScreen from "../../hooks/useNearScreen"
 import "./NewsData.css";
 
 const apiKeyNews = "28d89ba563644bf397ab0a8e7b46fa4d";
@@ -20,7 +19,6 @@ function NewsData(props) {
     handleChange,
   } = props
 
-  const {elementRef}= useNearScreen({distance: "0px", once: false})
   const [news, setNews] = useState([]);
   const [newsSlice, setNewsSlice] = useState([]);
   const [loader, setLoader] = useState(false);
@@ -72,7 +70,7 @@ function NewsData(props) {
           onChange={handleChange} 
           value={value}
           label={label}
-          placeHolder={"bitcoin, ethereum"}
+          placeHolder={"apple, ethereum"}
           classError={classError} 
           classButton={"button-add-news"}
         />
@@ -87,7 +85,6 @@ function NewsData(props) {
           />
         }
       </div>
-      <div ref={elementRef} className="check-point"></div>
     </>
   );
 }

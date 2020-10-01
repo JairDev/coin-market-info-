@@ -1,6 +1,6 @@
 import {useEffect, useState, useRef} from "react"
 
-function useNearScreen({distance = "0px", once = true}) {
+function useNearScreen({distance = "0px"}) {
   const [show, setShow] = useState(false)
   const elementRef = useRef()
 
@@ -11,15 +11,10 @@ function useNearScreen({distance = "0px", once = true}) {
         if(el.target.className === "content-articles") {
           el.target.classList.add("display")
           setShow(true)
-          once && observer.disconnect ()
-        }else if(el.target.className === "check-point") {
-          setShow(true)
-          once && observer.disconnect ()
+          observer.disconnect()
         }else {
           setShow(true)
         }
-      }else {
-        !once && setShow(false)
       }
     } 
   

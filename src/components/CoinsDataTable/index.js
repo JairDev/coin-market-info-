@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import getDataFetch from "../../services/index";
 import CoinsTable from "../CoinsTable";
 import useStateSaveWord from "../../hooks/useStateSaveWord";
@@ -9,7 +9,6 @@ function CoinsDataTable(props) {
     keyword = "bitcoin",
     label,
     value,
-    classButton,
     updateKeyword,
     handleChange,
   } = props;
@@ -67,7 +66,19 @@ function CoinsDataTable(props) {
     });
   }, [localKeyword, urlTable, arrayCoins]);
 
-  const onClick = (id) => {
+  // const onClick = (id) => {
+  //   const copyArray = [...coinId];
+  //   const copyArrayKeyword = [...localKeyword];
+  //   const index = copyArray.findIndex((item) => item.name === id);
+  //   const indexWord = copyArrayKeyword.findIndex(
+  //     (item) => item === id.toLowerCase()
+  //   );
+  //   copyArray.splice(index, 1);
+  //   copyArrayKeyword.splice(indexWord, 1);
+  //   setLocalKeyword(copyArrayKeyword);
+  //   setCoinID(copyArray);
+  // };
+  const onClick = useCallback((id) => {
     const copyArray = [...coinId];
     const copyArrayKeyword = [...localKeyword];
     const index = copyArray.findIndex((item) => item.name === id);
@@ -78,8 +89,9 @@ function CoinsDataTable(props) {
     copyArrayKeyword.splice(indexWord, 1);
     setLocalKeyword(copyArrayKeyword);
     setCoinID(copyArray);
-  };
+  },[coinId, localKeyword, setLocalKeyword]);
 
+  console.log("-")
   return (
     <>
       <div className="App-section-content-form">
@@ -93,7 +105,7 @@ function CoinsDataTable(props) {
           classButton={"button-add-coin"}
         />
       </div>
-      <CoinsTable array={coinId} onClick={onClick} />
+      <CoinsTable array={coinId} onClick={onClick}/>
     </>
   );
 }
