@@ -16,7 +16,7 @@ function NewsData(props) {
     current,
     label,
     value, 
-    handleSubmit, 
+    updateKeyword, 
     handleChange,
   } = props
 
@@ -68,13 +68,13 @@ function NewsData(props) {
     <>
     <div className="App-section-content-form">
         <Form
-          onSubmit={handleSubmit} 
+          updateKeyword={updateKeyword} 
           onChange={handleChange} 
           value={value}
           label={label}
           placeHolder={"bitcoin, ethereum"}
-          // classButton={"button-add-news"}
           classError={classError} 
+          classButton={"button-add-news"}
         />
       </div>
       <div className="App-section-content-articles">

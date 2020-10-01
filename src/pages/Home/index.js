@@ -52,7 +52,6 @@ function Home() {
           <DataInformation
             label={"Add currency to chart"}
             DataComponent={CoinsDataTable}
-            classButton={"button-add-coin"}
           />
         </section>
 
@@ -61,7 +60,6 @@ function Home() {
           <DataInformation
             label={"Search news by keyword"}
             DataComponent={LazyNewsdata}
-            classButton={"button-add-news"}
           />
         </section>
       </section>

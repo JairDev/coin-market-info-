@@ -3,22 +3,12 @@ import "./DataInformation.css"
 
 function DataInformation({ label, classButton, DataComponent }) {
   const [keyword, setKeyword] = useState()
-  const [value, setValue] = useState("")
   const [current, setCurrent] = useState(0);
 
-  const handleSubmit = (e) => {
-    if(!value) {
-      e.preventDefault()
-      return
-    }
+  const updateKeyword = (keyword) => {
     setCurrent(0)
-    setKeyword(value)
-    setValue("")
-    e.preventDefault()
-  }
-
-  const handleChange = (e) => {
-    setValue(e.target.value)
+    setKeyword(keyword)
+    console.log(keyword)
   }
 
   const handleClick = () => {
@@ -32,10 +22,8 @@ function DataInformation({ label, classButton, DataComponent }) {
         current={current}
         label={label} 
         classButton={classButton}
-        value={value}
         handleClick={handleClick}
-        handleSubmit={handleSubmit}
-        handleChange={handleChange}
+        updateKeyword={updateKeyword}
       />
     </>
   )

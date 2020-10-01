@@ -10,7 +10,7 @@ function CoinsDataTable(props) {
     label,
     value,
     classButton,
-    handleSubmit,
+    updateKeyword,
     handleChange,
   } = props;
 
@@ -34,7 +34,6 @@ function CoinsDataTable(props) {
       setArrayCoins(data);
       const find = data.find((coin) => coin.id === keyword);
       if (!find) {
-        console.log("not found");
         setClassError("error");
         setTimeout(() => {
           setClassError("");
@@ -85,13 +84,13 @@ function CoinsDataTable(props) {
     <>
       <div className="App-section-content-form">
         <Form
-          onSubmit={handleSubmit}
+          updateKeyword={updateKeyword}
           onChange={handleChange}
           value={value}
           label={label}
           placeHolder={"bitcoin, ethereum"}
-          // classButton={classButton}
           classError={classError}
+          classButton={"button-add-coin"}
         />
       </div>
       <CoinsTable array={coinId} onClick={onClick} />
