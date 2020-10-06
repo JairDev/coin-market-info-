@@ -1,6 +1,6 @@
 import React from "react"
 
-function IterateArray({array, property, Component, onClick, keyword, cell}) {
+function IterateArray({array, property, onClick, keyword, Component}) {
   return (
     array.map(item => 
       <Component 
@@ -8,7 +8,6 @@ function IterateArray({array, property, Component, onClick, keyword, cell}) {
         item={item} 
         onClick={onClick}
         keyword={keyword}
-        cell={cell}
       />
     )
   )

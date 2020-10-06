@@ -42,7 +42,6 @@ function TrTable({item, onClick}) {
           </span>
         </div>
       </td>
-    
     </tr>
   )
 }
