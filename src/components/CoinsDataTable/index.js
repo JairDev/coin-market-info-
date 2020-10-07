@@ -5,7 +5,7 @@ import Form from "../../components/Form";
 import useFindData from "../../hooks/useFindData"
 
 function CoinsDataTable({keyword, label, updateKeyword}) {
-  const { coinId, setCoinID, arrayCoins } = useFindData({keyword})
+  const { coinId, setCoinID, arrayCoins, classError } = useFindData({keyword})
   const [localKeyword, setLocalKeyword] = useStateSaveWord();
 
   useEffect(() => {
@@ -38,17 +38,12 @@ function CoinsDataTable({keyword, label, updateKeyword}) {
   const onClick = useCallback((id) => {
     const copyArrayCoin = [...coinId];
     const copyArrayKeyword = [...localKeyword];
-    const index = copyArrayCoin.findIndex((item) => item.name === id);
-    const indexWord = copyArrayKeyword.findIndex(
-      (item) => item === id.toLowerCase()
-    );
-    copyArrayCoin.splice(index, 1);
-    copyArrayKeyword.splice(indexWord, 1);
-    setLocalKeyword(copyArrayKeyword);
-    setCoinID(copyArrayCoin);
+    const remainingCoins = copyArrayCoin.filter(item => item.id !== id)
+    const remainingWords = copyArrayKeyword.filter(item => item !== id)
+    setLocalKeyword(remainingWords);
+    setCoinID(remainingCoins);
   },[coinId, localKeyword, setCoinID, setLocalKeyword]);
 
-  // console.log("-")
   return (
     <>
       <div className="App-section-content-form">
@@ -56,7 +51,7 @@ function CoinsDataTable({keyword, label, updateKeyword}) {
           updateKeyword={updateKeyword}
           label={label}
           placeHolder={"bitcoin, ethereum"}
-          // classError={classError}
+          classError={classError}
           classButton={"button-add-coin"}
         />
       </div>

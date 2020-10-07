@@ -32,10 +32,10 @@ function Home() {
 
         <section className="App-section-news">
           <InfoTitle spanTitle={"News about"}/>
-          {/* <DataInformation
+          <DataInformation
             label={"Search news by keyword"}
             DataComponent={LazyNewsdata}
-          /> */}
+          />
         </section>
       </section>
     </>

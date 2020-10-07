@@ -14,9 +14,7 @@ function NewsData(props) {
     keyword, 
     current,
     label,
-    value, 
     updateKeyword, 
-    handleChange,
   } = props
 
   const [news, setNews] = useState([]);
@@ -67,8 +65,6 @@ function NewsData(props) {
     <div className="App-section-content-form">
         <Form
           updateKeyword={updateKeyword} 
-          onChange={handleChange} 
-          value={value}
           label={label}
           placeHolder={"apple, ethereum"}
           classError={classError} 

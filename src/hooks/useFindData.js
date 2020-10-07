@@ -32,7 +32,7 @@ function useFindData({keyword}) {
     getDataCoinId().catch((error) => {throw new Error(error)})
   }, [keyword])
 
-  return {coinId,setCoinID, arrayCoins}
+  return {coinId, setCoinID, arrayCoins, classError}
 }
 
 export default useFindData
