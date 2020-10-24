@@ -4,7 +4,7 @@ import useStateSaveWord from "../../hooks/useStateSaveWord";
 import Form from "../../components/Form";
 import useFindData from "../../hooks/useFindData"
 
-function CoinsDataTable({keyword, label, updateKeyword}) {
+function CoinsDataTable({keyword = "ethereum", label, updateKeyword}) {
   const { coinId, setCoinID, arrayCoins, classError } = useFindData({keyword})
   const [localKeyword, setLocalKeyword] = useStateSaveWord();
 
@@ -56,7 +56,6 @@ function CoinsDataTable({keyword, label, updateKeyword}) {
         />
       </div>
       <CoinsTable array={coinId} onClick={onClick}/>
-
     </>
   );
 }

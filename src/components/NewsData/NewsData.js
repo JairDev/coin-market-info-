@@ -11,7 +11,7 @@ const apiKeyNews = "28d89ba563644bf397ab0a8e7b46fa4d";
 
 function NewsData(props) {
   const {
-    keyword, 
+    keyword = "bitcoin", 
     current,
     label,
     updateKeyword, 
@@ -42,7 +42,7 @@ function NewsData(props) {
   useEffect(() => {
     if (current !== 0) return;
     async function getNews() {
-      const urlNews = `http://newsapi.org/v2/everything?q=${keyword}&from=2020-09-08&sortBy=popularity&apiKey=${apiKeyNews}`;
+      const urlNews = `http://newsapi.org/v2/everything?q=${keyword}&from=2020-09-23&sortBy=popularity&apiKey=${apiKeyNews}`;
       setLoader(true);
       const data = await getDataFetch(urlNews);
       if(data.totalResults === 0) {

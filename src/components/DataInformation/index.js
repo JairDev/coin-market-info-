@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import "./DataInformation.css"
 
 function DataInformation({ label, DataComponent }) {
-  const [keyword, setKeyword] = useState("ethereum")
+  const [keyword, setKeyword] = useState()
   const [current, setCurrent] = useState(0);
 
   const updateKeyword = (keyword) => {
