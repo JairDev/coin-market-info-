@@ -44,7 +44,7 @@ function NewsData(props) {
   useEffect(() => {
     if (current !== 0) return;
     async function getNews() {
-      const urlNews = `http://newsapi.org/v2/everything?q=${keyword}&from=${actualDate}&sortBy=popularity&apiKey=${apiKeyNews}`;
+      const urlNews = `https://newsapi.org/v2/everything?q=${keyword}&from=${actualDate}&sortBy=popularity&apiKey=${apiKeyNews}`;
       setLoader(true);
       const data = await getDataFetch(urlNews);
       if(data.totalResults === 0) {
