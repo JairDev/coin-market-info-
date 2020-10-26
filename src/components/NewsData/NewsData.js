@@ -6,6 +6,7 @@ import ArticlesNews from "../ArticleNews";
 import Loader from "../Loader";
 import Form from "../../components/Form"
 import "./NewsData.css";
+import useActualDate from "./useActualDate";
 
 const apiKeyNews = "28d89ba563644bf397ab0a8e7b46fa4d";
 
@@ -22,6 +23,7 @@ function NewsData(props) {
   const [loader, setLoader] = useState(false);
   const [classError, setClassError] = useState("");
   const index = 3;
+  const {actualDate} = useActualDate()
 
   const sliceArray = useCallback(
     (array) => {
@@ -42,7 +44,7 @@ function NewsData(props) {
   useEffect(() => {
     if (current !== 0) return;
     async function getNews() {
-      const urlNews = `http://newsapi.org/v2/everything?q=${keyword}&from=2020-09-23&sortBy=popularity&apiKey=${apiKeyNews}`;
+      const urlNews = `http://newsapi.org/v2/everything?q=${keyword}&from=${actualDate}&sortBy=popularity&apiKey=${apiKeyNews}`;
       setLoader(true);
       const data = await getDataFetch(urlNews);
       if(data.totalResults === 0) {
@@ -58,7 +60,7 @@ function NewsData(props) {
       setLoader(false);
     }
     getNews().catch((error) => {throw new Error(error)});
-  }, [current, keyword, sliceArray]);
+  }, [actualDate, current, keyword, sliceArray]);
 
   return (
     <>
