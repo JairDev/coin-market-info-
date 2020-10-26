@@ -8,7 +8,7 @@ import Form from "../../components/Form"
 import "./NewsData.css";
 import useActualDate from "./useActualDate";
 
-const apiKeyNews = "28d89ba563644bf397ab0a8e7b46fa4d";
+const apiKeyNews = "69927d6b98c03af209c1e8961b1ff94e";
 
 function NewsData(props) {
   const {
@@ -29,7 +29,7 @@ function NewsData(props) {
     (array) => {
       const start = current * index;
       const end = index + start;
-      const slice = array.slice(start, end);
+      const slice = array.slice(start, end); 
       return slice;
     },
     [current]
@@ -44,7 +44,7 @@ function NewsData(props) {
   useEffect(() => {
     if (current !== 0) return;
     async function getNews() {
-      const urlNews = `https://newsapi.org/v2/everything?q=${keyword}&from=${actualDate}&sortBy=popularity&apiKey=${apiKeyNews}`;
+      const urlNews = `https://gnews.io/api/v4/search?q=${keyword}&lang=en&max=10&token=${apiKeyNews}`;
       setLoader(true);
       const data = await getDataFetch(urlNews);
       if(data.totalResults === 0) {
