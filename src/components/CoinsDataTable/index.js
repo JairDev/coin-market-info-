@@ -1,14 +1,17 @@
-import React, { useEffect, useCallback} from "react";
+import React, { useEffect, useCallback, useState} from "react";
 import CoinsTable from "../CoinsTable";
 import useStateSaveWord from "../../hooks/useStateSaveWord";
 import Form from "../../components/Form";
 import useFindData from "../../hooks/useFindData"
 
-function CoinsDataTable({keyword = "ethereum", label, updateKeyword}) {
+function CoinsDataTable({label, keyword, updateKeyword}) {
+  // const [keyword, setKeyword] = useState("bitcoin")
   const { coinId, setCoinID, arrayCoins, classError } = useFindData({keyword})
   const [localKeyword, setLocalKeyword] = useStateSaveWord();
+  // console.log(coinId)
 
   useEffect(() => {
+    if(!keyword) return
     setLocalKeyword((prev) => {
       const findWord = prev.findIndex((word) => word === keyword);
       if (findWord === -1) {
@@ -43,7 +46,7 @@ function CoinsDataTable({keyword = "ethereum", label, updateKeyword}) {
     setLocalKeyword(remainingWords);
     setCoinID(remainingCoins);
   },[coinId, localKeyword, setCoinID, setLocalKeyword]);
-
+  // console.log("table")
   return (
     <>
       <div className="App-section-content-form">
@@ -56,6 +59,8 @@ function CoinsDataTable({keyword = "ethereum", label, updateKeyword}) {
         />
       </div>
       <CoinsTable array={coinId} onClick={onClick}/>
+      {/* <CoinsTable array={coinId}/> */}
+
     </>
   );
 }

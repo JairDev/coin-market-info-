@@ -13,7 +13,7 @@ function DataInformation({ label, DataComponent }) {
   const handleClick = () => {
     setCurrent((prev) => (prev += 1));
   };
-  
+  // console.log("data")
   return (
     <>
       <DataComponent 
@@ -27,4 +27,26 @@ function DataInformation({ label, DataComponent }) {
   )
 }
 
-export default DataInformation
+
+function WithDataInformation(Component) {
+  return function WithUpdateInformation({label}) {
+    const [keyword, setKeyword] = useState()
+    
+    const updateKeyword = (keyword) => {
+      setKeyword(keyword)
+    }
+    
+    return (
+      <>
+        <Component 
+          label={label} 
+          keyword={keyword} 
+          // current={current}
+          // handleClick={handleClick}
+          updateKeyword={updateKeyword}
+        />
+      </>
+    )
+  }
+}
+export default WithDataInformation

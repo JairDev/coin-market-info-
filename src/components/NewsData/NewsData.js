@@ -6,24 +6,22 @@ import ArticlesNews from "../ArticleNews";
 import Loader from "../Loader";
 import Form from "../../components/Form"
 import "./NewsData.css";
-import useActualDate from "./useActualDate";
 
 const apiKeyNews = "69927d6b98c03af209c1e8961b1ff94e";
 
-function NewsData(props) {
-  const {
-    keyword = "bitcoin", 
-    current,
-    label,
-    updateKeyword, 
-  } = props
+function NewsData({label, keyword = "bitcoin", updateKeyword, current}) {
+  // const [keyword, setKeyword] = useState("bitcoin")
 
   const [news, setNews] = useState([]);
   const [newsSlice, setNewsSlice] = useState([]);
   const [loader, setLoader] = useState(false);
   const [classError, setClassError] = useState("");
   const index = 3;
-  const {actualDate} = useActualDate()
+
+  // const updateKeyword = (keyword) => {
+  //   setCurrent(0)
+  //   setKeyword(keyword)
+  // }
 
   const sliceArray = useCallback(
     (array) => {
@@ -45,6 +43,7 @@ function NewsData(props) {
     if (current !== 0) return;
     async function getNews() {
       const urlNews = `https://gnews.io/api/v4/search?q=${keyword}&lang=en&max=10&token=${apiKeyNews}`;
+      console.log(urlNews)
       setLoader(true);
       const data = await getDataFetch(urlNews);
       if(data.totalResults === 0) {
@@ -60,7 +59,7 @@ function NewsData(props) {
       setLoader(false);
     }
     getNews().catch((error) => {throw new Error(error)});
-  }, [actualDate, current, keyword, sliceArray]);
+  }, [current, keyword, sliceArray]);
 
   return (
     <>
@@ -77,7 +76,7 @@ function NewsData(props) {
         {loader ? <Loader /> : 
           <IterateArray
             array={news}
-            property={"content"}
+            property={"title"}
             Component={ArticlesNews}
             page={current}
           />

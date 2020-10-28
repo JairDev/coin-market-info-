@@ -1,9 +1,10 @@
-import React from "react"
-import IterateArray from "../../utils/IterateArray"
-import TrTable from "../TrTable"
-import "./CoinsTable.css"
+import React from "react";
+import IterateArray from "../../utils/IterateArray";
+import TrTable from "../TrTable";
+import "./CoinsTable.css";
 
-function CoinsTable({array, onClick}) {
+function CoinsTable({ array, onClick }) {
+ 
   return (
     <div className={`App-section-coin-info`}>
       <table className="App-section-coin-table">
@@ -16,39 +17,43 @@ function CoinsTable({array, onClick}) {
             </th>
             <th>
               <div>
-              <span>Name</span>
+                <span>Name</span>
               </div>
             </th>
             <th>
               <div>
-              <span>Market Cap</span>
+                <span>Market Cap</span>
               </div>
             </th>
             <th>
               <div>
-              <span>Price</span>
+                <span>Price</span>
               </div>
             </th>
             <th>
               <div>
-              <span>Change (24h)</span>
+                <span>Change (24h)</span>
               </div>
             </th>
           </tr>
         </thead>
         <tbody>
-         { 
-          <IterateArray 
-            array={array} 
-            property={"id"} 
-            Component={TrTable}
-            onClick={onClick}
-          />
-         }
+          {!array.length ? (
+            <tr className="empty-chart">  
+              <th>Add a coin, buddy...</th>
+            </tr>
+          ) : (
+            <IterateArray
+              array={array}
+              property={"id"}
+              Component={TrTable}
+              onClick={onClick}
+            />
+          )}
         </tbody>
       </table>
     </div>
-  )
+  );
 }
 
-export default CoinsTable
+export default CoinsTable;

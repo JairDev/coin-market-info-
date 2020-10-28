@@ -1,4 +1,4 @@
-import React, { Suspense } from "react"
+import React, { Suspense, useState, useEffect } from "react"
 import useNearScreen from "../../hooks/useNearScreen"
 // import NewsData from "./NewsData"
 import PropTypes from 'prop-types';
@@ -7,18 +7,28 @@ import "./NewsData.css";
 
 const NewsData = React.lazy(() => import("./NewsData"))
 
-function LazyNewsData({keyword, label, current, handleClick, updateKeyword}) {
+function LazyNewsData({label, keyword, updateKeyword}) {
   const {show, elementRef}= useNearScreen({distance: "0px"})
+  const [current, setCurrent] = useState(0)
+
+  useEffect(() => {
+    setCurrent(0)
+  },[keyword])
+
+  const handleClick = () => {
+    setCurrent((prev) => (prev += 1));
+  };
+ 
 
   return (
     <div className="content-all-news" ref={elementRef}>
       {show ?
         <Suspense fallback={"cargando..."}>
           <NewsData 
-            current={current} 
-            keyword={keyword}
             label={label}
+            keyword={keyword}
             updateKeyword={updateKeyword}
+            current={current}
           />
         </Suspense> : null}
       <ButtonAdd 
