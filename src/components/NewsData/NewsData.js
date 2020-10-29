@@ -4,30 +4,23 @@ import getDataFetch from "../../services";
 import IterateArray from "../../utils/IterateArray";
 import ArticlesNews from "../ArticleNews";
 import Loader from "../Loader";
-import Form from "../../components/Form"
+import Form from "../../components/Form";
 import "./NewsData.css";
 
 const apiKeyNews = "69927d6b98c03af209c1e8961b1ff94e";
 
-function NewsData({label, keyword = "bitcoin", updateKeyword, current}) {
-  // const [keyword, setKeyword] = useState("bitcoin")
-
+function NewsData({ label, keyword = "bitcoin", updateKeyword, current }) {
   const [news, setNews] = useState([]);
   const [newsSlice, setNewsSlice] = useState([]);
   const [loader, setLoader] = useState(false);
   const [classError, setClassError] = useState("");
   const index = 3;
 
-  // const updateKeyword = (keyword) => {
-  //   setCurrent(0)
-  //   setKeyword(keyword)
-  // }
-
   const sliceArray = useCallback(
     (array) => {
       const start = current * index;
       const end = index + start;
-      const slice = array.slice(start, end); 
+      const slice = array.slice(start, end);
       return slice;
     },
     [current]
@@ -43,44 +36,48 @@ function NewsData({label, keyword = "bitcoin", updateKeyword, current}) {
     if (current !== 0) return;
     async function getNews() {
       const urlNews = `https://gnews.io/api/v4/search?q=${keyword}&lang=en&max=10&token=${apiKeyNews}`;
-      console.log(urlNews)
       setLoader(true);
       const data = await getDataFetch(urlNews);
-      if(data.totalResults === 0) {
-        setClassError("error")
+      console.log(data)
+      if (data.totalArticles === 0) {
+        setClassError("error");
         setTimeout(() => {
-          setClassError("") 
+          setClassError("");
         }, 800);
-        return
+        return;
       }
       const dataSlice = sliceArray(data.articles);
       setNews(dataSlice);
       setNewsSlice(data.articles);
       setLoader(false);
     }
-    getNews().catch((error) => {throw new Error(error)});
+    getNews().catch((error) => {
+      throw new Error(error);
+    });
   }, [current, keyword, sliceArray]);
 
   return (
     <>
-    <div className="App-section-content-form">
+      <div className="App-section-content-form">
         <Form
-          updateKeyword={updateKeyword} 
+          updateKeyword={updateKeyword}
           label={label}
           placeHolder={"apple, ethereum"}
-          classError={classError} 
+          classError={classError}
           classButton={"button-add-news"}
         />
       </div>
       <div className="App-section-content-articles">
-        {loader ? <Loader /> : 
+        {loader ? (
+          <Loader />
+        ) : (
           <IterateArray
             array={news}
             property={"title"}
             Component={ArticlesNews}
             page={current}
           />
-        }
+        )}
       </div>
     </>
   );

@@ -1,17 +1,17 @@
-import React, { useEffect, useCallback, useState} from "react";
+import React, { useEffect, useCallback } from "react";
 import CoinsTable from "../CoinsTable";
 import useStateSaveWord from "../../hooks/useStateSaveWord";
 import Form from "../../components/Form";
-import useFindData from "../../hooks/useFindData"
+import useFindData from "../../hooks/useFindData";
 
-function CoinsDataTable({label, keyword, updateKeyword}) {
-  // const [keyword, setKeyword] = useState("bitcoin")
-  const { coinId, setCoinID, arrayCoins, classError } = useFindData({keyword})
+function CoinsDataTable({ label, keyword, updateKeyword }) {
+  const { coinId, setCoinID, arrayCoins, classError } = useFindData({
+    keyword,
+  });
   const [localKeyword, setLocalKeyword] = useStateSaveWord();
-  // console.log(coinId)
 
   useEffect(() => {
-    if(!keyword) return
+    if (!keyword) return;
     setLocalKeyword((prev) => {
       const findWord = prev.findIndex((word) => word === keyword);
       if (findWord === -1) {
@@ -23,6 +23,7 @@ function CoinsDataTable({label, keyword, updateKeyword}) {
   }, [keyword, setLocalKeyword]);
 
   useEffect(() => {
+    //Search local storage for keywords and filter the array with those matches for up-to-date information
     const findWord = localKeyword.map((word) => {
       const filter = arrayCoins.filter((item) => item.id === word);
       setCoinID((prev) => {
@@ -37,16 +38,18 @@ function CoinsDataTable({label, keyword, updateKeyword}) {
     });
   }, [localKeyword, arrayCoins, setCoinID]);
 
-
-  const onClick = useCallback((id) => {
-    const copyArrayCoin = [...coinId];
-    const copyArrayKeyword = [...localKeyword];
-    const remainingCoins = copyArrayCoin.filter(item => item.id !== id)
-    const remainingWords = copyArrayKeyword.filter(item => item !== id)
-    setLocalKeyword(remainingWords);
-    setCoinID(remainingCoins);
-  },[coinId, localKeyword, setCoinID, setLocalKeyword]);
-  // console.log("table")
+  const handleClick = useCallback(
+    (id) => {
+      const copyArrayCoin = [...coinId];
+      const copyArrayKeyword = [...localKeyword];
+      const remainingCoins = copyArrayCoin.filter((item) => item.id !== id);
+      const remainingWords = copyArrayKeyword.filter((item) => item !== id);
+      setLocalKeyword(remainingWords);
+      setCoinID(remainingCoins);
+    },
+    [coinId, localKeyword, setCoinID, setLocalKeyword]
+  );
+  console.log("table")
   return (
     <>
       <div className="App-section-content-form">
@@ -58,9 +61,7 @@ function CoinsDataTable({label, keyword, updateKeyword}) {
           classButton={"button-add-coin"}
         />
       </div>
-      <CoinsTable array={coinId} onClick={onClick}/>
-      {/* <CoinsTable array={coinId}/> */}
-
+      <CoinsTable array={coinId} onClick={handleClick} />
     </>
   );
 }

@@ -1,45 +1,52 @@
-import React, { useState } from "react"
-import "./Form.css"
-import ButtonAdd from "../ButtonAdd"
+import React, { useState } from "react";
+import "./Form.css";
+import ButtonAdd from "../ButtonAdd";
 
 function Form(props) {
-  const {
-    updateKeyword,
-    label,
-    placeHolder,
-    classButton,
-    classError
-  } = props
-
-  const [value, setValue] = useState("")
+  const { updateKeyword, label, placeHolder, classButton, classError } = props;
+  const [value, setValue] = useState("");
 
   const handleSubmit = (e) => {
-    if(!value) {
-      e.preventDefault()
+    if (!value) {
+      e.preventDefault();
       return;
     }
-    updateKeyword(value)
-    setValue("")
-    e.preventDefault()
-  }
+    updateKeyword(value);
+    setValue("");
+    e.preventDefault();
+  };
 
   const handleChange = (e) => {
-    setValue(e.target.value)
-  }
+    setValue(e.target.value);
+  };
 
   return (
-    <form className={`form-data`} onSubmit={handleSubmit} aria-label="add new currency">
+    <form
+      className={`form-data`}
+      onSubmit={handleSubmit}
+      aria-label="add new currency"
+    >
       <div className="App-section-coin-content-input">
         <label>
           <span>{label}</span>
-          <div className={`App-section-coin-content-input-button ${classError}`} tooltip="Data not found...">
-            <input className="form-input" type="text" value={value} onChange={handleChange} placeholder={`E.g ${placeHolder}`}></input>
-            <ButtonAdd classButton={classButton}/>
+          <div
+            className={`App-section-coin-content-input-button  ${classError}`}
+            classactive={classError}
+            tooltip="Data not found..."
+          >
+            <input
+              className="form-input"
+              type="text"
+              value={value}
+              onChange={handleChange}
+              placeholder={`E.g ${placeHolder}`}
+            ></input>
+            <ButtonAdd classButton={classButton} />
           </div>
         </label>
       </div>
     </form>
-  )
+  );
 }
 
-export default React.memo(Form)
+export default React.memo(Form);

@@ -4,7 +4,6 @@ import TrTable from "../TrTable";
 import "./CoinsTable.css";
 
 function CoinsTable({ array, onClick }) {
- 
   return (
     <div className={`App-section-coin-info`}>
       <table className="App-section-coin-table">
@@ -39,7 +38,7 @@ function CoinsTable({ array, onClick }) {
         </thead>
         <tbody>
           {!array.length ? (
-            <tr className="empty-chart">  
+            <tr className="empty-chart">
               <th>Add a coin, buddy...</th>
             </tr>
           ) : (

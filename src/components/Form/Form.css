@@ -36,6 +36,16 @@
   position: relative;
 }
 
+/* .App-section-coin-content-input-button.error::before {
+  content: "";
+  position: absolute;
+  bottom: calc(100% + 10px);
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  color: #ffffff;
+  opacity: 1;
+} */
+
 [tooltip]::before {
   content: attr(tooltip);
   background-color: rgba(225, 29, 37, .9);
@@ -64,7 +74,7 @@
     z-index: 10;
 }
 
-[classActive="error"]::before {
+[classactive="error"]::before {
   position: absolute;
   bottom: calc(100% + 10px);
   font-size: 1.3rem;
@@ -72,7 +82,7 @@
   color: #ffffff;
   opacity: 1;
 }
-[classActive="error"]::after{
+[classactive="error"]::after{
   bottom: 100%;
   opacity: 1;
 }

@@ -1,9 +1,9 @@
-import React from "react"
-import "./ArticlesNews.css"
-import useNearScreen from "../../hooks/useNearScreen"
+import React from "react";
+import "./ArticlesNews.css";
+import useNearScreen from "../../hooks/useNearScreen";
 
-function ArticlesNews({item}) {
-  const {elementRef}= useNearScreen({distance: "0px"})
+function ArticlesNews({ item }) {
+  const { elementRef } = useNearScreen({ distance: "0px" });
   return (
     <div ref={elementRef} className="content-articles">
       <a href={item.url} rel="noreferrer noopener" target="_blank">
@@ -15,13 +15,15 @@ function ArticlesNews({item}) {
             <p>{item.title}</p>
             <div className="articles-content-author">
               <span>by</span>
-              <span className="articles-content-author-name">{item.source.name}</span>
+              <span className="articles-content-author-name">
+                {item.source.name}
+              </span>
             </div>
           </div>
         </div>
       </a>
     </div>
-  )
+  );
 }
 
-export default ArticlesNews
+export default ArticlesNews;
