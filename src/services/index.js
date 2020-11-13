@@ -1,4 +1,5 @@
 
+
 async function getDataFetch(url) {
   try {
     const response = await fetch(url)
