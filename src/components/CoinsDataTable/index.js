@@ -7,12 +7,12 @@ import getDataFetch from "../../services";
 
 const urlTable = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`;
 
-
 function CoinsDataTable({ label, keyword, updateKeyword }) {
   const { coinId, setCoinID, arrayCoins, classError } = useFindData({
     keyword,
   });
   const [localKeyword, setLocalKeyword] = useStateSaveWord();
+
 
   useEffect(() => {
     if (!keyword) return;
@@ -35,7 +35,6 @@ function CoinsDataTable({ label, keyword, updateKeyword }) {
         const findIndex = prev.findIndex((item) => item.id === word);
         if (findIndex === -1) {
           return [...prev, ...filter];
-
         } else {
           return [...prev];
         }
@@ -55,37 +54,37 @@ function CoinsDataTable({ label, keyword, updateKeyword }) {
     },
     [coinId, localKeyword, setCoinID, setLocalKeyword]
   );
-  const update = async () => {
-    const data = await getDataFetch(urlTable);
-    console.log(data)
-      const words = localKeyword.map((keywords)  => {
-        const filterCoins = data.filter((coinNewPrice) => coinNewPrice.id === keywords )
-        const price = coinId.map((coinOldPrice) => {
-          const newPrice = filterCoins.map(coin => {
-            const match = coinOldPrice.current_price === coin.current_price
-            const sameCoin =coinOldPrice.id === coin.id
-            // console.log("old",coinOldPrice.current_price)
-            // console.log("new", coin.current_price) 
-            console.log(coinOldPrice.current_price)
-            console.log(coin.current_price)
-            // if(sameCoin && coinOldPrice.current_price !== coin.current_price) {
-            //   console.log("new", coin.current_price)
-            //   // setCoinID([coin])
-            //   // return coin
-            // }else {
-            //   console.log("old",coinOldPrice.current_price)
-            //   // return coinOldPrice
-            // }
-          })
-          // console.log(newPrice)
-        })
-      })
-  }
 
+  useEffect(() => {
+
+  })
+
+  const update = useCallback(async () => {
+    const data = await getDataFetch(urlTable);
+    const filter = data.filter((coins, index) => {
+      const match = coins.id === localKeyword[index]
+      return match
+    });
+
+    const check = coinId.map((coin, index) => {
+      const el = JSON.stringify(coin)
+      const id = JSON.stringify(filter[index])
+      if(el === id) {
+        console.log("not change")
+      }else {
+        setCoinID(filter)
+      }
+    })
+  }, [coinId, localKeyword, setCoinID]);
   return (
     <>
       <div className="App-section-content-form">
-        <div onClick={update} className="update">UPDATE</div>
+        <div onClick={update} className="update">
+          <span className="refresh">Refresh</span>
+          <span className="content-icon-refresh">
+          <svg className="icon icon-loop2"><use xlinkHref="#icon-loop2"></use></svg>
+          </span>
+        </div>
         <Form
           updateKeyword={updateKeyword}
           label={label}
@@ -95,13 +94,8 @@ function CoinsDataTable({ label, keyword, updateKeyword }) {
         />
       </div>
       <CoinsTable array={coinId} onClick={handleClick} />
-      
     </>
-    
   );
 }
-
-
-
 
 export default CoinsDataTable;

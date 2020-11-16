@@ -7,11 +7,10 @@ function useFindData({ keyword }) {
   const [coinId, setCoinID] = useState([]);
   const [arrayCoins, setArrayCoins] = useState([]);
   const [classError, setClassError] = useState("");
-  let controller = null
+
   useEffect(() => {
     async function getDataCoinId() {
-      if(controller) controller.abort()
-      const data = await getDataFetch(urlTable, controller);
+      const data = await getDataFetch(urlTable);
       setArrayCoins(data);
       const find = data.find((coin) => coin.id === keyword);
       if (keyword && !find) {
@@ -35,8 +34,9 @@ function useFindData({ keyword }) {
     getDataCoinId().catch((error) => {
       throw new Error(error);
     });
-  }, [controller, keyword]);
-
+    
+  }, [keyword]);
+ 
   return { coinId, setCoinID, arrayCoins, classError };
 }
 

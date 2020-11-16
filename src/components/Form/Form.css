@@ -1,4 +1,3 @@
-
 .App-section-coin-content-input label {
   display: flex;
   flex-direction: column;
@@ -9,13 +8,13 @@
   border: none;
   border-radius: 30px;
   /* height: 25px; */
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   font-size: 1.3rem;
   width: 40%;
   max-width: 200px;
 }
 
-.App-section-coin-content-input label span{
+.App-section-coin-content-input label span {
   font-size: 1.3rem;
   margin-bottom: 1.3rem;
 }
@@ -23,7 +22,7 @@
 @keyframes scaleBorder {
   0% {
     opacity: 1;
-    transform: scale(1.0);
+    transform: scale(1);
   }
   100% {
     opacity: 0;
@@ -31,26 +30,15 @@
   }
 }
 
-
 .App-section-coin-content-input-button {
   position: relative;
 }
 
-/* .App-section-coin-content-input-button.error::before {
-  content: "";
-  position: absolute;
-  bottom: calc(100% + 10px);
-  font-size: 1.3rem;
-  letter-spacing: 1px;
-  color: #ffffff;
-  opacity: 1;
-} */
-
 [tooltip]::before {
   content: attr(tooltip);
-  background-color: rgba(225, 29, 37, .9);
+  background-color: rgba(225, 29, 37, 0.9);
   border-radius: 30px;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   position: absolute;
   bottom: calc(0% + 0px);
   white-space: nowrap;
@@ -59,19 +47,19 @@
   letter-spacing: 1px;
   color: #ffffff;
   opacity: 0;
-  transition: all linear .3s;
+  transition: all linear 0.3s;
 }
 
 [tooltip]::after {
-    content: '';
-    border: 5px solid transparent;
-    border-top: 5px solid rgba(225, 29, 37, .9);
-    opacity: 0;
-    position: absolute;
-    bottom: 0%;
-    left: 3%;
-    transition: all linear .3s;
-    z-index: 10;
+  content: "";
+  border: 5px solid transparent;
+  border-top: 5px solid rgba(225, 29, 37, 0.9);
+  opacity: 0;
+  position: absolute;
+  bottom: 0%;
+  left: 3%;
+  transition: all linear 0.3s;
+  z-index: 10;
 }
 
 [classactive="error"]::before {
@@ -82,13 +70,10 @@
   color: #ffffff;
   opacity: 1;
 }
-[classactive="error"]::after{
+[classactive="error"]::after {
   bottom: 100%;
   opacity: 1;
 }
-
-
-
 
 .form-input:focus ~ .button-add-coin:before {
   border: 1px solid #f7a400;
@@ -96,9 +81,9 @@
   width: 35px;
   height: 35px;
   position: absolute;
-  animation: scaleBorder .8s linear 0s 1 normal none running;
+  animation: scaleBorder 0.8s linear 0s 1 normal none running;
   opacity: 1;
-  transform: scale(1.0);
+  transform: scale(1);
 }
 
 .form-input:focus ~ .button-add-news:before {
@@ -107,8 +92,7 @@
   width: 35px;
   height: 35px;
   position: absolute;
-  animation: scaleBorder .8s linear 0s 1 normal none running;
+  animation: scaleBorder 0.8s linear 0s 1 normal none running;
   opacity: 1;
-  transform: scale(1.0);
+  transform: scale(1);
 }
-
