@@ -28,11 +28,13 @@ function CoinsDataTable({ label, keyword, updateKeyword }) {
 
   useEffect(() => {
     //Search local storage for keywords and filter the array with those matches for up-to-date information
+    const filteri = arrayCoins.filter(({id}) => localKeyword.includes(id))
+    console.log(filteri)
     const findWord = localKeyword.map((word) => {
-      const filter = arrayCoins.filter((item) => item.id === word);
+      const filter = arrayCoins.filter(({id}) => id === word);
 
       setCoinID((prev) => {
-        const findIndex = prev.findIndex((item) => item.id === word);
+        const findIndex = prev.findIndex(({id}) => id === word);
         if (findIndex === -1) {
           return [...prev, ...filter];
         } else {
@@ -44,38 +46,23 @@ function CoinsDataTable({ label, keyword, updateKeyword }) {
   }, [localKeyword, arrayCoins, setCoinID]);
 
   const handleClick = useCallback(
-    (id) => {
+    (name) => {
       const copyArrayCoin = [...coinId];
       const copyArrayKeyword = [...localKeyword];
-      const remainingCoins = copyArrayCoin.filter((item) => item.id !== id);
-      const remainingWords = copyArrayKeyword.filter((item) => item !== id);
+      const remainingCoins = copyArrayCoin.filter(({id}) => id !== name);
+      const remainingWords = copyArrayKeyword.filter((item) => item !== name);
       setLocalKeyword(remainingWords);
       setCoinID(remainingCoins);
     },
     [coinId, localKeyword, setCoinID, setLocalKeyword]
   );
 
-  useEffect(() => {
-
-  })
-
   const update = useCallback(async () => {
     const data = await getDataFetch(urlTable);
-    const filter = data.filter((coins, index) => {
-      const match = coins.id === localKeyword[index]
-      return match
-    });
+    const filter = data.filter(coin => localKeyword.includes(coin.id))
+    setCoinID(filter)
+  }, [localKeyword, setCoinID]);
 
-    const check = coinId.map((coin, index) => {
-      const el = JSON.stringify(coin)
-      const id = JSON.stringify(filter[index])
-      if(el === id) {
-        console.log("not change")
-      }else {
-        setCoinID(filter)
-      }
-    })
-  }, [coinId, localKeyword, setCoinID]);
   return (
     <>
       <div className="App-section-content-form">
