@@ -7,6 +7,18 @@ import getDataFetch from "../../services";
 
 const urlTable = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`;
 
+
+
+function filtered(arr, compare, notEqual) {
+  if(notEqual) {
+    const filter = arr.filter((item) => item.id !== compare)
+    return filter
+  }else {
+    const filter = arr.filter((item) => item.id === compare)
+    return filter
+  }
+}
+
 function CoinsDataTable({ label, keyword, updateKeyword }) {
   const { coinId, setCoinID, arrayCoins, classError } = useFindData({
     keyword,
@@ -28,20 +40,16 @@ function CoinsDataTable({ label, keyword, updateKeyword }) {
 
   useEffect(() => {
     //Search local storage for keywords and filter the array with those matches for up-to-date information
-    const filteri = arrayCoins.filter(({id}) => localKeyword.includes(id))
-    console.log(filteri)
     const findWord = localKeyword.map((word) => {
-      const filter = arrayCoins.filter(({id}) => id === word);
-
+      const resultFilter = filtered(arrayCoins, word, false)
       setCoinID((prev) => {
         const findIndex = prev.findIndex(({id}) => id === word);
         if (findIndex === -1) {
-          return [...prev, ...filter];
+          return [...prev, ...resultFilter];
         } else {
           return [...prev];
-        }
+        }  
       });
-      return filter;
     });
   }, [localKeyword, arrayCoins, setCoinID]);
 
@@ -49,7 +57,7 @@ function CoinsDataTable({ label, keyword, updateKeyword }) {
     (name) => {
       const copyArrayCoin = [...coinId];
       const copyArrayKeyword = [...localKeyword];
-      const remainingCoins = copyArrayCoin.filter(({id}) => id !== name);
+      const remainingCoins = filtered(copyArrayCoin, name, true)
       const remainingWords = copyArrayKeyword.filter((item) => item !== name);
       setLocalKeyword(remainingWords);
       setCoinID(remainingCoins);

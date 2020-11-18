@@ -6,7 +6,7 @@ function TrTable({ item, onClick }) {
   const classPercentage =
     fixedPercentage < 0 ? "low-percentage" : "high-percentage";
   const formatMarketCap = new Intl.NumberFormat().format(item.market_cap) 
-  console.log(formatMarketCap)
+
   return (
     <tr className={`App-section-coin-table-coin ro`}>
       <td>
