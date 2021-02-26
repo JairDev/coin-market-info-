@@ -37,6 +37,10 @@
   text-transform: capitalize;
 }
 
+.coin-name, .coin-price {
+  color: rgba(0, 0, 0, 0.8);
+}
+
 .low-percentage {
   color: #e11d25;
 }

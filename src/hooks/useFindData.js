@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import getDataFetch from "../services/index";
 
 const urlTable = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`;
+const urlCoinId = (word) =>
+  `https://api.coingecko.com/api/v3/coins/${word}?tickers=false&community_data=false&developer_data=false&sparkline=false`;
 
 function useFindData({ keyword }) {
   const [coinId, setCoinID] = useState([]);
@@ -16,7 +18,7 @@ function useFindData({ keyword }) {
       if (keyword && !find) {
         setClassError("error");
         setTimeout(() => {
-          setClassError("");  
+          setClassError("");
         }, 800);
         return;
       }
@@ -34,9 +36,8 @@ function useFindData({ keyword }) {
     getDataCoinId().catch((error) => {
       throw new Error(error);
     });
-    
   }, [keyword]);
- 
+
   return { coinId, setCoinID, arrayCoins, classError };
 }
 

@@ -7,15 +7,13 @@ import getDataFetch from "../../services";
 
 const urlTable = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`;
 
-
-
 function filtered(arr, compare, notEqual) {
-  if(notEqual) {
-    const filter = arr.filter((item) => item.id !== compare)
-    return filter
-  }else {
-    const filter = arr.filter((item) => item.id === compare)
-    return filter
+  if (notEqual) {
+    const filter = arr.filter((item) => item.id !== compare);
+    return filter;
+  } else {
+    const filter = arr.filter((item) => item.id === compare);
+    return filter;
   }
 }
 
@@ -24,7 +22,6 @@ function CoinsDataTable({ label, keyword, updateKeyword }) {
     keyword,
   });
   const [localKeyword, setLocalKeyword] = useStateSaveWord();
-
 
   useEffect(() => {
     if (!keyword) return;
@@ -41,23 +38,24 @@ function CoinsDataTable({ label, keyword, updateKeyword }) {
   useEffect(() => {
     //Search local storage for keywords and filter the array with those matches for up-to-date information
     const findWord = localKeyword.map((word) => {
-      const resultFilter = filtered(arrayCoins, word, false)
+      const resultFilter = filtered(arrayCoins, word, false);
       setCoinID((prev) => {
-        const findIndex = prev.findIndex(({id}) => id === word);
+        const findIndex = prev.findIndex(({ id }) => id === word);
         if (findIndex === -1) {
           return [...prev, ...resultFilter];
         } else {
           return [...prev];
-        }  
+        }
       });
     });
+    return () => console.log("unmount");
   }, [localKeyword, arrayCoins, setCoinID]);
 
   const handleClick = useCallback(
     (name) => {
       const copyArrayCoin = [...coinId];
       const copyArrayKeyword = [...localKeyword];
-      const remainingCoins = filtered(copyArrayCoin, name, true)
+      const remainingCoins = filtered(copyArrayCoin, name, true);
       const remainingWords = copyArrayKeyword.filter((item) => item !== name);
       setLocalKeyword(remainingWords);
       setCoinID(remainingCoins);
@@ -67,8 +65,8 @@ function CoinsDataTable({ label, keyword, updateKeyword }) {
 
   const update = useCallback(async () => {
     const data = await getDataFetch(urlTable);
-    const filter = data.filter(coin => localKeyword.includes(coin.id))
-    setCoinID(filter)
+    const filter = data.filter((coin) => localKeyword.includes(coin.id));
+    setCoinID(filter);
   }, [localKeyword, setCoinID]);
 
   return (
@@ -77,7 +75,9 @@ function CoinsDataTable({ label, keyword, updateKeyword }) {
         <div onClick={update} className="update">
           <span className="refresh">Refresh</span>
           <span className="content-icon-refresh">
-          <svg className="icon icon-loop2"><use xlinkHref="#icon-loop2"></use></svg>
+            <svg className="icon icon-loop2">
+              <use xlinkHref="#icon-loop2"></use>
+            </svg>
           </span>
         </div>
         <Form
