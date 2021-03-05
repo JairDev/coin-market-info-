@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { Button } from "../ButtonAdd";
 import "./Form.css";
-import ButtonAdd from "../ButtonAdd";
 
 function Form(props) {
   const { updateKeyword, label, placeHolder, classButton, classError } = props;
@@ -41,7 +41,11 @@ function Form(props) {
               onChange={handleChange}
               placeholder={`E.g ${placeHolder}`}
             ></input>
-            <ButtonAdd classButton={classButton} />
+            <Button className={classButton} primary>
+              <svg className="icon icon-plus">
+                <use xlinkHref="#icon-plus"></use>
+              </svg>
+            </Button>
           </div>
         </label>
       </div>

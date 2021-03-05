@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import "./ButtonAdd.css";
 
-const Button = styled.button`
-  background: ${(props) => (props.primary ? "grey" : "none")};
+export const Button = styled.button`
+  background: none;
   border: 1px solid #f7a400;
-  border-radius: 30px;
+  border-radius: 50%;
   box-shadow: 0 0px 25px 1px rgba(547, 164, 0, 0.3);
   color: #3e4491;
   cursor: pointer;
@@ -18,18 +18,14 @@ const Button = styled.button`
 `;
 
 function ButtonAdd({ classButton, onClick }) {
-  console.log(classButton) 
   return (
-    <button onClick={onClick} className={classButton}>
-      <svg className="icon icon-plus"><use xlinkHref="#icon-plus"></use></svg>
-    </button>
-    // <>
-    //   <Button>
-    //     <svg className="icon icon-plus">
-    //       <use xlinkHref="#icon-plus"></use>
-    //     </svg>
-    //   </Button>
-    // </>
+    <>
+      <Button className={classButton} onClick={onClick}>
+        <svg className="icon icon-plus">
+          <use xlinkHref="#icon-plus"></use>
+        </svg>
+      </Button>
+    </>
   );
 }
 

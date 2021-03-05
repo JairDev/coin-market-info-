@@ -48,7 +48,6 @@ function CoinsDataTable({ label, keyword, updateKeyword }) {
         }
       });
     });
-    return () => console.log("unmount");
   }, [localKeyword, arrayCoins, setCoinID]);
 
   const handleClick = useCallback(

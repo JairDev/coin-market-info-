@@ -38,7 +38,6 @@ function NewsData({ label, keyword = "bitcoin", updateKeyword, current }) {
       const urlNews = `https://gnews.io/api/v4/search?q=${keyword}&lang=en&max=10&token=${apiKeyNews}`;
       setLoader(true);
       const data = await getDataFetch(urlNews);
-      console.log(data)
       if (data.totalArticles === 0) {
         setClassError("error");
         setTimeout(() => {
