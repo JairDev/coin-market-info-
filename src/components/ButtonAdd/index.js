@@ -18,17 +18,18 @@ const Button = styled.button`
 `;
 
 function ButtonAdd({ classButton, onClick }) {
+  console.log(classButton) 
   return (
-    // <button onClick={onClick} className={classButton}>
-    //   <svg className="icon icon-plus"><use xlinkHref="#icon-plus"></use></svg>
-    // </button>
-    <>
-      <Button>
-        <svg className="icon icon-plus">
-          <use xlinkHref="#icon-plus"></use>
-        </svg>
-      </Button>
-    </>
+    <button onClick={onClick} className={classButton}>
+      <svg className="icon icon-plus"><use xlinkHref="#icon-plus"></use></svg>
+    </button>
+    // <>
+    //   <Button>
+    //     <svg className="icon icon-plus">
+    //       <use xlinkHref="#icon-plus"></use>
+    //     </svg>
+    //   </Button>
+    // </>
   );
 }
 
