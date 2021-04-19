@@ -39,7 +39,7 @@ function CoinsTable({ array, onClick }) {
         <tbody>
           {!array.length ? (
             <tr className="empty-chart">
-              <th>Add a coin, buddy...</th>
+              <th>Add a coin...</th>
             </tr>
           ) : (
             <IterateArray
