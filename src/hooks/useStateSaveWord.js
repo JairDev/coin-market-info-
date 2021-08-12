@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 
 function useStateSaveWord() {
-  const [localKeyword, setLocalKeyword] = useState(JSON.parse(localStorage.getItem("coin")) || [])
+  const [localKeyword, setLocalKeyword] = useState(
+    JSON.parse(localStorage.getItem("coin")) || []
+  );
   useEffect(() => {
-    localStorage.setItem("coin", JSON.stringify(localKeyword))
-  }, [localKeyword])
+    localStorage.setItem("coin", JSON.stringify(localKeyword));
+  }, [localKeyword]);
 
-  return [localKeyword, setLocalKeyword]
+  return [localKeyword, setLocalKeyword];
 }
 
-export default useStateSaveWord
+export default useStateSaveWord;

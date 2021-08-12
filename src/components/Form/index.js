@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Button } from "../ButtonAdd";
 import "./Form.css";
 
-function Form(props) {
-  const { updateKeyword, label, placeHolder, classButton, classError } = props;
+function Form({ updateKeyword, label, placeHolder, classButton, classError }) {
+
+  // ...
+  
   const [value, setValue] = useState("");
 
   const handleSubmit = (e) => {
@@ -15,6 +17,8 @@ function Form(props) {
     setValue("");
     e.preventDefault();
   };
+
+  //...
 
   const handleChange = (e) => {
     setValue(e.target.value);

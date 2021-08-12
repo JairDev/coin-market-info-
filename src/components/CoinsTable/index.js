@@ -45,8 +45,8 @@ function CoinsTable({ array, onClick }) {
             <IterateArray
               array={array}
               property={"id"}
-              Component={TrTable}
               onClick={onClick}
+              Component={TrTable}
             />
           )}
         </tbody>

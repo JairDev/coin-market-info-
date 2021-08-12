@@ -37,7 +37,7 @@ function CoinsDataTable({ label, keyword, updateKeyword }) {
 
   useEffect(() => {
     //Search local storage for keywords and filter the array with those matches for up-to-date information
-    const findWord = localKeyword.map((word) => {
+    localKeyword.map((word) => {
       const resultFilter = filtered(arrayCoins, word, false);
       setCoinID((prev) => {
         const findIndex = prev.findIndex(({ id }) => id === word);
@@ -52,10 +52,8 @@ function CoinsDataTable({ label, keyword, updateKeyword }) {
 
   const handleClick = useCallback(
     (name) => {
-      const copyArrayCoin = [...coinId];
-      const copyArrayKeyword = [...localKeyword];
-      const remainingCoins = filtered(copyArrayCoin, name, true);
-      const remainingWords = copyArrayKeyword.filter((item) => item !== name);
+      const remainingCoins = filtered(coinId, name, true);
+      const remainingWords = localKeyword.filter((item) => item !== name);
       setLocalKeyword(remainingWords);
       setCoinID(remainingCoins);
     },
