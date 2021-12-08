@@ -10,7 +10,7 @@
   /* height: 25px; */
   padding: 0.5rem 1rem;
   font-size: 1.3rem;
-  width: 40%;
+  width: 100%;
   max-width: 200px;
 }
 
@@ -96,3 +96,4 @@
   opacity: 1;
   transform: scale(1);
 }
+

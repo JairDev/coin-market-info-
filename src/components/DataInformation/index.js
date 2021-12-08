@@ -5,7 +5,6 @@ function WithDataInformation(Component) {
     const [keyword, setKeyword] = useState();
 
     const updateKeyword = (keyword) => setKeyword(keyword);
-
     return (
       <>
         <Component

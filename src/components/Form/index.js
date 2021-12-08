@@ -3,9 +3,6 @@ import { Button } from "../ButtonAdd";
 import "./Form.css";
 
 function Form({ updateKeyword, label, placeHolder, classButton, classError }) {
-
-  // ...
-  
   const [value, setValue] = useState("");
 
   const handleSubmit = (e) => {
@@ -17,8 +14,6 @@ function Form({ updateKeyword, label, placeHolder, classButton, classError }) {
     setValue("");
     e.preventDefault();
   };
-
-  //...
 
   const handleChange = (e) => {
     setValue(e.target.value);
