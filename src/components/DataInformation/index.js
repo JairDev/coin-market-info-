@@ -3,8 +3,8 @@ import React, { useState } from "react";
 function WithDataInformation(Component) {
   return function WithUpdateInformation({ label }) {
     const [keyword, setKeyword] = useState();
-
     const updateKeyword = (keyword) => setKeyword(keyword);
+
     return (
       <>
         <Component
@@ -16,6 +16,5 @@ function WithDataInformation(Component) {
     );
   };
 }
-
 
 export default WithDataInformation;

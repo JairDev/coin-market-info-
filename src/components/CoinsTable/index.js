@@ -4,6 +4,7 @@ import TrTable from "../TrTable";
 import "./CoinsTable.css";
 
 function CoinsTable({ array, onClick }) {
+  // console.log(array)
   return (
     <div className={`App-section-coin-info`}>
       <table className="App-section-coin-table">

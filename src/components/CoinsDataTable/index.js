@@ -4,18 +4,10 @@ import useStateSaveWord from "../../hooks/useStateSaveWord";
 import Form from "../../components/Form";
 import useFindData from "../../hooks/useFindData";
 import getDataFetch from "../../services";
+import { filtered } from "../../utils/filtered";
 
 const urlTable = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`;
 
-function filtered(arr, compare, notEqual) {
-  if (notEqual) {
-    const filter = arr.filter((item) => item.id !== compare);
-    return filter;
-  } else {
-    const filter = arr.filter((item) => item.id === compare);
-    return filter;
-  }
-}
 
 function CoinsDataTable({ label, keyword, updateKeyword }) {
   const { coinId, setCoinID, arrayCoins, classError } = useFindData({
@@ -52,12 +44,13 @@ function CoinsDataTable({ label, keyword, updateKeyword }) {
 
   const handleClick = useCallback(
     (name) => {
+      updateKeyword("");
       const remainingCoins = filtered(coinId, name, true);
       const remainingWords = localKeyword.filter((item) => item !== name);
       setLocalKeyword(remainingWords);
       setCoinID(remainingCoins);
     },
-    [coinId, localKeyword, setCoinID, setLocalKeyword]
+    [coinId, localKeyword, setCoinID, setLocalKeyword, updateKeyword]
   );
 
   const update = useCallback(async () => {

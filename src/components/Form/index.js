@@ -10,6 +10,7 @@ function Form({ updateKeyword, label, placeHolder, classButton, classError }) {
       e.preventDefault();
       return;
     }
+    // console.log(value)
     updateKeyword(value);
     setValue("");
     e.preventDefault();
