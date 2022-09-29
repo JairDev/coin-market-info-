@@ -37,7 +37,7 @@ function Home() {
 
         <section className="App-section-news">
           <InfoTitle spanTitle={"News about"} />
-          <DataNews label="Search news by keyword"/>
+          <DataNews label="Search news by keyword" />
         </section>
       </section>
     </>

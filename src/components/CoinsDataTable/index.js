@@ -5,9 +5,8 @@ import Form from "../../components/Form";
 import useFindData from "../../hooks/useFindData";
 import getDataFetch from "../../services";
 import { filtered } from "../../utils/filtered";
-
-const urlTable = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`;
-
+import { urlTable } from "../../services/ApiUrl";
+import "./CoinsDataTable.css";
 
 function CoinsDataTable({ label, keyword, updateKeyword }) {
   const { coinId, setCoinID, arrayCoins, classError } = useFindData({
@@ -62,21 +61,24 @@ function CoinsDataTable({ label, keyword, updateKeyword }) {
   return (
     <>
       <div className="App-section-content-form">
-        <div onClick={update} className="update">
-          <span className="refresh">Refresh</span>
-          <span className="content-icon-refresh">
-            <svg className="icon icon-loop2">
-              <use xlinkHref="#icon-loop2"></use>
-            </svg>
-          </span>
+        <div className="content-form-coins">
+          <Form
+            updateKeyword={updateKeyword}
+            label={label}
+            id="name-coin"
+            placeHolder={"bitcoin, ethereum"}
+            classError={classError}
+            classButton={"button-add-coin"}
+          />
+          <div onClick={update} className="update">
+            <span className="refresh">Update coins data</span>
+            <span className="content-icon-refresh">
+              <svg className="icon icon-loop2">
+                <use xlinkHref="#icon-loop2"></use>
+              </svg>
+            </span>
+          </div>
         </div>
-        <Form
-          updateKeyword={updateKeyword}
-          label={label}
-          placeHolder={"bitcoin, ethereum"}
-          classError={classError}
-          classButton={"button-add-coin"}
-        />
       </div>
       <CoinsTable array={coinId} onClick={handleClick} />
     </>

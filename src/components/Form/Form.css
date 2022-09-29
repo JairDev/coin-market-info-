@@ -1,37 +1,65 @@
 .App-section-coin-content-input label {
-  display: flex;
-  flex-direction: column;
   color: white;
 }
 
 .App-section-coin-content-input input {
   border: none;
   border-radius: 30px;
-  /* height: 25px; */
-  padding: 0.5rem 1rem;
-  font-size: 1.3rem;
+  padding: 0.5rem 1.2rem;
+  font-size: 1.2rem;
   width: 100%;
-  max-width: 200px;
+  max-width: 280px;
+  z-index: 5;
 }
 
 .App-section-coin-content-input label span {
+  display: block;
   font-size: 1.3rem;
+  letter-spacing: 1px;
   margin-bottom: 1.3rem;
 }
 
-@keyframes scaleBorder {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.7);
-  }
+.App-section-coin-content-input-button {
+  display: flex;
+  align-items: center;
 }
 
-.App-section-coin-content-input-button {
+.App-section-coin-content-input-button button {
+  margin-left: 1rem;
+}
+
+.button {
+  background: none;
+  border: 1px solid #f7a400;
+  border-radius: 50%;
+  box-shadow: 0 0px 25px 1px rgba(547, 164, 0, 0.3);
+  color: #3e4491;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
   position: relative;
+}
+
+.button:before {
+  content: "";
+  border: 1px solid #f7a400;
+  border-radius: 30px;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  transform: scale(1);
+}
+
+.icon-plus {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: black;
+  fill: white;
 }
 
 [tooltip]::before {
@@ -48,6 +76,7 @@
   color: #ffffff;
   opacity: 0;
   transition: all linear 0.3s;
+  z-index: 1;
 }
 
 [tooltip]::after {
@@ -75,7 +104,7 @@
   opacity: 1;
 }
 
-.form-input:focus ~ .button-add-coin:before {
+.form-input:focus ~ .button:before {
   border: 1px solid #f7a400;
   border-radius: 30px;
   width: 35px;
@@ -86,14 +115,13 @@
   transform: scale(1);
 }
 
-.form-input:focus ~ .button-add-news:before {
-  border: 1px solid #f7a400;
-  border-radius: 30px;
-  width: 35px;
-  height: 35px;
-  position: absolute;
-  animation: scaleBorder 0.8s linear 0s 1 normal none running;
-  opacity: 1;
-  transform: scale(1);
+@keyframes scaleBorder {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.7);
+  }
 }
-

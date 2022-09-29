@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import { Button } from "../ButtonAdd";
 import "./Form.css";
 
-function Form({ updateKeyword, label, placeHolder, classButton, classError }) {
+function Form({
+  updateKeyword,
+  label,
+  id,
+  placeHolder,
+  classButton,
+  classError,
+}) {
   const [value, setValue] = useState("");
 
   const handleSubmit = (e) => {
@@ -10,7 +16,6 @@ function Form({ updateKeyword, label, placeHolder, classButton, classError }) {
       e.preventDefault();
       return;
     }
-    // console.log(value)
     updateKeyword(value);
     setValue("");
     e.preventDefault();
@@ -27,27 +32,28 @@ function Form({ updateKeyword, label, placeHolder, classButton, classError }) {
       aria-label="add new currency"
     >
       <div className="App-section-coin-content-input">
-        <label>
+        <label htmlFor={id}>
           <span>{label}</span>
-          <div
-            className={`App-section-coin-content-input-button  ${classError}`}
-            classactive={classError}
-            tooltip="Data not found..."
-          >
-            <input
-              className="form-input"
-              type="text"
-              value={value}
-              onChange={handleChange}
-              placeholder={`E.g ${placeHolder}`}
-            ></input>
-            <Button className={classButton} primary>
-              <svg className="icon icon-plus">
-                <use xlinkHref="#icon-plus"></use>
-              </svg>
-            </Button>
-          </div>
         </label>
+        <div
+          className={`App-section-coin-content-input-button  ${classError}`}
+          classactive={classError}
+          tooltip="Data not found..."
+        >
+          <input
+            id={id}
+            className="form-input"
+            type="text"
+            value={value}
+            onChange={handleChange}
+            placeholder={`E.g ${placeHolder}`}
+          />
+          <button className="button">
+            <svg className="icon icon-plus">
+              <use xlinkHref="#icon-plus"></use>
+            </svg>
+          </button>
+        </div>
       </div>
     </form>
   );

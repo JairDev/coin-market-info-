@@ -1,7 +1,6 @@
 import React, { Suspense, useState, useEffect } from "react";
 import useNearScreen from "../../hooks/useNearScreen";
 import PropTypes from "prop-types";
-import ButtonAdd from "../ButtonAdd";
 import "./NewsData.css";
 
 const NewsData = React.lazy(() => import("./NewsData"));
@@ -30,7 +29,14 @@ function LazyNewsData({ label, keyword, updateKeyword }) {
           />
         </Suspense>
       ) : null}
-      <ButtonAdd onClick={handleClick} classButton={"more"} />
+      <div>
+        More news
+        <button onClick={handleClick} className="button more-news">
+          <svg className="icon icon-plus">
+            <use xlinkHref="#icon-plus"></use>
+          </svg>
+        </button>
+      </div>
     </div>
   );
 }

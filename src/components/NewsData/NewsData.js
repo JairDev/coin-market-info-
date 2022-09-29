@@ -61,6 +61,7 @@ function NewsData({ label, keyword = "bitcoin", updateKeyword, current }) {
         <Form
           updateKeyword={updateKeyword}
           label={label}
+          id="name-news"
           placeHolder={"apple, ethereum"}
           classError={classError}
           classButton={"button-add-news"}

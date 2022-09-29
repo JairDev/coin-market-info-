@@ -1,8 +1,4 @@
-.App-section-coin{
-  /* border: 8px solid rgba(247, 164, 0, 1);
-  box-shadow: 0 0px 25px 1px rgba(547, 164, 0, .3);
-  border-radius: 25px; */
-  /* padding: 4rem 4vw; */
+.App-section-coin {
   position: relative;
 }
 
@@ -26,17 +22,17 @@
   stroke: currentColor;
   fill: white;
   opacity: 0;
-  transform: rotate(180deg) scale(1.0);
-  animation: toBottom 1s cubic-bezier(0, 0.5, 0.5, 1) 0s infinite alternate-reverse none running;
-  
+  transform: rotate(180deg) scale(1);
+  animation: toBottom 1s cubic-bezier(0, 0.5, 0.5, 1) 0s infinite
+    alternate-reverse none running;
 }
 
 .icon-ctrl:nth-child(1) {
-  animation-delay: -0.40s;
+  animation-delay: -0.4s;
 }
 
 .icon-ctrl:nth-child(2) {
-  animation-delay: -0.20s;
+  animation-delay: -0.2s;
 }
 
 .icon-ctrl:nth-child(3) {
@@ -47,7 +43,8 @@
   0% {
     opacity: 1;
   }
-  50%, 100% {
+  50%,
+  100% {
     opacity: 0;
   }
-} 
+}

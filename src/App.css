@@ -5,10 +5,10 @@
 
 .App-section-headband {
   background-color: #f7f7f7;
-  box-shadow: 0 0px 30px 5px rgba(58, 158, 253, .5);
+  box-shadow: 0 0px 30px 5px rgba(58, 158, 253, 0.5);
   font-size: 1.5rem;
   margin-top: 3rem;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
   white-space: nowrap;
   position: relative;
   overflow: hidden;
@@ -26,7 +26,7 @@
   animation-play-state: paused;
 }
 
- @keyframes move {
+@keyframes move {
   0% {
     left: 0;
   }
@@ -34,11 +34,11 @@
   100% {
     left: -50%;
   }
-} 
+}
 
 .App-section-main {
-  border: 8px solid rgba(247, 164, 0, 1);
-  box-shadow: 0 0px 25px 1px rgba(547, 164, 0, .3);
+  border: 2px solid rgba(247, 164, 0, 1);
+  box-shadow: 0 0px 25px 1px rgba(547, 164, 0, 0.2);
   border-radius: 25px;
   width: 90%;
   margin: 6rem auto 0;
@@ -46,103 +46,72 @@
   padding: 5vw;
 }
 
-
-/* @keyframes flip {
-  0%, 12.66%, 100% {transform:translate3d(0,0,0);}
-  16.66%, 29.32% {transform:translate3d(0,-100%,0);}
-  33.32%,45.98% {transform:translate3d(0,-200%,0);}
-  49.98%,62.64% {transform:translate3d(0,-300%,0);}
-  66.64%,79.3% {transform:translate3d(0,-200%,0);}
-  83.3%,95.96% {transform:translate3d(0,-100%,0);}
-} */
-
-.update {
-  /* border: 2px solid red; */
-  color: wheat;
-  cursor: pointer;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.refresh {
-  color: white;
-  font-size: 1.2rem;
-}
-
-.content-icon-refresh {
-  margin-left: 1rem;
-}
-
-
-.icon-loop2 {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  stroke-width: 0;
-  stroke: currentColor;
-  fill: white;
-
-}
-
-
 @media only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
-  table, thead, tbody, th, td, tr { 
-		display: block; 
+  (min-device-width: 768px) and (max-device-width: 1024px) {
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
   }
 
-  thead tr { 
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
   }
-  
-  .App-section-coin-table tbody td{ 
-		border: none;
-		border-bottom: 1px solid rgb(131, 131, 131);
-		position: relative;
+
+  .App-section-coin-table tbody td {
+    border: none;
+    border-bottom: 1px solid rgb(131, 131, 131);
+    position: relative;
     padding: 1rem 0 1rem 50%;
   }
-  .App-section-coin-table tbody td:first-child { 
+  .App-section-coin-table tbody td:first-child {
     border-top: 1px solid rgb(131, 131, 131);
   }
 
-  .App-section-coin-table tbody tr{ 
+  .App-section-coin-table tbody tr {
     font-size: 1rem;
     letter-spacing: 0px;
     margin-bottom: 1rem;
   }
 
-  td:before { 
-		position: absolute;
-		left: 6px;
-		width: 45%; 
-		padding-right: 10px; 
-		white-space: nowrap;
+  td:before {
+    position: absolute;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
   }
-  
-  td:nth-of-type(1):before { 
-    content: "Rank"; color:#f7a400; font-weight: bold;
+
+  td:nth-of-type(1):before {
+    content: "Rank";
+    color: #f7a400;
+    font-weight: bold;
   }
-	td:nth-of-type(2):before { 
-    content: "Name"; color:#f7a400; font-weight: bold;
+  td:nth-of-type(2):before {
+    content: "Name";
+    color: #f7a400;
+    font-weight: bold;
   }
-	td:nth-of-type(3):before { 
-    content: "Market Cap"; color:#f7a400; font-weight: bold;
+  td:nth-of-type(3):before {
+    content: "Market Cap";
+    color: #f7a400;
+    font-weight: bold;
   }
-	td:nth-of-type(4):before { 
-    content: "Price"; color:#f7a400; font-weight: bold;
+  td:nth-of-type(4):before {
+    content: "Price";
+    color: #f7a400;
+    font-weight: bold;
   }
-	td:nth-of-type(5):before { 
-    content: "Change (24h)"; color:#f7a400; font-weight: bold;
+  td:nth-of-type(5):before {
+    content: "Change (24h)";
+    color: #f7a400;
+    font-weight: bold;
   }
-  /* .App-section-main {
-    width: 90%;
-    margin: 6rem auto 0;
-    padding: 10px;
-    
-  } */
 
   .content-no-flip-text {
     padding-left: 0vw;
