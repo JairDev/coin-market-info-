@@ -5,16 +5,22 @@
 .content-form-coins {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
 }
 
 .update {
   color: white;
   cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 .refresh {
   color: white;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .content-icon-refresh {
@@ -23,8 +29,8 @@
 
 .icon-loop2 {
   display: inline-block;
-  width: 1em;
-  height: 1em;
+  width: 1.3em;
+  height: 1.3em;
   stroke-width: 0;
   stroke: currentColor;
   fill: white;

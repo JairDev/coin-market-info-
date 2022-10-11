@@ -27,7 +27,7 @@ function Form({
 
   return (
     <form
-      className={`form-data`}
+      className="form-data"
       onSubmit={handleSubmit}
       aria-label="add new currency"
     >

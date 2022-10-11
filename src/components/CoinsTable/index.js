@@ -5,7 +5,18 @@ import "./CoinsTable.css";
 
 function CoinsTable({ array, onClick }) {
   return (
-    <div className={`App-section-coin-info`}>
+    <div className="App-section-coin-info">
+      <div className="toBottom">
+        <svg className="icon icon-ctrl">
+          <use xlinkHref="#icon-ctrl"></use>
+        </svg>
+        <svg className="icon icon-ctrl">
+          <use xlinkHref="#icon-ctrl"></use>
+        </svg>
+        <svg className="icon icon-ctrl">
+          <use xlinkHref="#icon-ctrl"></use>
+        </svg>
+      </div>
       <table className="App-section-coin-table">
         <thead>
           <tr>
@@ -16,7 +27,7 @@ function CoinsTable({ array, onClick }) {
             </th>
             <th>
               <div>
-                <span>Name</span>
+                <span className="coin-table-name-head">Name</span>
               </div>
             </th>
             <th>

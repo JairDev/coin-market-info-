@@ -29,8 +29,8 @@ function LazyNewsData({ label, keyword, updateKeyword }) {
           />
         </Suspense>
       ) : null}
-      <div>
-        More news
+      <div className="content-more-news">
+        <div className="label-button-more-news">More news</div>
         <button onClick={handleClick} className="button more-news">
           <svg className="icon icon-plus">
             <use xlinkHref="#icon-plus"></use>

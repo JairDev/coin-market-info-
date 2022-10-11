@@ -3,8 +3,8 @@ import CoinsDataTable from "../../components/CoinsDataTable";
 import InfoTitle from "../../components/InfoTitle";
 import DataCoinStrip from "../../components/DataCoinStrip";
 import LazyNewsdata from "../../components/NewsData";
-import "./Home.css";
 import WithDataInformation from "../../components/DataInformation";
+import "./Home.css";
 
 function Home() {
   const DataTable = WithDataInformation(CoinsDataTable);
@@ -21,17 +21,6 @@ function Home() {
       <section className="App-section-main">
         <section className="App-section-coin">
           <InfoTitle spanTitle={"Coins Market"} />
-          <div className="toBottom">
-            <svg className="icon icon-ctrl">
-              <use xlinkHref="#icon-ctrl"></use>
-            </svg>
-            <svg className="icon icon-ctrl">
-              <use xlinkHref="#icon-ctrl"></use>
-            </svg>
-            <svg className="icon icon-ctrl">
-              <use xlinkHref="#icon-ctrl"></use>
-            </svg>
-          </div>
           <DataTable label="Add currency to chart" />
         </section>
 

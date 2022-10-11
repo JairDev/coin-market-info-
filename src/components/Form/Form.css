@@ -9,6 +9,7 @@
   font-size: 1.2rem;
   width: 100%;
   max-width: 280px;
+  flex: 1;
   z-index: 5;
 }
 
@@ -16,7 +17,11 @@
   display: block;
   font-size: 1.3rem;
   letter-spacing: 1px;
-  margin-bottom: 1.3rem;
+}
+
+.App-section-coin-content-input label {
+  display: block;
+  margin-bottom: 1.5rem;
 }
 
 .App-section-coin-content-input-button {
@@ -43,7 +48,7 @@
   position: relative;
 }
 
-.button:before {
+/* .button:before {
   content: "";
   border: 1px solid #f7a400;
   border-radius: 30px;
@@ -51,7 +56,7 @@
   height: 35px;
   position: absolute;
   transform: scale(1);
-}
+} */
 
 .icon-plus {
   display: inline-block;
@@ -104,6 +109,9 @@
   opacity: 1;
 }
 
+.form-data {
+  flex: 1;
+}
 .form-input:focus ~ .button:before {
   border: 1px solid #f7a400;
   border-radius: 30px;

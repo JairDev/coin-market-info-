@@ -11,6 +11,17 @@
   transition: all linear 0.4s;
 }
 
+.content-more-news {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.label-button-more-news {
+  font-size: 1.3rem;
+}
+
 .button.more-news {
   margin-top: 1rem;
   margin-bottom: 2rem;

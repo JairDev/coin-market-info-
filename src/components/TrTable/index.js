@@ -2,14 +2,14 @@ import React from "react";
 import "./TrTable.css";
 
 function TrTable({ item, onClick }) {
-  const formatPrice = new Intl.NumberFormat().format(item.current_price)
+  const formatPrice = new Intl.NumberFormat().format(item.current_price);
   const fixedPercentage = item.price_change_percentage_24h.toFixed(2);
   const classPercentage =
     fixedPercentage < 0 ? "low-percentage" : "high-percentage";
   const formatMarketCap = new Intl.NumberFormat().format(item.market_cap);
 
   return (
-    <tr className={`App-section-coin-table-coin ro`}>
+    <tr className="App-section-coin-table-coin ro">
       <td>
         <div>{item.market_cap_rank}</div>
       </td>
